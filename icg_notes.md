@@ -23,3 +23,5 @@ There are 5 kinds of reference tables: date, site, line, shift, and location. On
 ## Random Notes
 
 Each driver implements #supports? to denote if it supports a particular kind of rule fragment.
+
+There are four scopes: Moves, MovePlans, PickLists, or JobLotsExpiries.
