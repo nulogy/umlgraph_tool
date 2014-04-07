@@ -19,16 +19,18 @@ class UmlCreator
   end
 
   def create
-    keywords = Keywords.new
-    template_file = File.open(@filename, 'r').read
     erb = ERB.new(template_file)
-    File.open(output_filename, 'w+') { |file| file.write(erb.result(keywords.bind)) }
+    File.open(output_filename, 'w+') { |file| file.write(erb.result(Keywords.new.bind)) }
   end
 
   private
 
   def output_filename
     @filename.gsub(/.erb/, '')
+  end
+
+  def template_file
+    File.open(@filename, 'r').read
   end
 
 end
