@@ -14,7 +14,7 @@ class UMLOptions {}
 
 /**
  * @depend - - - CodeGenerationService
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class CodeGenerationController {
   void generate_lot_code() {}
@@ -27,49 +27,49 @@ class CodeGenerationController {
  * @depend - - - ProductionParameters
  * @depend - - - ProductionProvider
  * @depend - - - RuleService
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class CodeGenerationService {}
 
 /**
  * @has - - - Customer
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class MaterialsValidationConfig {}
 
 /**
  * @has - - - Rule
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class ProductionParameters {}
 
 /**
  * @has - - - Driver
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class ProductionProvider {}
 
 /**
  * @depend - - - ReferenceDataTable
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class ReferenceData {}
 
 /**
  * @depend - - - ReferenceData
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class RuleService {}
 
 /**
  * @depend - - - ValidationPipeline
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class ValidatingMaterials {}
 
 /**
  * @depend - - - ValidatingMaterials
- * @opt nodefillcolor lightgray
+ * <%= node_fill_color :lightgray %>
  */
 class MaterialsValidationService {}
 
@@ -80,61 +80,61 @@ class MaterialsValidationService {}
 // Note: concrete drivers hidden for the moment.
 
 /**
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class EarliestMfgDateDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class LineDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class ManufacturingOriginDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class ProductionDateDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class SampleManufacturingOriginDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class SampleMfgDateDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class ShiftDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class ShortestShelfLifeDriver extends Driver {}
 
 /**
  * @hidden
- * @opt nodefillcolor LightCoral
+ * <%= node_fill_color :lightcoral %>
  */
 class SiteDriver extends Driver {}
 
@@ -143,19 +143,19 @@ class SiteDriver extends Driver {}
 // Reference Data (< ActiveRecord::Base)
 
 /**
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class ReferenceDataField {}
 
 /**
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class ReferenceDataRow {}
 
 /**
  * @composed - - - ReferenceDataField
  * @composed - - - ReferenceDataRow
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class ReferenceDataTable {}
 
@@ -164,31 +164,31 @@ class ReferenceDataTable {}
 // Rules (< ActiveRecord::Base)
 
 /**
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class Rule {}
 
 /**
  * @composed  - - - Fragment
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class GenerateExpiry extends Rule {}
 
 /**
  * @composed  - - - Fragment
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class GenerateLot extends Rule {}
 
 /**
  * @composed  - - - Fragment
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class InterpretExpiry extends Rule {}
 
 /**
  * @composed  - - - Fragment
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class InterpretLot extends Rule {}
 
@@ -196,7 +196,7 @@ class InterpretLot extends Rule {}
  * @depend - - - Driver
  * @depend - - - ReferenceDataTable
  * @depend - - - ReferenceDataField
- * @opt nodefillcolor LightBlue
+ * <%= node_fill_color :lightblue %>
  */
 class Fragment {}
 
@@ -224,79 +224,79 @@ class Fragment {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class CanInterpretMfgDateValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class CanRunValidations {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ExpiryDateParsingValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ExpiryDateRangeValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ExpiryDateValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class FinishedGoodProductionDateLimitValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ManufacturingOriginValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class PickStrategyValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class QualifiedItemsPresenceValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ShelfLifeValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class StopShipDateRangeValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class StopShipDateValidator {}
 
 /**
  * @hidden
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class StopShipLimitValidator {}
 
@@ -314,7 +314,7 @@ class StopShipLimitValidator {}
  * @depend - - - StopShipDateRangeValidator
  * @depend - - - StopShipDateValidator
  * @depend - - - StopShipLimitValidator
- * @opt nodefillcolor PaleGreen
+ * <%= node_fill_color :palegreen %>
  */
 class ValidationPipeline {}
 
@@ -326,34 +326,34 @@ class ValidationPipeline {}
 
 /**
  * @depend - - - ReferenceDataRow
- * @opt nodefillcolor Khaki
+ * <%= node_fill_color :khaki %>
  */
 class ReferenceDataSyncer {}
 
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Line
- * @opt nodefillcolor Khaki
+ * <%= node_fill_color :khaki %>
  */
 class LineObserver {}
 
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Shift
- * @opt nodefillcolor Khaki
+ * <%= node_fill_color :khaki %>
  */
 class ShiftObserver {}
 
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Site
- * @opt nodefillcolor Khaki
+ * <%= node_fill_color :khaki %>
  */
 class SiteObserver {}
 
 /**
  * @depend - - - ReferenceDataSyncer
- * @opt nodefillcolor Khaki
+ * <%= node_fill_color :khaki %>
  */
 class TableBuilderService {}
 
@@ -364,32 +364,30 @@ class TableBuilderService {}
 /**
  * @composed - - - Customer
  * @composed - - - Site
- * @opt nodefillcolor LightYellow
+ * <%= node_fill_color :lightyellow %>
  */
 class Account {}
 
 /**
  * @composed - - - ReferenceDataTable
  * @composed - - - Rule
- * @opt nodefillcolor LightYellow
+ * <%= node_fill_color :lightyellow %>
  */
 class Customer {}
 
 /**
- * @opt nodefillcolor LightYellow
+ * <%= node_fill_color :lightyellow %>
  */
 class Line {}
 
 /**
- * @opt nodefillcolor LightYellow
+ * <%= node_fill_color :lightyellow %>
  */
 class Shift {}
 
 /**
  * @composed - - - Line
  * @composed - - - Shift
- * @opt nodefillcolor LightYellow
+ * <%= node_fill_color :lightyellow %>
  */
 class Site {}
-
-
