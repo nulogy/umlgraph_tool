@@ -2,12 +2,12 @@ require 'erb'
 
 class Keywords
 
-  def node_fill_color(color)
-    "@opt nodefillcolor #{color}"
-  end
-
   def bind
     binding
+  end
+
+  def node_fill_color(color)
+    "@opt nodefillcolor #{color}"
   end
 
 end
@@ -35,7 +35,6 @@ class UmlCreator
 
 end
 
-creator = UmlCreator.new('IcgRoot.erb.java')
-creator.create
+UmlCreator.new('IcgRoot.erb.java').create
 
 system('./umlgraph IcgRoot png')
