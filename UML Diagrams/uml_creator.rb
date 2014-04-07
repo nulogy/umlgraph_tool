@@ -6,7 +6,7 @@ class Keywords
     "@opt nodefillcolor #{color}"
   end
 
-  def get_binding
+  def bind
     binding
   end
 
@@ -22,7 +22,7 @@ class UmlCreator
     keywords = Keywords.new
     template_file = File.open(@filename, 'r').read
     erb = ERB.new(template_file)
-    File.open(output_filename, 'w+') { |file| file.write(erb.result(keywords.get_binding)) }
+    File.open(output_filename, 'w+') { |file| file.write(erb.result(keywords.bind)) }
   end
 
   private
