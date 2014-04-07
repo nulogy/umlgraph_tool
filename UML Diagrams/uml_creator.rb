@@ -35,6 +35,6 @@ class UmlCreator
 
 end
 
-UmlCreator.new('IcgRoot.erb.java').create
+UmlCreator.new('IcgRoot.java.erb').create
 
 system('./umlgraph IcgRoot png')
