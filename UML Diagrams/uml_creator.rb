@@ -20,6 +20,7 @@ class Keywords
         :concrete_drivers => true,
         :concrete_scopes => true,
         :concrete_validators => true,
+        :sync => true,
         :wizard => true
       }
     }
