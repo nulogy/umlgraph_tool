@@ -38,12 +38,6 @@ class CodeGenerationService {}
 class MaterialsValidationConfig {}
 
 /**
- * @has - - - Rule
- * <%= node_fill_color :base %>
- */
-class ProductionParameters {}
-
-/**
  * @has - - - Driver
  * <%= node_fill_color :base %>
  */
@@ -78,6 +72,13 @@ class MaterialsValidationService {}
 // Drivers
 //
 // Note: concrete drivers hidden for the moment.
+
+/**
+ * @has - - - Rule
+ * @depend - - - Scope
+ * <%= node_fill_color :drivers %>
+ */
+class ProductionParameters {}
 
 /**
  * <%= node_fill_color :drivers %>
