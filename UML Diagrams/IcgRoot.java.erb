@@ -77,7 +77,7 @@ class MaterialsValidationService {}
 
 /**
  * @has - - - Rule
- * @depend - - - Scope
+ * @depend - creates - Scope
  * <%= node_fill_color :drivers %>
  */
 class ProductionParameters {}
@@ -229,7 +229,9 @@ class Fragment {}
 /**
  * <%= node_fill_color :scopes %>
  */
-class Scope {}
+class Scope {
+  void qualified_items() {}
+}
 
 /**
  * <%= show :concrete_scopes %>
