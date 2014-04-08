@@ -2,12 +2,34 @@ require 'erb'
 
 class Keywords
 
+  def initialize
+    @options = {
+      :color => {
+        :base => 'lightgray',
+        :domain => 'lightyellow',
+        :drivers => 'lightcoral',
+        :rules => 'lightblue',
+        :sync => 'khaki',
+        :validators => 'palegreen'
+      },
+
+      :hidden => {
+        :concrete_drivers => false,
+        :concrete_validators => false
+      }
+    }
+  end
+
   def bind
     binding
   end
 
-  def node_fill_color(color)
-    "@opt nodefillcolor #{color}"
+  def node_fill_color(color_key)
+    "@opt nodefillcolor #{@options[:color][color_key]}"
+  end
+
+  def show(visibility_key)
+    "@hidden" if @options[:hidden][visibility_key]
   end
 
 end
