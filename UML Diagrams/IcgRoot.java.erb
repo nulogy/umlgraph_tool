@@ -39,6 +39,7 @@ class MaterialsValidationConfig {}
 
 /**
  * @has - - - Driver
+ * @depend - - - MfgDatesInterpreter
  * <%= node_fill_color :base %>
  */
 class ProductionProvider {}
@@ -56,6 +57,7 @@ class ReferenceData {}
 class RuleService {}
 
 /**
+ * @depend - - - MfgDatesInterpreter
  * @depend - - - ValidationPipeline
  * <%= node_fill_color :base %>
  */
@@ -144,23 +146,19 @@ class SiteDriver extends Driver {}
 // Interpreters
 
 /**
+ * <%= show :concrete_validators %>
  * <%= node_fill_color :interpreters %>
- * @stereotype Icg::Interpreters
- */
- class Interpreter {}
+ */class ExpiryDateInterpreter {}
 
 /**
  * <%= node_fill_color :interpreters %>
- */class ExpiryDateInterpreter extends Interpreter {}
+ */class MfgDatesInterpreter {}
 
 /**
- * <%= node_fill_color :interpreters %>
- */class MfgDatesInterpreter extends Interpreter {}
-
-/**
+ * <%= show :concrete_validators %>
  * <%= node_fill_color :interpreters %>
  */
-class MfgOriginInterpreter extends Interpreter {}
+class MfgOriginInterpreter {}
 
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -329,6 +327,7 @@ class CanRunValidations {}
 class ExpiryDateParsingValidator {}
 
 /**
+ * @depend - - - ExpiryDateInterpreter
  * <%= show :concrete_validators %>
  * <%= node_fill_color :validators %>
  */
@@ -341,12 +340,14 @@ class ExpiryDateRangeValidator {}
 class ExpiryDateValidator {}
 
 /**
+ * @depend - - - ExpiryDateInterpreter
  * <%= show :concrete_validators %>
  * <%= node_fill_color :validators %>
  */
 class FinishedGoodProductionDateLimitValidator {}
 
 /**
+ * @depend - - - MfgOriginInterpreter
  * <%= show :concrete_validators %>
  * <%= node_fill_color :validators %>
  */
@@ -408,7 +409,7 @@ class ValidationPipeline {}
 
 
 // --------------------------------------------------------------------------------------------------------------------
-// Data Syching
+// Data Synching
 //
 // Note: hiding the dependency on the observed models.
 

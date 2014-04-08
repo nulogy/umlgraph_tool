@@ -18,7 +18,7 @@ class Keywords
 
       :hidden => {
         :concrete_drivers => false,
-        :concrete_validators => false
+        :concrete_validators => true
       }
     }
   end
