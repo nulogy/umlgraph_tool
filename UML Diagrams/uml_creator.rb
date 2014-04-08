@@ -17,8 +17,10 @@ class Keywords
       },
 
       :hidden => {
-        :concrete_drivers => false,
-        :concrete_validators => true
+        :concrete_drivers => true,
+        :concrete_scopes => true,
+        :concrete_validators => true,
+        :wizard => true
       }
     }
   end
