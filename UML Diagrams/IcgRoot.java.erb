@@ -140,6 +140,29 @@ class SiteDriver extends Driver {}
 
 
 // --------------------------------------------------------------------------------------------------------------------
+// Interpreters
+
+/**
+ * <%= node_fill_color :interpreters %>
+ * @stereotype Icg::Interpreters
+ */
+ class Interpreter {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */class ExpiryDateInterpreter extends Interpreter {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */class MfgDatesInterpreter extends Interpreter {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */
+class MfgOriginInterpreter extends Interpreter {}
+
+
+// --------------------------------------------------------------------------------------------------------------------
 // Reference Data (< ActiveRecord::Base)
 
 /**
@@ -172,25 +195,25 @@ class Rule {}
  * @composed  - - - Fragment
  * <%= node_fill_color :rules %>
  */
-class GenerateExpiry extends Rule {}
+class GenerateExpiryRule extends Rule {}
 
 /**
  * @composed  - - - Fragment
  * <%= node_fill_color :rules %>
  */
-class GenerateLot extends Rule {}
+class GenerateLotRule extends Rule {}
 
 /**
  * @composed  - - - Fragment
  * <%= node_fill_color :rules %>
  */
-class InterpretExpiry extends Rule {}
+class InterpretExpiryRule extends Rule {}
 
 /**
  * @composed  - - - Fragment
  * <%= node_fill_color :rules %>
  */
-class InterpretLot extends Rule {}
+class InterpretLotRule extends Rule {}
 
 /**
  * @depend - - - Driver
@@ -202,19 +225,68 @@ class Fragment {}
 
 
 // --------------------------------------------------------------------------------------------------------------------
+// Scopes
+
+/**
+ * <%= node_fill_color :scopes %>
+ * @stereotype Icg::Scopes
+ */
+class Scope {}
+
+/**
+ * <%= node_fill_color :scopes %>
+ */
+class JobLotsExpiriesScope extends Scope {}
+
+/**
+ * <%= node_fill_color :scopes %>
+ */
+class MovePlanScope extends Scope {}
+
+/**
+ * <%= node_fill_color :scopes %>
+ */
+class MovesScope extends Scope {}
+
+/**
+ * <%= node_fill_color :scopes %>
+ */
+class PickListCandidateScope extends Scope {}
+
+/**
+ * <%= node_fill_color :scopes %>
+ */
+class PickListsScope extends Scope {}
+
+
+// --------------------------------------------------------------------------------------------------------------------
 // Transition
-//
-// Note: commented out for the moment.
 
-// /**
-//  * @stereotype Icg::Rule::State::Spec
-//  */
-// class Transition {}
+/**
+ * <%= node_fill_color :interpreters %>
+ * @stereotype Icg::Rule::State::Spec
+ */
+class Transition {}
 
-// class GenerateExpiry extends Transition {}
-// class GenerateLot extends Transition {}
-// class InterpretExpiry extends Transition {}
-// class InterpretLot extends Transition {}
+/**
+ * <%= node_fill_color :interpreters %>
+ */
+class GenerateExpiryTransition extends Transition {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */
+class GenerateLotTransition extends Transition {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */
+class InterpretExpiryTransition extends Transition {}
+
+/**
+ * <%= node_fill_color :interpreters %>
+ */
+class InterpretLotTransition extends Transition {}
 
 
 // --------------------------------------------------------------------------------------------------------------------
