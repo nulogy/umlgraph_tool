@@ -8,11 +8,11 @@ class Keywords
         :base => 'lightgray',
         :domain => 'lightyellow',
         :drivers => 'lightcoral',
-        :interpreters => 'wheat',
+        :interpreters => 'gold',
         :rules => 'lightblue',
         :scopes => 'violet',
         :sync => 'khaki',
-        :transition => 'chartreuse',
+        :transitions => 'cyan',
         :validators => 'palegreen'
       },
 

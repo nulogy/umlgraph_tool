@@ -264,28 +264,43 @@ class PickListsScope extends Scope {}
 // Transition
 
 /**
- * <%= node_fill_color :interpreters %>
+ * @depend - - - Wizard
+ * <%= node_fill_color :base %>
+ */
+class RuleWizardController {
+  void show() {}
+  void transition() {}
+}
+
+/**
+ * @depend - - - Transition
+ * <%= node_fill_color :transitions %>
+ */
+class Wizard {}
+
+/**
+ * <%= node_fill_color :transitions %>
  * @stereotype Icg::Rule::State::Spec
  */
 class Transition {}
 
 /**
- * <%= node_fill_color :interpreters %>
+ * <%= node_fill_color :transitions %>
  */
 class GenerateExpiryTransition extends Transition {}
 
 /**
- * <%= node_fill_color :interpreters %>
+ * <%= node_fill_color :transitions %>
  */
 class GenerateLotTransition extends Transition {}
 
 /**
- * <%= node_fill_color :interpreters %>
+ * <%= node_fill_color :transitions %>
  */
 class InterpretExpiryTransition extends Transition {}
 
 /**
- * <%= node_fill_color :interpreters %>
+ * <%= node_fill_color :transitions %>
  */
 class InterpretLotTransition extends Transition {}
 
