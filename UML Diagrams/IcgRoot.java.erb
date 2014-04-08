@@ -432,7 +432,7 @@ class ReferenceDataSyncer {}
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Line
- * <%= show :sync %>
+ * <%= show :sync_details %>
  * <%= node_fill_color :sync %>
  */
 class LineObserver {}
@@ -440,7 +440,7 @@ class LineObserver {}
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Shift
- * <%= show :sync %>
+ * <%= show :sync_details %>
  * <%= node_fill_color :sync %>
  */
 class ShiftObserver {}
@@ -448,14 +448,14 @@ class ShiftObserver {}
 /**
  * @depend - - - ReferenceDataSyncer
  * @depend_HIDE - observes - Site
- * <%= show :sync %>
+ * <%= show :sync_details %>
  * <%= node_fill_color :sync %>
  */
 class SiteObserver {}
 
 /**
  * @depend - - - ReferenceDataSyncer
- * <%= show :sync %>
+ * <%= show :sync_details %>
  * <%= node_fill_color :sync %>
  */
 class TableBuilderService {}
