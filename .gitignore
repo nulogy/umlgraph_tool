@@ -1,4 +1,7 @@
 .DS_Store
+*.sublime-project
+*.sublime-workspace
+
 *.jar
 *.png
 IcgRoot.java
