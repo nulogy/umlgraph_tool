@@ -1,9 +1,10 @@
 .PS
 copy "sequence.pic";
 
-boxht = 0.5
-boxwid = 3.0
+boxht = 0.4
+boxwid = 2.5
 movewid = .25
+maxpswid = 22
 
 # ---------------------------------------------------------
 # Object definition
@@ -17,8 +18,11 @@ placeholder_object(P);
 # MaterialsValidationConfig
 placeholder_object(M);
 
-# Icg::CodeGenerationService
-object(S,"CodeGenerationService");
+# Drivers::ProductionProvider
+object(X,"pp:ProductionProvider");
+
+# CodeGenerationService
+object(S,"cgs:CodeGenerationService");
 
 # ---------------------------------------------------------
 # Message exchange
@@ -26,13 +30,12 @@ object(S,"CodeGenerationService");
 step();
 step();
 active(C);
+active(X);
+active(S);
 step();
 create_message(C,P,"p:ProductionParameters");
-active(P);
 create_message(C,M,"m:MaterialsValidationConfig");
-active(M);
-message(C,S,"generate_lot_code(p, m)");
-active(S);
+message(C,S,"generate_lot_code(p, pp, m)");
 
 # ---------------------------------------------------------
 # Object liefetime completion
@@ -42,5 +45,6 @@ complete(C);
 complete(P);
 complete(M);
 complete(S);
+complete(X);
 
 .PE
