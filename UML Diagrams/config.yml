@@ -1,0 +1,17 @@
+color:
+  base:         lightgray
+  domain:       lightyellow
+  drivers:      lightcoral
+  interpreters: gold
+  rules:        lightblue
+  scopes:       violet
+  sync:         khaki
+  transitions:  cyan
+  validators:   palegreen
+
+visible:
+  concrete_drivers:     false
+  concrete_scopes:      false
+  concrete_validators:  false
+  sync_details:         false
+  wizard:               false
