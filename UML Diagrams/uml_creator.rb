@@ -22,11 +22,11 @@ class Keywords
   private
 
   def color_option(color_key)
-    @options[:color.to_s][color_key.to_s]
+    @options['color'][color_key.to_s]
   end
 
   def visibility_option(visibility_key)
-    @options[:visible.to_s][visibility_key.to_s]
+    @options['visible'][visibility_key.to_s]
   end
 end
 
