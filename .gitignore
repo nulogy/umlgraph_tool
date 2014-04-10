@@ -18,5 +18,6 @@ UmlGraph.jar
 # -----------------------------
 # Output files
 
-*.png
 IcgRoot.java
+IcgRoot.png
+IcgSequence.ps

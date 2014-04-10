@@ -1,0 +1,46 @@
+.PS
+copy "sequence.pic";
+
+boxht = 0.5
+boxwid = 3.0
+movewid = .25
+
+# ---------------------------------------------------------
+# Object definition
+
+# CodeGenerationController
+object(C,"c:CodeGenerationController");
+
+# Drivers::ProductionParameters
+placeholder_object(P);
+
+# MaterialsValidationConfig
+placeholder_object(M);
+
+# Icg::CodeGenerationService
+object(S,"CodeGenerationService");
+
+# ---------------------------------------------------------
+# Message exchange
+
+step();
+step();
+active(C);
+step();
+create_message(C,P,"p:ProductionParameters");
+active(P);
+create_message(C,M,"m:MaterialsValidationConfig");
+active(M);
+message(C,S,"generate_lot_code(p, m)");
+active(S);
+
+# ---------------------------------------------------------
+# Object liefetime completion
+
+step();
+complete(C);
+complete(P);
+complete(M);
+complete(S);
+
+.PE
