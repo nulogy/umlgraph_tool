@@ -25,3 +25,7 @@ There are 5 kinds of reference tables: date, site, line, shift, and location. On
 Each driver implements #supports? to denote if it supports a particular kind of rule fragment.
 
 There are four scopes: Moves, MovePlans, PickLists, or JobLotsExpiries.
+
+
+ProductionParameters has request scope.
+MaterialsValidationConfig has Customer scope and doesn't really change.
