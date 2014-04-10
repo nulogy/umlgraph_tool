@@ -1,7 +1,22 @@
+# -----------------------------
+# OS X detritus
+
 .DS_Store
+
+# -----------------------------
+# Sublime detritus
+
 *.sublime-project
 *.sublime-workspace
 
-*.jar
+# -----------------------------
+# UmlGraph lib
+
+sequence.pic
+UmlGraph.jar
+
+# -----------------------------
+# Output files
+
 *.png
 IcgRoot.java
