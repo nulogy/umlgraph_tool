@@ -9,6 +9,8 @@ maxpswid = 22
 # ---------------------------------------------------------
 # Object definition
 
+pobject(E,"External Messages");
+
 # CodeGenerationController
 object(C,"c:CodeGenerationController");
 
@@ -33,6 +35,7 @@ active(C);
 active(X);
 active(S);
 step();
+message(E,C,"request(params)");
 create_message(C,P,"p:ProductionParameters");
 create_message(C,M,"m:MaterialsValidationConfig");
 message(C,S,"generate_lot_code(p, pp, m)");
