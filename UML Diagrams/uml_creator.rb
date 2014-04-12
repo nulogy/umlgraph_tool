@@ -4,7 +4,8 @@ require 'yaml'
 class Keywords
 
   def initialize
-    @options = YAML.load_file('config.yml')
+    @diagram = YAML.load_file('diagram.yml')
+    @colors = YAML.load_file('colors.yml')
     @show = YAML.load_file('show_all.yml')
   end
 
@@ -13,7 +14,7 @@ class Keywords
   end
 
   def diagram_options
-    @options['diagram'].map { |k| "@opt #{k}" }.join("\n * ")
+    @diagram.map { |k| "@opt #{k}" }.join("\n * ")
   end
 
   def node_fill_color(color_key)
@@ -27,12 +28,9 @@ class Keywords
   private
 
   def color_option(color_key)
-    @options['color'].fetch(color_key.to_s, 'white')
+    @colors.fetch(color_key.to_s, 'white')
   end
 
-  def visibility_option(visibility_key)
-    @options['visible'].fetch(visibility_key.to_s, true)
-  end
 end
 
 class UmlCreator
