@@ -5,6 +5,7 @@ class Keywords
 
   def initialize
     @options = YAML.load_file('config.yml')
+    @show = YAML.load_file('show_all.yml')
   end
 
   def bind
@@ -19,8 +20,8 @@ class Keywords
     "@opt nodefillcolor #{color_option(color_key)}"
   end
 
-  def show(visibility_key)
-    "@hidden" unless visibility_option(visibility_key)
+  def show?(classname)
+    "@hidden" unless @show[classname]
   end
 
   private
