@@ -1,3 +1,8 @@
+diagram:
+  - vertical
+  - attributes
+  - operations
+
 color:
   base:         lightgray
   domain:       lightyellow

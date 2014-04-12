@@ -11,6 +11,10 @@ class Keywords
     binding
   end
 
+  def diagram_options
+    @options['diagram'].map { |k| "@opt #{k}" }.join("\n * ")
+  end
+
   def node_fill_color(color_key)
     "@opt nodefillcolor #{color_option(color_key)}"
   end
@@ -22,11 +26,11 @@ class Keywords
   private
 
   def color_option(color_key)
-    @options['color'][color_key.to_s]
+    @options['color'].fetch(color_key.to_s, 'white')
   end
 
   def visibility_option(visibility_key)
-    @options['visible'][visibility_key.to_s]
+    @options['visible'].fetch(visibility_key.to_s, true)
   end
 end
 
