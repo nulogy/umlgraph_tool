@@ -26,6 +26,12 @@ object(X,"pp:ProductionProvider");
 # CodeGenerationService
 object(S,"cgs:CodeGenerationService");
 
+# RuleService
+object(R,"rs:RuleService");
+
+# Rule
+object(Y,"r:Rule");
+
 # ---------------------------------------------------------
 # Message exchange
 
@@ -34,11 +40,21 @@ step();
 active(C);
 active(X);
 active(S);
+active(R);
 step();
 message(E,C,"request(params)");
+
 create_message(C,P,"p:ProductionParameters");
+active(P);
+active(Y);
+
 create_message(C,M,"m:MaterialsValidationConfig");
+active(M);
+
 message(C,S,"generate_lot_code(p, pp, m)");
+message(S,P,"rule()");
+return_message(P,S,"aRule");
+message(S,R,"generate_lot_code(rule,drivers)");
 
 # ---------------------------------------------------------
 # Object liefetime completion
@@ -49,5 +65,6 @@ complete(P);
 complete(M);
 complete(S);
 complete(X);
+complete(R);
 
 .PE
