@@ -4,9 +4,9 @@ require 'yaml'
 class Keywords
 
   def initialize
-    @diagram = YAML.load_file('diagram_horizontal.yml')
+    @diagram = YAML.load_file('diagram.yml')
     @colors = YAML.load_file('colors.yml')
-    @show = YAML.load_file('show_validators.yml')
+    @show = YAML.load_file('show_basic.yml')
   end
 
   def bind
