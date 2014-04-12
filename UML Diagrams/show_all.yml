@@ -3,11 +3,11 @@
 CodeGenerationController: true
 CodeGenerationService: true
 MaterialsValidationConfig: true
+MaterialsValidationService: true
 ProductionProvider: true
 ReferenceData: true
 RuleService: true
-RuleService: true
-RuleService: true
+ValidatingMaterials: true
 
 # Drivers
 ProductionParameters: true

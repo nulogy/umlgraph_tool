@@ -6,7 +6,7 @@ class Keywords
   def initialize
     @diagram = YAML.load_file('diagram.yml')
     @colors = YAML.load_file('colors.yml')
-    @show = YAML.load_file('show_all.yml')
+    @show = YAML.load_file('show_basic.yml')
   end
 
   def bind
@@ -14,7 +14,7 @@ class Keywords
   end
 
   def diagram_options
-    @diagram.map { |k| "@opt #{k}" }.join("\n * ")
+    @diagram['diagram'].map { |k| "@opt #{k}" }.join("\n * ")
   end
 
   def node_fill_color(color_key)

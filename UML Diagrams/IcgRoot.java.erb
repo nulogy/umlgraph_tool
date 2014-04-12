@@ -40,6 +40,13 @@ class CodeGenerationService {}
 class MaterialsValidationConfig {}
 
 /**
+ * @depend - - - ValidatingMaterials
+ * <%= show? 'MaterialsValidationService' %>
+ * <%= node_fill_color :base %>
+ */
+class MaterialsValidationService {}
+
+/**
  * @has - - - Driver
  * @depend - - - MfgDatesInterpreter
  * <%= show? 'ProductionProvider' %>
@@ -63,19 +70,11 @@ class ReferenceData {}
 class RuleService {}
 
 /**
- * @depend - - - MfgDatesInterpreter
  * @depend - - - ValidationPipeline
- * <%= show? 'RuleService' %>
+ * <%= show? 'ValidatingMaterials' %>
  * <%= node_fill_color :base %>
  */
-class RuleService {}
-
-/**
- * @depend - - - ValidatingMaterials
- * <%= show? 'RuleService' %>
- * <%= node_fill_color :base %>
- */
-class RuleService {}
+class ValidatingMaterials {}
 
 
 // --------------------------------------------------------------------------------------------------------------------

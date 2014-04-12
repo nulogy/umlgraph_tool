@@ -1,0 +1,89 @@
+
+# Application Entry Point
+CodeGenerationController: true
+CodeGenerationService: true
+MaterialsValidationConfig: true
+MaterialsValidationService: true
+ProductionProvider: true
+ReferenceData: true
+RuleService: true
+ValidatingMaterials: true
+
+# Drivers
+ProductionParameters: true
+Driver: true
+EarliestMfgDateDriver: false
+LineDriver: false
+ManufacturingOriginDriver: false
+ProductionDateDriver: false
+SampleManufacturingOriginDriver: false
+SampleMfgDateDriver: false
+ShiftDriver: false
+ShortestShelfLifeDriver: false
+SiteDriver: false
+
+# Interpreters
+ExpiryDateInterpreter: false
+MfgDatesInterpreter: false
+MfgOriginInterpreter: false
+
+# Reference Data
+ReferenceDataField: true
+ReferenceDataRow: true
+ReferenceDataTable: true
+
+# Rules
+Rule: true
+GenerateExpiryRule: true
+GenerateLotRule: true
+InterpretExpiryRule: true
+InterpretLotRule: true
+RuleFragment: true
+
+# Scopes
+Scope: true
+JobLotsExpiriesScope: false
+MovePlanScope: false
+MovesScope: false
+PickListCandidateScope: false
+PickListsScope: false
+
+# Transitions
+RuleWizardController: false
+Wizard: false
+Transition: false
+GenerateExpiryTransition: false
+GenerateLotTransition: false
+InterpretExpiryTransition: false
+InterpretLotTransition: false
+
+# Validations
+CanInterpretMfgDateValidator: false
+CanRunValidations: false
+ExpiryDateParsingValidator: false
+ExpiryDateRangeValidator: false
+ExpiryDateValidator: false
+FinishedGoodProductionDateLimitValidator: false
+ManufacturingOriginValidator: false
+PickStrategyValidator: false
+QualifiedItemsPresenceValidator: false
+ShelfLifeValidator: false
+StopShipDateRangeValidator: false
+StopShipDateValidator: false
+StopShipLimitValidator: false
+ValidationPipeline: true
+
+# Data Synching
+ReferenceDataSyncer: true
+LineObserver: false
+ShiftObserver: false
+SiteObserver: false
+TableBuilderService: false
+
+# Domain Master
+Account: true
+Customer: true
+Job: true
+Line: true
+Shift: true
+Site: true
