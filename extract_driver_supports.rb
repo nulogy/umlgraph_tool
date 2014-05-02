@@ -1,6 +1,6 @@
 # Simple utility to extract out all of the driver supports relationships.
 
-dir = "/Users/alistair/src/packmanager/dev/domain/icg/icg/drivers"
+dir = "../packmanager/dev/domain/icg/icg/drivers"
 
 Dir.foreach(dir) do |filename|
   if filename.match('rb$')
