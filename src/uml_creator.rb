@@ -2,11 +2,10 @@ require 'erb'
 require 'yaml'
 
 class Keywords
-
   def initialize
-    @diagram = YAML.load_file('diagram.yml')
-    @colors = YAML.load_file('colors.yml')
-    @show = YAML.load_file('show_basic.yml')
+    @diagram = YAML.load_file('config/diagram.yml')
+    @colors = YAML.load_file('config/colors.yml')
+    @show = YAML.load_file('config/show_basic.yml')
   end
 
   def bind
@@ -30,13 +29,11 @@ class Keywords
   def color_option(color_key)
     @colors.fetch(color_key.to_s, 'white')
   end
-
 end
 
 class UmlCreator
-
-  def initialize(filename)
-    @filename = filename
+  def initialize(basename)
+    @basename = basename
   end
 
   def create
@@ -47,15 +44,13 @@ class UmlCreator
   private
 
   def output_filename
-    @filename.gsub(/.erb/, '')
+    "temp/#{@basename}.java"
   end
 
   def template_file
-    File.open(@filename, 'r').read
+    File.open("templates/#{@basename}.java.erb", 'r').read
   end
-
 end
 
-UmlCreator.new('IcgRoot.java.erb').create
-
+UmlCreator.new('IcgRoot').create
 system('./umlgraph IcgRoot png')
