@@ -2,10 +2,10 @@ require 'erb'
 require 'yaml'
 
 class Keywords
-  def initialize
-    @diagram = YAML.load_file('config/diagram.yml')
-    @colors = YAML.load_file('config/colors.yml')
-    @show = YAML.load_file('config/show_basic.yml')
+  def initialize(args)
+    @diagram = YAML.load_file(args[:diagram])
+    @colors = YAML.load_file(args[:colors])
+    @show = YAML.load_file(args[:show])
   end
 
   def bind
@@ -32,25 +32,27 @@ class Keywords
 end
 
 class UmlCreator
-  def initialize(basename)
-    @basename = basename
+  def initialize(args)
+    @args = args
   end
 
   def create
-    erb = ERB.new(template_file)
-    File.open(output_filename, 'w+') { |file| file.write(erb.result(Keywords.new.bind)) }
+    template = read_file(@args[:template_filename])
+    rendered = render_template(template)
+    write_file(@args[:output_filename], rendered)
   end
 
   private
 
-  def output_filename
-    "temp/#{@basename}.java"
+  def read_file(filename)
+    File.open(filename, 'r').read
   end
 
-  def template_file
-    File.open("templates/#{@basename}.java.erb", 'r').read
+  def render_template(template)
+    ERB.new(template).result(Keywords.new(@args).bind)
+  end
+
+  def write_file(filename, contents)
+    File.open(filename, 'w+') { |file| file.write(contents) }
   end
 end
-
-UmlCreator.new('IcgRoot').create
-system('./umlgraph IcgRoot png')

@@ -1,3 +1,37 @@
+require_relative 'src/uml_creator.rb'
+
+def create_graph(args)
+  basename = args[:basename]
+  show = args[:show]
+  layout = args[:layout]
+  dot_file = "temp/#{basename}_#{show}.java"
+  args = {
+    template_filename: "templates/#{basename}.java.erb",
+    output_filename: dot_file,
+    diagram: "config/diagram_#{layout}.yml",
+    colors: "config/colors.yml",
+    show: "config/show_#{show}.yml",
+  }
+  UmlCreator.new(args).create
+  system "./umlgraph #{dot_file} out/#{basename}_#{show}.png png"
+end
+
+task :clean do
+  Dir.glob('out/*').each { |file| File.delete(file) }
+  Dir.glob('temp/*').each { |file| File.delete(file) }
+end
+
 task :default do
-  system 'ruby src/uml_creator.rb'
+  create_graph basename: 'IcgRoot', show: 'all', layout: 'vertical'
+  create_graph basename: 'IcgRoot', show: 'basic', layout: 'vertical'
+  create_graph basename: 'IcgRoot', show: 'drivers', layout: 'horizontal'
+  create_graph basename: 'IcgRoot', show: 'validators', layout: 'horizontal'
+end
+
+task :classnames do
+  require_relative 'src/extract_classnames'
+end
+
+task :drivers do
+  require_relative 'src/extract_driver_supports'
 end
