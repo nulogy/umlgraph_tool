@@ -1,19 +1,13 @@
 require_relative 'src/uml_creator.rb'
 
-def create_graph(args)
-  basename = args[:basename]
-  show = args[:show]
-  layout = args[:layout]
-  dot_file = "temp/#{basename}_#{show}.java"
+def create_graph(basename)
+  dot_file = "temp/#{basename}.java"
   args = {
     template_filename: "templates/#{basename}.yml",
     output_filename: dot_file,
-    diagram: "config/diagram_#{layout}.yml",
-    colors: "config/colors.yml",
-    show: "config/show_#{show}.yml",
   }
   UmlCreator.new(args).create
-  system "./umlgraph #{dot_file} out/#{basename}_#{show}.png png"
+  system "./umlgraph #{dot_file} out/#{basename}.png png"
 end
 
 task :clean do
@@ -22,10 +16,9 @@ task :clean do
 end
 
 task :default do
-  create_graph basename: 'IcgRoot', show: 'all', layout: 'vertical'
-  create_graph basename: 'IcgRoot', show: 'basic', layout: 'vertical'
-  create_graph basename: 'IcgRoot', show: 'drivers', layout: 'horizontal'
-  create_graph basename: 'IcgRoot', show: 'validators', layout: 'horizontal'
+  Dir.glob('templates/*.yml').each do |template|
+    create_graph File.basename(template, File.extname(template))
+  end
 end
 
 task :classnames do

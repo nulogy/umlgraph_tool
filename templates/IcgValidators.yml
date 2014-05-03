@@ -1,0 +1,44 @@
+config:
+  IcgValidators:
+    - '@hidden'
+  UMLOptions:
+    - '@opt horizontal'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+interpreters gold:
+  ExpiryDateInterpreter:
+  MfgOriginInterpreter:
+
+validators palegreen:
+  CanInterpretMfgDateValidator:
+  CanRunValidations:
+  ExpiryDateParsingValidator:
+  ExpiryDateRangeValidator:
+    - '@depend - - - ExpiryDateInterpreter'
+  ExpiryDateValidator:
+  FinishedGoodProductionDateLimitValidator:
+    - '@depend - - - ExpiryDateInterpreter'
+  ManufacturingOriginValidator:
+    - '@depend - - - MfgOriginInterpreter'
+  PickStrategyValidator:
+  QualifiedItemsPresenceValidator:
+  ShelfLifeValidator:
+  StopShipDateRangeValidator:
+  StopShipDateValidator:
+  StopShipLimitValidator:
+  ValidationPipeline:
+    - '@depend - - - CanInterpretMfgDateValidator'
+    - '@depend - - - CanRunValidations'
+    - '@depend - - - ExpiryDateParsingValidator'
+    - '@depend - - - ExpiryDateRangeValidator'
+    - '@depend - - - ExpiryDateValidator'
+    - '@depend - - - FinishedGoodProductionDateLimitValidator'
+    - '@depend - - - ManufacturingOriginValidator'
+    - '@depend - - - PickStrategyValidator'
+    - '@depend - - - QualifiedItemsPresenceValidator'
+    - '@depend - - - ShelfLifeValidator'
+    - '@depend - - - StopShipDateRangeValidator'
+    - '@depend - - - StopShipDateValidator'
+    - '@depend - - - StopShipLimitValidator'

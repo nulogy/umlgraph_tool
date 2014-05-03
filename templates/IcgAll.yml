@@ -1,4 +1,13 @@
-base:
+config:
+  IcgAll:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base lightgray:
   CodeGenerationController:
     - '@depend - - - CodeGenerationService'
     - 'void generate_lot_code() {}'
@@ -26,7 +35,7 @@ base:
   ValidatingMaterials:
     - '@depend - - - ValidationPipeline'
 
-drivers:
+drivers lightcoral:
   ProductionParameters:
     - '@has - - - Rule'
     - '@depend - creates - Scope'
@@ -41,12 +50,12 @@ drivers:
   ShortestShelfLifeDriver extends Driver:
   SiteDriver extends Driver:
 
-interpreters:
+interpreters gold:
   ExpiryDateInterpreter:
   MfgDatesInterpreter:
   MfgOriginInterpreter:
 
-rules:
+rules lightblue:
   ReferenceDataField:
   ReferenceDataRow:
   ReferenceDataTable:
@@ -66,7 +75,7 @@ rules:
     - '@depend - - - ReferenceDataTable'
     - '@depend - - - ReferenceDataField'
 
-scopes:
+scopes violet:
   Scope:
     - 'void qualified_items() {}'
   JobLotsExpiriesScope extends Scope:
@@ -75,7 +84,7 @@ scopes:
   PickListCandidateScope extends Scope:
   PickListsScope extends Scope:
 
-transitions:
+transitions cyan:
   RuleWizardController:
     - '@depend - - - Wizard'
     - 'void show() {}'
@@ -89,7 +98,7 @@ transitions:
   InterpretExpiryTransition extends Transition:
   InterpretLotTransition extends Transition:
 
-validators:
+validators palegreen:
   CanInterpretMfgDateValidator:
   CanRunValidations:
   ExpiryDateParsingValidator:
@@ -121,7 +130,7 @@ validators:
     - '@depend - - - StopShipDateValidator'
     - '@depend - - - StopShipLimitValidator'
 
-sync:
+sync khaki:
   ReferenceDataSyncer:
     - '@depend - - - ReferenceDataRow'
   LineObserver:
@@ -136,7 +145,7 @@ sync:
   TableBuilderService:
     - '@depend - - - ReferenceDataSyncer'
 
-domain:
+domain lightyellow:
   Account:
     - '@composed - - - Customer'
     - '@composed - - - Site'

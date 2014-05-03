@@ -1,0 +1,22 @@
+<% @groups.each do |group_color, entities| %>
+  <% group = group_color.split[0] %>
+  <% fill_color = (group_color.split.size > 1) ? group_color.split[1] : nil %>
+  // --------------------------------------------------------------------------------------------------------------------
+  // <%= group %>
+  <% entities.each do |entity, properties| %>
+    <% properties ||= [] %>
+    /**
+    <% properties.select { |p| p[0] == '@' }.each do |property| %>
+      * <%= property %>
+    <% end %>
+    <% if fill_color %>
+      * @opt nodefillcolor <%= fill_color %>
+    <% end %>
+     */
+    class <%= entity %> {
+      <% properties.reject { |p| p[0] == '@' }.each do |property| %>
+        <%= property %>
+      <% end %>
+    }
+  <% end %>
+<% end %>
