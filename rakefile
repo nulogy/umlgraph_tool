@@ -21,11 +21,3 @@ task :default do
     create_graph(basename)
   end
 end
-
-task :classnames do
-  require_relative 'src/extract_classnames'
-end
-
-task :drivers do
-  require_relative 'src/extract_driver_supports'
-end
