@@ -3,14 +3,14 @@ require 'yaml'
 
 class UmlCreator
   def initialize(args)
-    @args = args
     @groups = YAML.load_file(args[:template_filename])
+    @output_filename = args[:output_filename]
   end
 
   def create
     template = read_file('src/template.erb')
     rendered = render_template(template)
-    write_file(@args[:output_filename], rendered)
+    write_file(@output_filename, rendered)
   end
 
   private
