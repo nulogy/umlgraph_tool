@@ -3,8 +3,9 @@ require 'yaml'
 
 class Keywords
   def initialize(args)
-    @diagram = YAML.load_file(args[:diagram])
     @colors = YAML.load_file(args[:colors])
+    @diagram = YAML.load_file(args[:diagram])
+    @groups = YAML.load_file(args[:template_filename])
     @show = YAML.load_file(args[:show])
   end
 
@@ -21,7 +22,7 @@ class Keywords
   end
 
   def show?(classname)
-    "@hidden" unless @show[classname]
+    @show[classname.split.first]
   end
 
   private
@@ -37,7 +38,7 @@ class UmlCreator
   end
 
   def create
-    template = read_file(@args[:template_filename])
+    template = read_file('templates/template.erb')
     rendered = render_template(template)
     write_file(@args[:output_filename], rendered)
   end

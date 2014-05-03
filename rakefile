@@ -6,7 +6,7 @@ def create_graph(args)
   layout = args[:layout]
   dot_file = "temp/#{basename}_#{show}.java"
   args = {
-    template_filename: "templates/#{basename}.java.erb",
+    template_filename: "templates/#{basename}.yml",
     output_filename: dot_file,
     diagram: "config/diagram_#{layout}.yml",
     colors: "config/colors.yml",
