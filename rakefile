@@ -17,7 +17,8 @@ end
 
 task :default do
   Dir.glob('templates/*.yml').each do |template|
-    create_graph File.basename(template, File.extname(template))
+    basename = File.basename(template, File.extname(template))
+    create_graph(basename)
   end
 end
 
