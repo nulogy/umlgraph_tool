@@ -17,6 +17,6 @@ Create UML diagrams rapidly.
 
 ## Reference
 
-Tags: http://www.umlgraph.org/doc/cd-model.html
-
 Colors: http://www.graphviz.org/doc/info/colors.html
+
+Tags: http://www.umlgraph.org/doc/cd-model.html
