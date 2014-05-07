@@ -11,6 +11,6 @@ Create UML diagrams rapidly.
 
 ## Usage
 
-1. Create a YAML file in the 'templates' folder.
+1. Define your UML diagram in a YAML file in the 'templates' folder.
 2. Run 'rake'.
-3. View graph in the 'out' folder.
+3. View the generated graph in the 'out' folder.
