@@ -2,10 +2,12 @@
 
 Create UML diagrams rapidly.
 
-## Install
+## Quickstart
 
     brew install graphviz
     git clone https://github.com/jchunky/umlgraph_tool
+    cd umlgraph_tool
+    rake
 
 ## Usage
 
