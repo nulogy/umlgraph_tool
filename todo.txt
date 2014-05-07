@@ -1,8 +1,4 @@
-- post to github
 - create sample file
-- create readme file
-  - install graphviz
-  - clone project
 - cleanup 'umlgraph' script
   - documentation out of date
   - don't depende on $JAVA_HOME being set
