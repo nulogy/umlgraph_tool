@@ -14,3 +14,8 @@ Create UML diagrams rapidly.
 1. Define your UML diagram in a YAML file in the 'templates' folder.
 2. Run 'rake'.
 3. View the generated graph in the 'out' folder.
+
+## Reference
+
+Tags: http://www.umlgraph.org/doc/cd-model.html
+Colors: http://www.graphviz.org/doc/info/colors.html
