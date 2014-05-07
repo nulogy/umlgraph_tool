@@ -48,13 +48,17 @@ rules lightblue:
     - '@composed - - - ReferenceDataField'
     - '@composed - - - ReferenceDataRow'
   Rule:
-  GenerateExpiryRule extends Rule:
+  GenerateExpiryRule:
+    - '@extends Rule'
     - '@composed_HIDE  - - - RuleFragment'
-  GenerateLotRule extends Rule:
+  GenerateLotRule:
+    - '@extends Rule'
     - '@composed  - - - RuleFragment'
-  InterpretExpiryRule extends Rule:
+  InterpretExpiryRule:
+    - '@extends Rule'
     - '@composed_HIDE  - - - RuleFragment'
-  InterpretLotRule extends Rule:
+  InterpretLotRule:
+    - '@extends Rule'
     - '@composed  - - - RuleFragment'
   RuleFragment:
     - '@depend - - - Driver'

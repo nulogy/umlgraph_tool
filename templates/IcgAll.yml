@@ -40,15 +40,24 @@ drivers lightcoral:
     - '@has - - - Rule'
     - '@depend - creates - Scope'
   Driver:
-  EarliestMfgDateDriver extends Driver:
-  LineDriver extends Driver:
-  ManufacturingOriginDriver extends Driver:
-  ProductionDateDriver extends Driver:
-  SampleManufacturingOriginDriver extends Driver:
-  SampleMfgDateDriver extends Driver:
-  ShiftDriver extends Driver:
-  ShortestShelfLifeDriver extends Driver:
-  SiteDriver extends Driver:
+  EarliestMfgDateDriver:
+    - '@extends Driver'
+  LineDriver:
+    - '@extends Driver'
+  ManufacturingOriginDriver:
+    - '@extends Driver'
+  ProductionDateDriver:
+    - '@extends Driver'
+  SampleManufacturingOriginDriver:
+    - '@extends Driver'
+  SampleMfgDateDriver:
+    - '@extends Driver'
+  ShiftDriver:
+    - '@extends Driver'
+  ShortestShelfLifeDriver:
+    - '@extends Driver'
+  SiteDriver:
+    - '@extends Driver'
 
 interpreters gold:
   ExpiryDateInterpreter:
@@ -62,13 +71,17 @@ rules lightblue:
     - '@composed - - - ReferenceDataField'
     - '@composed - - - ReferenceDataRow'
   Rule:
-  GenerateExpiryRule extends Rule:
+  GenerateExpiryRule:
+    - '@extends Rule'
     - '@composed_HIDE  - - - RuleFragment'
-  GenerateLotRule extends Rule:
+  GenerateLotRule:
+    - '@extends Rule'
     - '@composed  - - - RuleFragment'
-  InterpretExpiryRule extends Rule:
+  InterpretExpiryRule:
+    - '@extends Rule'
     - '@composed_HIDE  - - - RuleFragment'
-  InterpretLotRule extends Rule:
+  InterpretLotRule:
+    - '@extends Rule'
     - '@composed  - - - RuleFragment'
   RuleFragment:
     - '@depend - - - Driver'
@@ -78,11 +91,16 @@ rules lightblue:
 scopes violet:
   Scope:
     - 'void qualified_items() {}'
-  JobLotsExpiriesScope extends Scope:
-  MovePlanScope extends Scope:
-  MovesScope extends Scope:
-  PickListCandidateScope extends Scope:
-  PickListsScope extends Scope:
+  JobLotsExpiriesScope:
+    - '@extends Scope'
+  MovePlanScope:
+    - '@extends Scope'
+  MovesScope:
+    - '@extends Scope'
+  PickListCandidateScope:
+    - '@extends Scope'
+  PickListsScope:
+    - '@extends Scope'
 
 transitions cyan:
   RuleWizardController:
@@ -93,10 +111,14 @@ transitions cyan:
     - '@depend - - - Transition'
   Transition:
     - '@stereotype Icg::Rule::State::Spec'
-  GenerateExpiryTransition extends Transition:
-  GenerateLotTransition extends Transition:
-  InterpretExpiryTransition extends Transition:
-  InterpretLotTransition extends Transition:
+  GenerateExpiryTransition:
+    - '@extends Transition'
+  GenerateLotTransition:
+    - '@extends Transition'
+  InterpretExpiryTransition:
+    - '@extends Transition'
+  InterpretLotTransition:
+    - '@extends Transition'
 
 validators palegreen:
   CanInterpretMfgDateValidator:
