@@ -1,4 +1,0 @@
-- create sample file
-- cleanup 'umlgraph' script
-  - documentation out of date
-  - don't depende on $JAVA_HOME being set
