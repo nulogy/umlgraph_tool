@@ -1,4 +1,5 @@
 require_relative 'src/uml_creator.rb'
+require_relative 'src/uml_creator.rb'
 
 task :clean do
   Dir.glob('out/*').each { |file| File.delete(file) }
@@ -7,6 +8,17 @@ end
 
 task :default do
   Dir.glob('templates/*.yml').each do |template|
+    basename = File.basename(template, File.extname(template))
+    dot_file = "temp/#{basename}.java"
+    UmlCreator.new(template_filename: template, output_filename: dot_file).create
+    system "./umlgraph #{dot_file} out/#{basename}.png png"
+  end
+end
+
+task :generate, [:template_pattern] do |_, args|
+  Dir.glob('templates/*.yml').each do |template|
+    next unless template =~ /#{Regexp.quote(args.template_pattern)}/
+
     basename = File.basename(template, File.extname(template))
     dot_file = "temp/#{basename}.java"
     UmlCreator.new(template_filename: template, output_filename: dot_file).create
