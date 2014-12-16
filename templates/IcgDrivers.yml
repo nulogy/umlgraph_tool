@@ -9,21 +9,18 @@ config:
 
 drivers lightcoral:
   Driver:
-  EarliestMfgDateDriver:
-    - '@extends Driver'
-  LineDriver:
-    - '@extends Driver'
-  ManufacturingOriginDriver:
-    - '@extends Driver'
-  ProductionDateDriver:
-    - '@extends Driver'
-  SampleManufacturingOriginDriver:
-    - '@extends Driver'
-  SampleMfgDateDriver:
-    - '@extends Driver'
-  ShiftDriver:
-    - '@extends Driver'
-  ShortestShelfLifeDriver:
-    - '@extends Driver'
-  SiteDriver:
-    - '@extends Driver'
+  SimpleDriver extends Driver:
+  SubcomponentDriver extends Driver:
+
+  LineDriver extends SimpleDriver:
+  ShiftDriver extends SimpleDriver:
+  SiteDriver extends SimpleDriver:
+
+  EarliestMfgDateDriver extends SubcomponentDriver:
+  ManufacturingOriginDriver extends SubcomponentDriver:
+  ProductionDateDriver extends SubcomponentDriver:
+  ShortestShelfLifeDriver extends SubcomponentDriver:
+
+  SampleExpiryDateDriver extends SimpleDriver:
+  SampleManufacturingOriginDriver extends SimpleDriver:
+  SampleMfgDateDriver extends SimpleDriver:

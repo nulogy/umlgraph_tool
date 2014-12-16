@@ -8,6 +8,11 @@ config:
     - '@hidden'
 
 base lightgray:
+  PlannedReceiptsController:
+    - '@depend - - - ReceiptGenerationService'
+    - 'void create_receipt() {}'
+  ReceiptGenerationService:
+    - '@depend - - - CodeGenerationService'
   CodeGenerationController:
     - '@depend - - - CodeGenerationService'
     - 'void generate_lot_code() {}'
@@ -26,7 +31,7 @@ base lightgray:
     - '@depend - - - ValidatingMaterials'
   ProductionProvider:
     - '@has - - - Driver'
-    - '@depend - - - MfgDatesInterpreter'
+    - '@depend - - - Enricher'
   ReferenceData:
     - '@depend - - - ReferenceDataTable'
   RuleService:
@@ -34,35 +39,31 @@ base lightgray:
     - '@depend - - - Rule'
   ValidatingMaterials:
     - '@depend - - - ValidationPipeline'
+    - '@depend - - - Enricher'
 
 drivers lightcoral:
   ProductionParameters:
     - '@has - - - Rule'
     - '@depend - creates - Scope'
   Driver:
-  EarliestMfgDateDriver:
-    - '@extends Driver'
-  LineDriver:
-    - '@extends Driver'
-  ManufacturingOriginDriver:
-    - '@extends Driver'
-  ProductionDateDriver:
-    - '@extends Driver'
-  SampleManufacturingOriginDriver:
-    - '@extends Driver'
-  SampleMfgDateDriver:
-    - '@extends Driver'
-  ShiftDriver:
-    - '@extends Driver'
-  ShortestShelfLifeDriver:
-    - '@extends Driver'
-  SiteDriver:
-    - '@extends Driver'
+  SimpleDriver extends Driver:
+  SubcomponentDriver extends Driver:
+
+  LineDriver extends SimpleDriver:
+  ShiftDriver extends SimpleDriver:
+  SiteDriver extends SimpleDriver:
+
+  EarliestMfgDateDriver extends SubcomponentDriver:
+  ManufacturingOriginDriver extends SubcomponentDriver:
+  ProductionDateDriver extends SubcomponentDriver:
+  ShortestShelfLifeDriver extends SubcomponentDriver:
+
+  SampleExpiryDateDriver extends SimpleDriver:
+  SampleManufacturingOriginDriver extends SimpleDriver:
+  SampleMfgDateDriver extends SimpleDriver:
 
 interpreters gold:
-  ExpiryDateInterpreter:
-  MfgDatesInterpreter:
-  MfgOriginInterpreter:
+  Enricher:
 
 rules lightblue:
   ReferenceDataField:
@@ -71,17 +72,13 @@ rules lightblue:
     - '@composed - - - ReferenceDataField'
     - '@composed - - - ReferenceDataRow'
   Rule:
-  GenerateExpiryRule:
-    - '@extends Rule'
+  GenerateExpiryRule extends Rule:
     - '@composed_HIDE  - - - RuleFragment'
-  GenerateLotRule:
-    - '@extends Rule'
+  GenerateLotRule extends Rule:
     - '@composed  - - - RuleFragment'
-  InterpretExpiryRule:
-    - '@extends Rule'
+  InterpretExpiryRule extends Rule:
     - '@composed_HIDE  - - - RuleFragment'
-  InterpretLotRule:
-    - '@extends Rule'
+  InterpretLotRule extends Rule:
     - '@composed  - - - RuleFragment'
   RuleFragment:
     - '@depend - - - Driver'
@@ -91,16 +88,11 @@ rules lightblue:
 scopes violet:
   Scope:
     - 'void qualified_items() {}'
-  JobLotsExpiriesScope:
-    - '@extends Scope'
-  MovePlanScope:
-    - '@extends Scope'
-  MovesScope:
-    - '@extends Scope'
-  PickListCandidateScope:
-    - '@extends Scope'
-  PickListsScope:
-    - '@extends Scope'
+  JobLotsExpiriesScope extends Scope:
+  MovePlanScope extends Scope:
+  MovesScope extends Scope:
+  PickListCandidateScope extends Scope:
+  PickListsScope extends Scope:
 
 transitions cyan:
   RuleWizardController:
@@ -111,26 +103,23 @@ transitions cyan:
     - '@depend - - - Transition'
   Transition:
     - '@stereotype Icg::Rule::State::Spec'
-  GenerateExpiryTransition:
-    - '@extends Transition'
-  GenerateLotTransition:
-    - '@extends Transition'
-  InterpretExpiryTransition:
-    - '@extends Transition'
-  InterpretLotTransition:
-    - '@extends Transition'
+  GenerateExpiryTransition extends Transition:
+  GenerateLotTransition extends Transition:
+  InterpretExpiryTransition extends Transition:
+  InterpretLotTransition extends Transition:
 
 validators palegreen:
   CanInterpretMfgDateValidator:
   CanRunValidations:
   ExpiryDateParsingValidator:
   ExpiryDateRangeValidator:
-    - '@depend - - - ExpiryDateInterpreter'
+    - '@depend - - - Enricher'
   ExpiryDateValidator:
+    - '@depend - - - Enricher'
   FinishedGoodProductionDateLimitValidator:
-    - '@depend - - - ExpiryDateInterpreter'
+    - '@depend - - - Enricher'
   ManufacturingOriginValidator:
-    - '@depend - - - MfgOriginInterpreter'
+    - '@depend - - - Enricher'
   PickStrategyValidator:
   QualifiedItemsPresenceValidator:
   ShelfLifeValidator:

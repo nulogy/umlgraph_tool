@@ -16,12 +16,13 @@ validators palegreen:
   CanRunValidations:
   ExpiryDateParsingValidator:
   ExpiryDateRangeValidator:
-    - '@depend - - - ExpiryDateInterpreter'
+    - '@depend - - - Enricher'
   ExpiryDateValidator:
+    - '@depend - - - Enricher'
   FinishedGoodProductionDateLimitValidator:
-    - '@depend - - - ExpiryDateInterpreter'
+    - '@depend - - - Enricher'
   ManufacturingOriginValidator:
-    - '@depend - - - MfgOriginInterpreter'
+    - '@depend - - - Enricher'
   PickStrategyValidator:
   QualifiedItemsPresenceValidator:
   ShelfLifeValidator:

@@ -8,6 +8,11 @@ config:
     - '@hidden'
 
 base lightgray:
+  PlannedReceiptsController:
+    - '@depend - - - ReceiptGenerationService'
+    - 'void create_receipt() {}'
+  ReceiptGenerationService:
+    - '@depend - - - CodeGenerationService'
   CodeGenerationController:
     - '@depend - - - CodeGenerationService'
     - 'void generate_lot_code() {}'
@@ -26,7 +31,7 @@ base lightgray:
     - '@depend - - - ValidatingMaterials'
   ProductionProvider:
     - '@has - - - Driver'
-    - '@depend - - - MfgDatesInterpreter'
+    - '@depend - - - Enricher'
   ReferenceData:
     - '@depend - - - ReferenceDataTable'
   RuleService:
@@ -34,12 +39,16 @@ base lightgray:
     - '@depend - - - Rule'
   ValidatingMaterials:
     - '@depend - - - ValidationPipeline'
+    - '@depend - - - Enricher'
 
 drivers lightcoral:
   ProductionParameters:
     - '@has - - - Rule'
     - '@depend - creates - Scope'
   Driver:
+
+interpreters gold:
+  Enricher:
 
 rules lightblue:
   ReferenceDataField:
@@ -48,17 +57,13 @@ rules lightblue:
     - '@composed - - - ReferenceDataField'
     - '@composed - - - ReferenceDataRow'
   Rule:
-  GenerateExpiryRule:
-    - '@extends Rule'
+  GenerateExpiryRule extends Rule:
     - '@composed_HIDE  - - - RuleFragment'
-  GenerateLotRule:
-    - '@extends Rule'
+  GenerateLotRule extends Rule:
     - '@composed  - - - RuleFragment'
-  InterpretExpiryRule:
-    - '@extends Rule'
+  InterpretExpiryRule extends Rule:
     - '@composed_HIDE  - - - RuleFragment'
-  InterpretLotRule:
-    - '@extends Rule'
+  InterpretLotRule extends Rule:
     - '@composed  - - - RuleFragment'
   RuleFragment:
     - '@depend - - - Driver'
@@ -71,19 +76,6 @@ scopes violet:
 
 validators palegreen:
   ValidationPipeline:
-    - '@depend - - - CanInterpretMfgDateValidator'
-    - '@depend - - - CanRunValidations'
-    - '@depend - - - ExpiryDateParsingValidator'
-    - '@depend - - - ExpiryDateRangeValidator'
-    - '@depend - - - ExpiryDateValidator'
-    - '@depend - - - FinishedGoodProductionDateLimitValidator'
-    - '@depend - - - ManufacturingOriginValidator'
-    - '@depend - - - PickStrategyValidator'
-    - '@depend - - - QualifiedItemsPresenceValidator'
-    - '@depend - - - ShelfLifeValidator'
-    - '@depend - - - StopShipDateRangeValidator'
-    - '@depend - - - StopShipDateValidator'
-    - '@depend - - - StopShipLimitValidator'
 
 sync khaki:
   ReferenceDataSyncer:
