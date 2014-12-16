@@ -1,0 +1,71 @@
+config:
+  ProductionPickingBasic:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  ProductionPickingController:
+    - '@depend - - - ProvideReservationItems'
+    - '@depend - - - SubstitutionsOrganizer'
+    - '@depend - - - ReservationItemsSerializer'
+  SubstitutionsOrganizer:
+  ReservationItemsSerializer extends ReservationItemsSerializer_Base:
+    - '@stereotype Picking'
+    - '@depend - - - ReservationItem'
+    - '@depend - - - ReservationItemsOrganizer'
+
+  ReservationItemsSerializer_Base:
+
+  ReservationItemsOrganizer:
+
+  FefoSorter:
+
+base palegreen:
+  ProvideReservationItems:
+    - '@depend - - - ReservedInventoryLevelRepository'
+    - '@depend - - - ReservationCandidateFactory'
+    - '@depend - - - Result'
+  ReservationCandidateFactory:
+    - '@depend - - - ReservationCandidate'
+    - '@depend - - - ReservationItem'
+    - '@depend - - - FefoSorter'
+    - '@depend - - - PalletAssignmentRepository'
+    - '@depend - - - AvailableInventoryRepository'
+    - '@depend - - - CurrentInventoryRepository'
+    - '@depend - - - ReservedInventoryLevel'
+
+
+base lightcoral:
+  ReservationCandidate:
+  ReservationItem:
+  Result:
+    - '@stereotype ProvideReservationItems'
+
+
+base lightblue:
+  CurrentInventoryRepository:
+      - '@depend - - - CurrentInventoryLevel'
+  CurrentInventoryLevel:
+
+  AvailableInventoryRepository:
+    - '@depend - - - AvailableInventory'
+    - '@depend - - - CurrentInventoryLevel'
+    - '@depend - - - PickableSku'
+
+  AvailableInventory:
+  PickableSku extends QualifiedSku:
+  QualifiedSku:
+
+  PalletAssignmentRepository:
+    - '@depend - - - PalletAssignment'
+  PalletAssignment:
+
+  ReservedInventoryLevelRepository:
+    - '@depend - - - ReservedInventoryLevel'
+  ReservedInventoryLevel:
+    - '@stereotype WMS'
+

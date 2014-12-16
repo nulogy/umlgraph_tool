@@ -1,0 +1,39 @@
+config:
+  EfficiencyBasic:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  Project:
+    - '@composed - - - Job'
+    - '@has - - - Sku'
+  Line:
+    - '@has - - - Job'
+
+sku coral:
+  Sku:
+    - '@composed - - - AssemblyProcedure'
+  AssemblyProcedure:
+    - '@composed - - - AssemblyStep'
+  AssemblyStep:
+
+base lightgray:
+  Job:
+    - '@composed - - - Break'
+    - '@composed - - - Production'
+    - '@composed - - - TimeReport'
+  Break:
+    - '@has - - - DowntimeReason'
+  DowntimeReason:
+
+production lightseagreen:
+  Production:
+
+time_reprt purple:
+  TimeReport:
+    - '@has - - - BadgeType'
+  BadgeType:
