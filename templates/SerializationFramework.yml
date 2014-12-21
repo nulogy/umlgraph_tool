@@ -1,0 +1,16 @@
+config:
+  SerializationFrameworkBasic:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  Serializer:
+  SerializerFactory:
+
+  ScenariosSerializer extends Serializer:
+      - '@depend - - - ScenarioSerializer'
+  ScenarioSerializer:
