@@ -20,7 +20,7 @@ class UmlCreator
   end
 
   def render_template(template)
-    ERB.new(template).result(binding)
+    ERB.new(template).result(binding).gsub(/^\s*$/, "").squeeze("\n")
   end
 
   def write_file(filename, contents)
