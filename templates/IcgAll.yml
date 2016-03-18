@@ -50,12 +50,12 @@ drivers lightcoral:
   SubcomponentDriver extends Driver:
 
   LineDriver extends SimpleDriver:
+  ProductionDateDriver extends SimpleDriver:
   ShiftDriver extends SimpleDriver:
   SiteDriver extends SimpleDriver:
 
   EarliestMfgDateDriver extends SubcomponentDriver:
   ManufacturingOriginDriver extends SubcomponentDriver:
-  ProductionDateDriver extends SubcomponentDriver:
   ShortestShelfLifeDriver extends SubcomponentDriver:
 
   SampleExpiryDateDriver extends SimpleDriver:
