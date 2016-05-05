@@ -1,4 +1,4 @@
-.*
+/.rake_tasks
 lib
 out
 temp
