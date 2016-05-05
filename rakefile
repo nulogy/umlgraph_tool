@@ -1,27 +1,30 @@
-require_relative 'src/uml_creator.rb'
-require_relative 'src/uml_creator.rb'
+require_relative "src/uml_creator.rb"
+require_relative "src/uml_creator.rb"
 
+desc "Clean the out and temp directories"
 task :clean do
-  Dir.glob('out/*').each { |file| File.delete(file) }
-  Dir.glob('temp/*').each { |file| File.delete(file) }
+  Dir.glob("out/*").each { |file| File.delete(file) }
+  Dir.glob("temp/*").each { |file| File.delete(file) }
 end
 
+desc "Generate a diagram for each template"
 task :default do
-  Dir.glob('templates/*.yml').each do |template|
-    basename = File.basename(template, File.extname(template))
-    dot_file = "temp/#{basename}.java"
-    UmlCreator.new(template_filename: template, output_filename: dot_file).create
-    system "./umlgraph #{dot_file} out/#{basename}.png png"
-  end
+  Dir.glob("templates/*.yml")
+    .each { |template| generate_diagram(template) }
 end
 
+desc "Generate a diagram for each template matching the template pattern"
 task :generate, [:template_pattern] do |_, args|
-  Dir.glob('templates/*.yml').each do |template|
-    next unless template =~ /#{Regexp.quote(args.template_pattern)}/
+  Dir.glob("templates/*.yml")
+    .select { |template | template =~ /#{Regexp.quote(args.template_pattern)}/ }
+    .each { |template| generate_diagram(template) }
+end
 
-    basename = File.basename(template, File.extname(template))
-    dot_file = "temp/#{basename}.java"
-    UmlCreator.new(template_filename: template, output_filename: dot_file).create
-    system "./umlgraph #{dot_file} out/#{basename}.png png"
-  end
+def generate_diagram(template)
+  basename = File.basename(template, File.extname(template))
+  dot_file = "temp/#{basename}.java"
+
+  UmlCreator.new(template_filename: template, output_filename: dot_file).create
+
+  system("./umlgraph #{dot_file} out/#{basename}.png png")
 end
