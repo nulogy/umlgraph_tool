@@ -1,0 +1,24 @@
+config:
+  CsvMigratioRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  BaseCsvPresenter:
+  ColumnDefinitionInterpreter:
+    - '@depend - - - CustomerMigration'
+  CsvMigration:
+    - '@depend - - - ColumnDefinitionInterpreter'
+    - 'void csv_import() {}'
+  TranslatedCsvExporter:
+    - '@depend - - - BaseCsvPresenter'
+
+base white:
+  CustomerPresenter extends BaseCsvPresenter:
+  CustomerMigration extends CsvMigration:
+    - '@depend - - - CustomerPresenter'
+    - 'void column_definition() {}'
