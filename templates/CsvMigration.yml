@@ -11,14 +11,49 @@ framework lightgray:
   BaseCsvPresenter:
   ColumnDefinitionInterpreter:
     - '@depend - - - CustomerMigration'
+    - '@depend - - - SkusMigration'
   CsvMigration:
     - '@depend - - - ColumnDefinitionInterpreter'
     - 'void csv_import() {}'
   TranslatedCsvExporter:
     - '@depend - - - BaseCsvPresenter'
+    - 'void generate() {}'
 
-base white:
+  ControllerFileUtilities:
+    - 'void do_csv_export() {}'
+    - 'void do_csv_import() {}'
+
+  BackgroundTask:
+  S3FileUploadService:
+  BackgroundTasksAction:
+  ActionExport extends BackgroundTasksAction:
+    - '@depend - - - S3FileUploadService'
+    - '@depend - - - BackgroundTask'
+
+customer lightblue:
   CustomerPresenter extends BaseCsvPresenter:
   CustomerMigration extends CsvMigration:
     - '@depend - - - CustomerPresenter'
     - 'void column_definition() {}'
+
+sku lightcoral:
+  SkusTranslatedCsvExporter extends TranslatedCsvExporter:
+  SkusPresenter extends BaseCsvPresenter:
+  SkusMigration extends CsvMigration:
+    - '@depend - - - SkusPresenter'
+    - 'void column_definition() {}'
+
+  SkuRepository:
+    - 'void skus_for_export() {}'
+  SkusExport:
+    - '@depend - - - SkuRepository'
+    - '@depend - - - SkusTranslatedCsvExporter'
+    - 'void skus_exporter() {}'
+  SkusContentProvider:
+    - '@depend - - - SkusExport'
+    - 'void generate() {}'
+  SkusController:
+    - '@depend - - - ActionExport'
+    - '@depend - - - ControllerFileUtilities'
+    - '@depend - - - SkusContentProvider'
+    - 'void offer_skus_csv_download() {}'
