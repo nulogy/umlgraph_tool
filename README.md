@@ -14,11 +14,15 @@ Create UML diagrams rapidly.
 ## Usage
 
 1. Define your UML diagram in a YAML file in the 'templates' folder.
-2. Run 'rake'.
-3. View the generated graph in the 'out' folder.
+2. Run `rake`.
+3. View the generated graph in the `out` folder.
+
+## Tips
+
+1. To generate a single diagram `rake "generate[ProductionDomain]" && open ./out/ProductionDomain.png`
 
 ## Reference
 
-Colors: http://www.graphviz.org/doc/info/colors.html
+[Colors](http://www.graphviz.org/doc/info/colors.html)
 
-Tags: http://www.umlgraph.org/doc/cd-model.html
+[Tags](http://www.umlgraph.org/doc/cd-model.html)
