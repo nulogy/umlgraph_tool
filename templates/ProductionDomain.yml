@@ -1,0 +1,54 @@
+config:
+  ProductionDomainRoot:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+production white:
+  Account:
+    - '@composed - - - Site'
+  Site:
+  Customer:
+    - '@has - - - Job'
+
+  Project:
+    - '@composed - - - Job'
+    - '@has - - - Sku'
+
+  FloorLocation:
+    - '@hidden'
+  RackLocation:
+    - '@hidden'
+  Line:
+    - '@has - - - Job'
+
+  Sku:
+    - '@composed - - - AssemblyProcedure'
+    - '@composed - - - BomItem'
+  AssemblyProcedure:
+    - '@composed - - - AssemblyStep'
+  AssemblyStep:
+  BomItem:
+  ItemType:
+    - '@has - - - Sku'
+
+  Job:
+    - '@composed - - - Break'
+    - '@composed - - - Production'
+    - '@composed - - - TimeReport'
+  Break:
+    - '@has - - - DowntimeReason'
+  DowntimeReason:
+
+  Production:
+
+  TimeReport:
+    - '@has - - - BadgeType'
+  BadgeType:
+
+  Pallet:
+    -  '@note NON-WIP, LINE-WIP, or JOB-WIP'
+
+  InventoryDelta:
+    - '@has - - - Production'
