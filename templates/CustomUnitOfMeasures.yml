@@ -1,0 +1,36 @@
+config:
+  CustomUnitOfMeasureRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@opt types'
+    - '@hidden'
+
+framework lightgray:
+  UomContext:
+      - '@has 1 default_uom 0 UomRatio'
+      - '@has 1 base_uom 0 UomRatio'
+      - '@has 1 case_uom 0 UomRatio'
+      - '@has 1 full_pallet_uom 0 UomRatio'
+      - '@has 1 reconciliation_uom 0 UomRatio'
+      - '@has 1 accounting_uom 1 UomRatio'
+      - '@has 1 receiving_uom 1 UomRatio'
+  UnitOfMeasure:
+      - 'String code;'
+      - 'String label;'
+      - 'String short_label;'
+      - 'String integration_key;'
+  UomRatio:
+      - 'int dimension_id;'
+      - 'float ratio_to_reference_uom;'
+      - 'boolean reference_uom_ratio;'
+      - 'float conversion_ratio;'
+      - '@has 1 for 1 UnitOfMeasure'
+      - '@has 1 conversion 0 UnitOfMeasure'
+
+base white:
+  Sku:
+      - '@has 1 - 1 UomContext'
+      - '@has 1 - * UomRatio'
