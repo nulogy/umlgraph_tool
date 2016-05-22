@@ -19,7 +19,10 @@ Create UML diagrams rapidly.
 
 ## Tips
 
-1. To generate a single diagram `rake "generate[ProductionDomain]" && open ./out/ProductionDomain.png`
+To generate a single diagram use `generate ProductDomain`
+
+Note: the generate command is defined as: `rake "generate[ProductionDomain]" && open ./out/ProductionDomain.png`
+
 
 ## Reference
 
