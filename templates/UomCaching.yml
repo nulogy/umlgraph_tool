@@ -1,0 +1,51 @@
+config:
+  UomCachingRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  BaseCsvPresenter:
+    - '@hidden'
+  ColumnDefinitionInterpreter:
+    - '@hidden'
+    - '@depend - - - SkusMigration'
+  CsvMigration:
+    - '@depend - - - ColumnDefinitionInterpreter'
+    - '@depend - - - FieldValidations'
+    - 'void csv_import() {}'
+  FieldValidations:
+    - '@depend - - - UnitOfMeasureRepo'
+
+uom lightblue:
+  StdPkg:
+    - '@depend - - - UnitOfMeasureRepo'
+  UomDataBuilder:
+    - '@depend - - - StdPkg'
+  UomRatioFactory:
+    - '@depend - - - UnitOfMeasureRepo'
+  UomRatiosAndContextUpserter:
+    - '@depend - - - UnitOfMeasureRepo'
+    - '@depend - - - UomRatiosUpserter'
+  UomRatiosUpserter:
+    - '@depend - - - UnitOfMeasureRepo'
+    - '@depend - - - UomRatioFactory'
+  UpdateWithUomFields:
+    - '@depend - - - UomDataBuilder'
+    - '@depend - - - UomRatiosAndContextUpserter'
+  UnitOfMeasureRepo:
+    - 'void active_uoms_for() {}'
+    - 'void by_id() {}'
+    - 'void by_label() {}'
+    - 'void uoms_for() {}'
+
+sku lightcoral:
+  SkusPresenter extends BaseCsvPresenter:
+    - '@hidden'
+  SkusMigration extends CsvMigration:
+    - '@depend - - - SkusPresenter'
+    - '@depend - - - UpdateWithUomFields'
+
