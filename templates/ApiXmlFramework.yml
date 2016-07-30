@@ -1,0 +1,67 @@
+config:
+  ApiXmlFrameworkRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+
+framework lightgray:
+  ResourcesController:
+    - '@depend - - - SerializerFactory'
+    - '@depend - - - ResourceRepositories'
+    - '@depend - - - DeserializationService'
+    - 'void create_or_update() {}'
+
+  SerializerFactory:
+    - '@depend - create - ShipOrderSerializer'
+    - '@depend - create - ShipOrderItemSerializer'
+    - 'void resource_deserializer_for() {}'
+
+  ResourceRepositories:
+    - '@depend - create - ShipOrderRepository'
+    - '@depend - create - ShipOrderItemRepository'
+    - 'void repository_for() {}'
+
+  DeserializationService:
+    - 'void deserialize() {}'
+    - '@has - - - ShipOrderRepository'
+    - '@has - - - ShipOrderSerializer'
+    - '@depend - - - DefaultRepository'
+    - '@depend - - - ErrorSerializer'
+
+  DefaultRepository:
+    - '@depend - - - AggregateBuilder'
+    - 'void lookup_or_build() {}'
+    - 'void save_with_changes() {}'
+
+  AggregateBuilder:
+    - '@depend - - - CollectionValidatorFactory'
+    - '@depend - - - ShipOrderItemValidator'
+    - '@depend - - - ShipOrderItemRepository'
+    - 'void apply_changes() {}'
+
+  CollectionValidatorFactory:
+    - '@depend - create - ShipOrderItemValidator'
+
+  ErrorSerializer:
+
+
+base white:
+  ShipOrderSerializer:
+    - '@depend - - - ShipOrderItemSerializer'
+    - 'void from_xml() {}'
+
+  ShipOrderItemSerializer:
+    - 'void from_xml() {}'
+
+  ShipOrderRepository extends DefaultRepository:
+    - 'void save_with_changes() {}'
+
+  ShipOrderItemRepository extends DefaultRepository:
+    - 'void lookup_or_build() {}'
+
+  ShipOrderItemValidator:
+    - 'void validate() {}'
