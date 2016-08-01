@@ -21,10 +21,10 @@ framework lightgray:
     - '@depend - - - UnitOfMeasureRepo'
 
 uom lightblue:
-  StdPkg:
+  UomDataBuilderForCustomUoms:
     - '@depend - - - UnitOfMeasureRepo'
-  UomDataBuilder:
-    - '@depend - - - StdPkg'
+  UomDataBuilderForStandardUoms:
+    - '@depend - - - UnitOfMeasureRepo'
   UomRatioFactory:
     - '@depend - - - UnitOfMeasureRepo'
   UomRatiosAndContextUpserter:
@@ -34,18 +34,36 @@ uom lightblue:
     - '@depend - - - UnitOfMeasureRepo'
     - '@depend - - - UomRatioFactory'
   UpdateWithUomFields:
-    - '@depend - - - UomDataBuilder'
+    - '@depend - - - UomDataBuilderForCustomUoms'
+    - '@depend - - - UomDataBuilderForStandardUoms'
     - '@depend - - - UomRatiosAndContextUpserter'
   UnitOfMeasureRepo:
+    - '@stereotype module'
     - 'void active_uoms_for() {}'
     - 'void by_id() {}'
     - 'void by_label() {}'
     - 'void uoms_for() {}'
 
+callers palegreen:
+  ImportFromAnotherSku:
+    - '@stereotype module'
+    - '@depend - - - UomRatiosAndContextUpserter'
+  CreateFromScenario:
+    - '@depend - - - UpdateWithUomFields'
+  Creating:
+    - '@depend - - - UpdateWithUomFields'
+  EdiInbound888:
+    - '@depend - - - UpdateWithUomFields'
+  SkuRepository:
+    - '@depend - - - UpdateWithUomFields'
+
 sku lightcoral:
+
   SkusPresenter extends BaseCsvPresenter:
     - '@hidden'
   SkusMigration extends CsvMigration:
     - '@depend - - - SkusPresenter'
     - '@depend - - - UpdateWithUomFields'
 
+  UomRatiosMigration extends CsvMigration:
+    - '@depend - - - UomRatiosAndContextUpserter'
