@@ -1,0 +1,44 @@
+config:
+  QCloud:
+    - '@hidden'
+  UMLOptions:
+    - '@opt horizontal'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  Company:
+  Site:
+  User:
+
+  Category:
+    - '@composed - - - CategoryHeader'
+
+  CategoryHeader:
+
+  Form:
+    - '@composed - - - FormHeader'
+    - '@composed - - - Check'
+    - '@depend - - - Category'
+    - '@has - - - Sheet'
+
+  FormHeader:
+    - '@depend - - - CategoryHeader'
+    - '@has - - - SheetHeaderValue'
+
+  Check:
+
+  Sheet:
+    - '@composed - - - SheetHeaderValue'
+    - '@composed - - - Inspection'
+    - '@has - - - SheetActivityDetail'
+
+  SheetHeaderValue:
+
+  Inspection:
+    - '@composed - - - CheckValue'
+
+  CheckValue:
+
+  SheetActivityDetail:
