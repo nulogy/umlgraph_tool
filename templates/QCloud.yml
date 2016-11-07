@@ -2,37 +2,47 @@ config:
   QCloud:
     - '@hidden'
   UMLOptions:
-    - '@opt horizontal'
+    - '@opt vertical'
     - '@opt attributes'
     - '@opt operations'
     - '@hidden'
 
 base white:
   Company:
-  Site:
-  User:
+    - '@composed - - - Sheet'
+    - '@hidden'
 
+  Site:
+    - '@hidden'
+
+  User:
+    - '@hidden'
+
+base lightgray:
   Category:
     - '@composed - - - CategoryHeader'
+    - '@composed - - - Form'
 
   CategoryHeader:
+    - '@composed - - - FormHeader'
 
+base palegreen:
   Form:
     - '@composed - - - FormHeader'
     - '@composed - - - Check'
-    - '@depend - - - Category'
-    - '@has - - - Sheet'
+    - '@composed - - - Sheet'
 
   FormHeader:
-    - '@depend - - - CategoryHeader'
-    - '@has - - - SheetHeaderValue'
+    - '@composed - - - SheetHeaderValue'
 
   Check:
+    - '@stereotype XML'
 
+base lightblue:
   Sheet:
     - '@composed - - - SheetHeaderValue'
     - '@composed - - - Inspection'
-    - '@has - - - SheetActivityDetail'
+    - '@composed - - - SheetActivityDetail'
 
   SheetHeaderValue:
 
@@ -40,5 +50,7 @@ base white:
     - '@composed - - - CheckValue'
 
   CheckValue:
+    - '@stereotype XML'
 
   SheetActivityDetail:
+
