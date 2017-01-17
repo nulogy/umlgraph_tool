@@ -1,0 +1,73 @@
+config:
+  PickListRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base lightgray:
+  PickList:
+    - 'String status;'
+    - '@composed - - - PickListLineItem'
+    - '@composed - - - PickListPick'
+    - '@has - destination - Location'
+    - '@has - - - Reservable'
+
+  PickListPick:
+    - 'String status;'
+    - '@has - - - Pallet'
+    - '@composed - - - DropOffPick'
+    - '@composed - - - PickUpPick'
+
+base lightcoral:
+  PickListLineItem:
+    - '@stereotype Lot'
+    - 'String lot_code;'
+    - 'String expiry_date;'
+    - 'String unit_quantity;'
+    - '@has - - - Sku'
+
+  DropOffPick:
+    - '@stereotype Lot'
+    - 'String lot_code;'
+    - 'String expiry_date;'
+    - 'String unit_quantity;'
+    - '@has - pick_up - Location'
+    - '@has - destination - Location'
+    - '@has - to - InventoryDelta'
+    - '@has - from - InventoryDelta'
+    - '@has - - - Pallet'
+    - '@has - - - Sku'
+
+  PickUpPick:
+    - '@stereotype Lot'
+    - 'String lot_code;'
+    - 'String expiry_date;'
+    - 'String unit_quantity;'
+    - '@has - source - Location'
+    - '@has - destination - Location'
+    - '@has - source - Pallet'
+    - '@has - destination - Pallet'
+    - '@has - to - InventoryDelta'
+    - '@has - from - InventoryDelta'
+    - '@has - - - Sku'
+    - '@has - - - InventoryStatus'
+
+base palegreen:
+  InventoryDelta:
+    - '@stereotype Lot'
+    - 'String lot_code;'
+    - 'String expiry_date;'
+    - 'String unit_quantity;'
+    - '@has - - - Sku'
+  InventoryStatus:
+  Location:
+  Pallet:
+  Sku:
+
+base lightblue:
+  Reservable:
+  ShipOrder extends Reservable:
+  Project extends Reservable:
