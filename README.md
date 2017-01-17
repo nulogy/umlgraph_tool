@@ -28,4 +28,4 @@ Note: the generate command is defined as: `rake "generate[ProductionDomain]" && 
 
 [Colors](http://www.graphviz.org/doc/info/colors.html)
 
-[Tags](http://www.umlgraph.org/doc/cd-model.html)
+[Tags](http://www.spinellis.gr/umlgraph/doc/cd-model.html)
