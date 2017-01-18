@@ -21,7 +21,6 @@ base lightgray:
     - '@composed - - - DropOffPick'
     - '@composed - - - PickUpPick'
 
-base lightcoral:
   PickListLineItem:
     - '@stereotype Lot'
     - 'String lot_code;'
@@ -55,7 +54,15 @@ base lightcoral:
     - '@has - - - Sku'
     - '@has - - - InventoryStatus'
 
-base palegreen:
+base lightcoral:
+  CurrentInventoryLevel:
+    - '@stereotype Lot'
+    - 'String lot_code;'
+    - 'String expiry_date;'
+    - 'String quanitity_value_in_reference_uom;'
+    - '@has - - - Sku'
+    - '@has - - - Pallet'
+
   InventoryDelta:
     - '@stereotype Lot'
     - 'String lot_code;'
@@ -63,6 +70,8 @@ base palegreen:
     - 'String unit_quantity;'
     - '@has - - - Sku'
   InventoryStatus:
+
+base palegreen:
   Location:
   Pallet:
   Sku:
