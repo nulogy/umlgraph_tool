@@ -1,0 +1,20 @@
+config:
+  ShipmentRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  Shipment:
+    - '@composed - - - UnitShipment'
+    - '@has - - - OutboundTrailer'
+  UnitShipment:
+    - '@has - - - Sku'
+  OutboundTrailer:
+    - '@has - - - Customer'
+  Sku:
+    - '@has - - - Customer'
+  Customer:
