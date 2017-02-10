@@ -64,5 +64,8 @@ base palegreen:
 
 base lightblue:
   Reservable:
+    - '@hidden'
   ShipOrder extends Reservable:
+    - '@hidden'
   Project extends Reservable:
+    - '@hidden'
