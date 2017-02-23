@@ -1,0 +1,41 @@
+config:
+  CsvMigratioRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  BaseCsvPresenter:
+  ColumnDefinitionInterpreter:
+    - '@depend - - - CustomerMigration'
+    - '@depend - - - SkusMigration'
+  CsvMigration:
+    - '@depend - - - ColumnDefinitionInterpreter'
+    - 'void csv_import() {}'
+    - 'void before_run() {}'
+    - 'void before_row() {}'
+    - 'void after_processing_rows() {}'
+    - 'void after_run() {}'
+    - 'void column_definition() {}'
+    - 'void materialize_row() {}'
+    - 'void presenter() {}'
+
+customer lightblue:
+  CustomerPresenter extends BaseCsvPresenter:
+  CustomerMigration extends CsvMigration:
+    - '@depend - - - CustomerPresenter'
+    - 'void column_definition() {}'
+    - 'void materialize_row() {}'
+    - 'void presenter() {}'
+
+sku lightcoral:
+  SkusPresenter extends BaseCsvPresenter:
+  SkusMigration extends CsvMigration:
+    - '@depend - - - SkusPresenter'
+    - 'void column_definition() {}'
+    - 'void materialize_row() {}'
+    - 'void presenter() {}'
+
