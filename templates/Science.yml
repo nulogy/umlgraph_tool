@@ -1,0 +1,56 @@
+config:
+  ScienceRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  FailFastOnMismatch extends PublicationPolicy:
+    - '@stereotype Decorator'
+
+  PublishMismatchedOnly extends PublicationPolicy:
+    - '@stereotype Decorator'
+
+  ConfigurableExperiment:
+    - '@depend - - - EnablementPolicy'
+    - '@depend - - - PublicationPolicy'
+
+    - '@depend - - - FailFastOnMismatch'
+    - '@depend - - - PublishMismatchedOnly'
+    - '@depend - - - ScienceExperiment'
+
+  ScienceExperiment:
+    - '@stereotype Model'
+    - 'void name() {}'
+    - 'void enablement_policy() {}'
+    - 'void publication_policy() {}'
+    - 'void mismatched_only() {}'
+
+  SimpleResult:
+    - '@stereotype Mixin'
+
+enablement_policy lightblue:
+  EnablementPolicy:
+    - '@stereotype DuckType'
+
+  Disabled extends EnablementPolicy:
+
+  Enabled extends EnablementPolicy:
+
+publication_policy violet:
+  PublicationPolicy:
+    - '@stereotype DuckType'
+
+  DoNotPublish extends PublicationPolicy:
+
+  PublishToAirbrake extends PublicationPolicy:
+    - '@depend - - - SimpleResult'
+
+  ResultLogger:
+
+  PublishToLog extends PublicationPolicy:
+    - '@depend - - - SimpleResult'
+    - '@depend - - - ResultLogger'
