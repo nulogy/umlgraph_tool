@@ -49,6 +49,9 @@ publication_policy violet:
   PublishToAirbrake extends PublicationPolicy:
     - '@depend - - - SimpleResult'
 
+  PublishToKibana extends PublicationPolicy:
+    - '@depend - - - SimpleResult'
+
   ResultLogger:
 
   PublishToLog extends PublicationPolicy:
