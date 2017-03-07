@@ -8,12 +8,6 @@ config:
     - '@hidden'
 
 framework lightgray:
-  FailFastOnMismatch extends PublicationPolicy:
-    - '@stereotype Decorator'
-
-  PublishMismatchedOnly extends PublicationPolicy:
-    - '@stereotype Decorator'
-
   ConfigurableExperiment:
     - '@depend - - - EnablementPolicy'
     - '@depend - - - PublicationPolicy'
@@ -29,9 +23,6 @@ framework lightgray:
     - 'void publication_policy() {}'
     - 'void mismatched_only() {}'
 
-  SimpleResult:
-    - '@stereotype Mixin'
-
 enablement_policy lightblue:
   EnablementPolicy:
     - '@stereotype DuckType'
@@ -46,14 +37,20 @@ publication_policy violet:
 
   DoNotPublish extends PublicationPolicy:
 
-  PublishToAirbrake extends PublicationPolicy:
-    - '@depend - - - SimpleResult'
+  PublishSimpleResult extends PublicationPolicy:
 
-  PublishToKibana extends PublicationPolicy:
-    - '@depend - - - SimpleResult'
+  PublishToAirbrake extends PublishSimpleResult:
 
-  ResultLogger:
+  PublishToKibana extends PublishSimpleResult:
 
-  PublishToLog extends PublicationPolicy:
-    - '@depend - - - SimpleResult'
-    - '@depend - - - ResultLogger'
+  ExperimentResultLogger:
+    - '@hidden'
+
+  PublishToLog extends PublishSimpleResult:
+    - '@depend - - - ExperimentResultLogger'
+
+  FailFastOnMismatch extends PublicationPolicy:
+    - '@stereotype Decorator'
+
+  PublishMismatchedOnly extends PublicationPolicy:
+    - '@stereotype Decorator'
