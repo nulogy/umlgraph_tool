@@ -38,6 +38,7 @@ publication_policy violet:
   DoNotPublish extends PublicationPolicy:
 
   PublishSimpleResult extends PublicationPolicy:
+    - '@stereotype TemplateMethod'
 
   PublishToAirbrake extends PublishSimpleResult:
 
