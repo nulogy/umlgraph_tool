@@ -1,0 +1,56 @@
+config:
+  SisenceSyRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base lightgray:
+  SyncWithSisense extends Action:
+    - '@depend - - - MetadataSyncerBuilder'
+
+  MetadataSyncerBuilder:
+    - '@depend - creates - MetadataSyncer'
+    - '@depend - - - MetadataSyncerEventLogger'
+    - '@depend - - - PMAdapter'
+    - '@depend - - - SisenseAdapter'
+    - '@depend - - - SisenseIntegrationConfig'
+
+  MetadataSyncer:
+    - '@depend - - - PMAdapter'
+    - '@depend - - - SisenseAdapter'
+
+  PMAdapter:
+  SisenseAdapter:
+  SisenseIntegrationConfig:
+
+  SisenseUserSyncer:
+    - '@depend - - - SisenseAdapter'
+
+  SisenseDashboardSharer:
+    - '@depend - - - SisenseAdapter'
+
+  SisenseDataSecuritySyncer:
+    - '@depend - - - SisenseAdapter'
+
+  SisenseDataSecurityCleaner:
+    - '@depend - - - SisenseAdapter'
+
+  SisenseDashboardChecker:
+    - '@depend - - - SisenseAdapter'
+
+  MetricsLoggingMetadataSyncer extends Decorator:
+    - '@depend - - - MetricsLogger'
+    - '@depend - - - PMAdapter'
+
+  MetadataSyncerEventLogger:
+  MetricsLogger:
+
+base palegreen:
+  Action:
+    - '@stereotype BackgroundTasks'
+
+  Decorator extends Delegator:
+  Delegator:
