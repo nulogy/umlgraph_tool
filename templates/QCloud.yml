@@ -40,13 +40,20 @@ base palegreen:
 
 base lightblue:
   Sheet:
+    - '@stereotype record'
     - '@composed - - - SheetHeaderValue'
     - '@composed - - - Inspection'
     - '@composed - - - SheetActivityDetail'
+    - '@composed 1 - 1 HeaderRecord'
+
+  HeaderRecord:
+    - '@stereotype record'
+    - '@composed - - - SheetHeaderValue'
 
   SheetHeaderValue:
 
   Inspection:
+    - '@stereotype record'
     - '@composed - - - CheckValue'
 
   CheckValue:
