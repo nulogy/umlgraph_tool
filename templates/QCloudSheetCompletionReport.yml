@@ -1,0 +1,75 @@
+config:
+  QCloudSheetCompletionReportRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base white:
+  SheetCompletionReportController:
+    - '@depend - - - SheetCompletionDetailsReport'
+    - '@depend - - - SheetCompletionOverviewReport'
+    - '@depend - - - SheetCompletionReportView'
+    - 'void index() {}'
+
+  SheetCompletionDetailsReport:
+    - '@depend - - - SheetCompletionRepository'
+
+  SheetCompletionOverviewReport:
+    - '@depend - - - SheetCompletionRepository'
+
+  SheetCompletionRepository:
+    - '@depend - - - SheetCompletionDetailQuery'
+    - '@depend - - - SheetCompletionOverviewQuery'
+
+query lightgrey:
+  SheetCompletionReportQuery:
+    - '@depend - - - ColumnFilter'
+    - '@depend - - - MatchingSheetHeadersQuery'
+    - '@depend - - - QueryParams'
+    - '@depend - - - Sheet'
+    - 'void build_query() {}'
+
+  SheetCompletionDetailQuery extends SheetCompletionReportQuery:
+    - '@depend - - - ColumnSpecification'
+    - 'void specify_columns_for_result() {}'
+    - 'void specify_order_for_result() {}'
+
+  ColumnSpecification:
+
+  SheetCompletionOverviewQuery extends SheetCompletionReportQuery:
+    - 'void specify_columns_for_result() {}'
+    - 'void specify_order_for_result() {}'
+
+  ColumnFilter:
+
+  MatchingSheetHeadersQuery:
+
+  QueryParams:
+
+base lightblue:
+  Form:
+    - '@composed - - - FormHeader'
+    - '@composed - - - Sheet'
+
+  FormHeader:
+    - '@composed - - - SheetHeaderValue'
+
+  Sheet:
+    - '@composed - - - SheetHeaderValue'
+    - '@composed - - - Inspection'
+    - '@composed - - - HeaderRecord'
+
+  HeaderRecord:
+    - '@composed - - - SheetHeaderValue'
+
+  SheetHeaderValue:
+
+  Inspection:
+
+view lightcoral:
+  SheetCompletionReportView:
+    -  "@note index.html.haml\n     _details_results.html.haml\n     _overview_results.html.haml"
+
