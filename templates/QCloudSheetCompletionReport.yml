@@ -15,13 +15,9 @@ base white:
     - 'void index() {}'
 
   SheetCompletionDetailsReport:
-    - '@depend - - - SheetCompletionRepository'
+    - '@depend - - - SheetCompletionDetailQuery'
 
   SheetCompletionOverviewReport:
-    - '@depend - - - SheetCompletionRepository'
-
-  SheetCompletionRepository:
-    - '@depend - - - SheetCompletionDetailQuery'
     - '@depend - - - SheetCompletionOverviewQuery'
 
 query lightgrey:
