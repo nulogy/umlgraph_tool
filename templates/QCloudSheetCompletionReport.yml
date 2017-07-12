@@ -13,12 +13,17 @@ base white:
     - '@depend - - - SheetCompletionOverviewReport'
     - '@depend - - - SheetCompletionReportView'
     - 'void index() {}'
+    - 'void common_headers() {}'
 
   SheetCompletionDetailsReport:
     - '@depend - - - SheetCompletionDetailQuery'
 
   SheetCompletionOverviewReport:
+    - '@depend - - - SheetCountsByForm'
     - '@depend - - - SheetCompletionOverviewQuery'
+
+  SheetCountsByForm:
+    - '@stereotype nested'
 
 query lightgrey:
   SheetCompletionReportQuery:
@@ -34,16 +39,20 @@ query lightgrey:
     - 'void specify_order_for_result() {}'
 
   ColumnSpecification:
+    - '@stereotype nested'
 
   SheetCompletionOverviewQuery extends SheetCompletionReportQuery:
     - 'void specify_columns_for_result() {}'
     - 'void specify_order_for_result() {}'
 
   ColumnFilter:
+    - '@stereotype nested'
 
   MatchingSheetHeadersQuery:
+    - '@stereotype nested'
 
   QueryParams:
+    - '@stereotype nested'
 
 base lightblue:
   Form:
