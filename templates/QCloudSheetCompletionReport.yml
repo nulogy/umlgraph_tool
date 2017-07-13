@@ -35,15 +35,13 @@ query lightgrey:
 
   SheetCompletionDetailQuery extends SheetCompletionReportQuery:
     - '@depend - - - ColumnSpecification'
-    - 'void specify_columns_for_result() {}'
-    - 'void specify_order_for_result() {}'
+    - 'void finalize_query_definition() {}'
 
   ColumnSpecification:
     - '@stereotype nested'
 
   SheetCompletionOverviewQuery extends SheetCompletionReportQuery:
-    - 'void specify_columns_for_result() {}'
-    - 'void specify_order_for_result() {}'
+    - 'void finalize_query_definition() {}'
 
   ColumnFilter:
     - '@stereotype nested'
