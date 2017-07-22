@@ -1,0 +1,16 @@
+config:
+  QCloudAttributionEventRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt horizontal'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base lightblue:
+  Sheet:
+    - '@composed - reviewed - AttributionEvent'
+    - '@composed - submitted - AttributionEvent'
+
+view lightcoral:
+  AttributionEvent:
