@@ -1,0 +1,28 @@
+config:
+  QCloudSheetCompletionReportDomainRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+base lightblue:
+  Form:
+    - '@composed - - - FormHeader'
+    - '@composed - - - Sheet'
+
+  FormHeader:
+    - '@composed - - - SheetHeaderValue'
+
+  Sheet:
+    - '@composed - - - SheetHeaderValue'
+    - '@composed - - - Inspection'
+    - '@composed - - - HeaderRecord'
+
+  HeaderRecord:
+    - '@composed - - - SheetHeaderValue'
+
+  SheetHeaderValue:
+
+  Inspection:

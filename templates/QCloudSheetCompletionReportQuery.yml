@@ -1,0 +1,26 @@
+config:
+  QCloudSheetCompletionReportRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+query lightgrey:
+  SheetCompletionReportQuery:
+    - '@depend - - - ColumnFilter'
+    - '@depend - - - MatchingSheetHeadersQuery'
+    - '@depend - - - QueryParams'
+    - 'void build_query() {}'
+    - 'void finalize_query_definition() {}'
+
+  ColumnFilter:
+    - '@stereotype nested'
+
+  MatchingSheetHeadersQuery:
+    - '@stereotype nested'
+
+  QueryParams:
+    - '@stereotype nested'
+
