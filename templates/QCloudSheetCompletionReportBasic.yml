@@ -1,5 +1,5 @@
 config:
-  QCloudSheetCompletionReportRoot:
+  QCloudSheetCompletionReportBasicRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -29,6 +29,9 @@ query lightgrey:
     - 'void finalize_query_definition() {}'
 
   SheetCompletionInspectionOverviewQuery extends SheetCompletionReportQuery:
+    - 'void finalize_query_definition() {}'
+
+  SheetCompletionInspectionFailuresOverviewQuery extends SheetCompletionReportQuery:
     - 'void finalize_query_definition() {}'
 
   ColumnFilter:

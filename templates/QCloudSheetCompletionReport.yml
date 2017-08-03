@@ -23,6 +23,7 @@ base white:
     - '@depend - - - SheetCountsByForm'
     - '@depend - - - SheetCompletionOverviewQuery'
     - '@depend - - - SheetCompletionInspectionOverviewQuery'
+    - '@depend - - - SheetCompletionInspectionFailuresOverviewQuery'
 
   SheetCountsByForm:
     - '@stereotype nested'
@@ -50,6 +51,9 @@ query lightgrey:
     - 'void finalize_query_definition() {}'
 
   SheetCompletionInspectionOverviewQuery extends SheetCompletionReportQuery:
+    - 'void finalize_query_definition() {}'
+
+  SheetCompletionInspectionFailuresOverviewQuery extends SheetCompletionReportQuery:
     - 'void finalize_query_definition() {}'
 
   ColumnFilter:
