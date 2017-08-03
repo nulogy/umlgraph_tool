@@ -1,0 +1,17 @@
+config:
+  QCloudSheetCompletionReportTemplateMethodRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+query lightgrey:
+  SheetCompletionReportQuery:
+    - 'void build_query() {}'
+    - 'void finalize_query_definition() {}'
+
+  SheetCompletionDetailsCountQuery extends SheetCompletionReportQuery:
+    - 'void finalize_query_definition() {}'
+
