@@ -9,7 +9,7 @@ config:
 
 framework lightgray:
   ConfigurableExperiment:
-    - '@depend - - - EnablementPolicy'
+    - '@depend - - - BaseEnablementPolicy'
     - '@depend - - - PublicationPolicy'
 
     - '@depend - - - FailFastOnMismatch'
@@ -20,16 +20,18 @@ framework lightgray:
     - '@stereotype Model'
     - 'void name() {}'
     - 'void enablement_policy() {}'
+    - 'void enablement_policy_options() {}'
     - 'void publication_policy() {}'
     - 'void mismatched_only() {}'
 
 enablement_policy lightblue:
-  EnablementPolicy:
-    - '@stereotype DuckType'
+  BaseEnablementPolicy:
 
-  Disabled extends EnablementPolicy:
+  Disabled extends BaseEnablementPolicy:
 
-  Enabled extends EnablementPolicy:
+  Enabled extends BaseEnablementPolicy:
+
+  EnabledPercentage extends BaseEnablementPolicy:
 
 publication_policy violet:
   PublicationPolicy:
