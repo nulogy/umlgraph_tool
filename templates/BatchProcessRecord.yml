@@ -1,0 +1,74 @@
+config:
+  BatchProcessRecordRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+planning lightcoral:
+  Project:
+    - '@has - - - Job'
+    - '@has - - - Scenario'
+    - '@has - - 1 Sku'
+
+master palegreen:
+  AssemblyProcedure:
+    - '@composed - - - AssemblyStep'
+  AssemblyStep:
+    - '@hidden'
+  BillOfMaterials:
+  BomItem:
+    - '@hidden'
+    - '@has - - - Sku'
+  Customer:
+    - '@has - - - Project'
+    - '@has - - - Quote'
+  ItemCategory:
+    - '@hidden'
+    - '@has - - - Sku'
+  ItemClass:
+    - '@hidden'
+    - '@has - - - Sku'
+  ItemFamily:
+    - '@hidden'
+    - '@has - - - Sku'
+  ItemType:
+    - '@hidden'
+    - '@has - - - Sku'
+  Line:
+    - '@has - - - Job'
+  Sku:
+    - '@has - - 1 AssemblyProcedure'
+    - '@has - - 1 BillOfMaterials'
+
+inventory lightblue:
+  Pallet:
+    - '@hidden'
+  WipPallet:
+
+production plum:
+  Job:
+    - '@has - - - Production'
+    - '@has - - - RejectedItem'
+    - '@has - - 1 WipPallet'
+  JobReconciliation:
+    - '@has - - - Job'
+    - '@composed - - - JobReconciliationRecords'
+  JobReconciliationRecords:
+    - '@hidden'
+  Production:
+    - '@has - - - Pallet'
+    - '@has - - - SubcomponentConsumption'
+  RejectedItem:
+    - '@has - - - Pallet'
+  SubcomponentConsumption:
+
+estimating yellow:
+  Quote:
+    - '@hidden'
+    - '@composed - - - Scenario'
+  Scenario:
+    - '@hidden'
+    - '@has - - - AssemblyProcedure'
