@@ -1,0 +1,46 @@
+config:
+  InventoryRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+production lightblue:
+  Job:
+    - '@has - - - Pallet'
+    - '@has - - - Production'
+    - '@has - - - Sku'
+
+  Production:
+
+master palegreen:
+  BomItem:
+
+  Customer:
+    - '@has - - - Job'
+    - '@has - - - Sku'
+
+  Line:
+    - '@has - - - Job'
+
+  Sku:
+    - '@has - - - BomItem'
+    - '@has - - - CurrentInventoryLevel'
+    - '@has - - - InventoryDelta'
+
+inventory lightcoral:
+  CurrentInventoryLevel:
+    - '@has - - - InventoryStatus'
+
+  Location:
+    - '@has - - - InventoryDelta'
+
+  InventoryDelta:
+    - '@has - - - InventoryStatus'
+
+  InventoryStatus:
+
+  Pallet:
+    - '@has - - - InventoryDelta'
