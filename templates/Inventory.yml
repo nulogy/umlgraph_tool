@@ -9,20 +9,25 @@ config:
 
 production lightblue:
   Job:
+    - '@hidden'
     - '@has - - - Pallet'
     - '@has - - - Production'
     - '@has - - - Sku'
 
   Production:
+    - '@hidden'
 
 master palegreen:
   BomItem:
+    - '@hidden'
 
   Customer:
+    - '@hidden'
     - '@has - - - Job'
     - '@has - - - Sku'
 
   Line:
+    - '@hidden'
     - '@has - - - Job'
 
   Sku:
