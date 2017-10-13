@@ -11,9 +11,15 @@ production lightblue:
   Job:
     - '@has - - - Pallet'
     - '@has - - - Production'
+    - '@has - - - RejectItem'
     - '@has - - - Sku'
 
+  JobReconciliation:
+    - '@has - - - Job'
+
   Production:
+
+  RejectItem:
 
 master palegreen:
   BomItem:
@@ -21,6 +27,16 @@ master palegreen:
   Customer:
     - '@has - - - Job'
     - '@has - - - Sku'
+
+  FloorLocation extends Location:
+
+  ItemClass:
+    - '@has - - - Sku'
+    - '@has - - - ZoningRule'
+
+  Location:
+    - '@has - - - InventoryDelta'
+    - '@has - - - WarehouseZone'
 
   Line:
     - '@has - - - Job'
@@ -30,12 +46,14 @@ master palegreen:
     - '@has - - - CurrentInventoryLevel'
     - '@has - - - InventoryDelta'
 
+  WarehouseZone:
+    - '@composed - - - ZoningRule'
+
+  ZoningRule:
+
 inventory lightcoral:
   CurrentInventoryLevel:
     - '@has - - - InventoryStatus'
-
-  Location:
-    - '@has - - - InventoryDelta'
 
   InventoryDelta:
     - '@has - - - InventoryStatus'
