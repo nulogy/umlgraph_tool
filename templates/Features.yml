@@ -1,0 +1,36 @@
+config:
+  FeaturesRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+helpers lightblue:
+  StepDefinitionHelper:
+  CatalogHelper extends StepDefinitionHelper:
+  EmployeeHelper extends StepDefinitionHelper:
+  FeatureErrorHelper extends StepDefinitionHelper:
+  InventoryHelper extends StepDefinitionHelper:
+  ItemHelper extends StepDefinitionHelper:
+  LoggingHelper extends StepDefinitionHelper:
+  LoginHelper extends StepDefinitionHelper:
+  SiteHelper extends StepDefinitionHelper:
+
+configuration palegreen:
+  CapybaraConfiguration:
+  Env:
+  Hooks:
+  PageObjectConfiguration:
+
+table_interpreters lightcoral:
+  TableInterpreter:
+  BillOfMaterialsInformationTableInterpreter extends TableInterpreter:
+  FieldValueTableInterpreter extends TableInterpreter:
+  ItemInformationTableInterpreter extends FieldValueTableInterpreter:
+  ProjectInformationTableInterpreter extends FieldValueTableInterpreter:
+
+catalog plum:
+  CatalogGenerator:
+  ProjectCatalog:
