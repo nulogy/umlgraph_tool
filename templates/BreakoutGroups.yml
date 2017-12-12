@@ -1,0 +1,39 @@
+config:
+  BreakoutGroupsRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+
+shell palegreen:
+  Breakout:
+    - '@stereotype "Script"'
+    - '@depend - - - CommandArgs'
+    - '@depend - - - BreakoutCommand'
+
+base white:
+  CommandArgs:
+    - '@depend - - - EmployeeSourceFile'
+    - '@depend - - - EmployeeFilterFile'
+
+  BreakoutCommand:
+    - '@depend - - - CommandArgs'
+    - '@depend - - - EmployeeSource'
+    - '@depend - - - DistributeEmployees'
+    - '@depend - - - SaveDistribution'
+
+  EmployeeSource:
+
+  DistributeEmployees:
+
+  SaveDistribution:
+
+csv lightyellow:
+  EmployeeSourceFile:
+    - '@stereotype "CSV File"'
+
+  EmployeeFilterFile:
+    - '@stereotype "CSV File"'
