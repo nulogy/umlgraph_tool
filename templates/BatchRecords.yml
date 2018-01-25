@@ -1,0 +1,62 @@
+config:
+  BatchRecordsRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+planning palegreen:
+  ProjectOverviewController:
+
+helpers lightblue:
+  CardHelper:
+  PrintHelper:
+  ReconciliationSummaryHelper:
+  SectionNavigationHelper:
+
+lib white:
+  CompositeHash:
+
+pdf white:
+  PdfConfiguration:
+
+policies white:
+  NavigationPolicy:
+
+repositories white:
+  ReconciliationRepository:
+
+domain lightcoral:
+  JobDetail:
+      - '@stereotype PORO'
+  JobDetailsBuilder:
+    - '@depend - - - JobDetail'
+  ProductionLot:
+      - '@stereotype PORO'
+  ProductionLotsBuilder:
+    - '@depend - - - ProductionLot'
+  Reconciliation:
+      - '@stereotype PORO'
+  ReconciliationBuilder:
+    - '@depend - - - Reconciliation'
+    - '@depend - - - ReconciliationDetailsCalculator'
+  ReconciliationDetailsCalculator:
+  ReconciliationDetailsCompositeHashBuilder:
+    - '@depend - - - CompositeHash'
+  ReconciliationTotals:
+      - '@stereotype PORO'
+  ReconciliationTotalsBuilder:
+    - '@depend - - - ReconciliationTotals'
+  Reject:
+      - '@stereotype PORO'
+  RejectsBuilder:
+    - '@depend - - - Reject'
+
+presenters pink:
+  BillOfMaterialsCardPresenter extends CardPresenter:
+  BillOfMaterialsItemPresenter extends CardPresenter:
+  CardPresenter:
+  CardHeader:
+      - '@stereotype PORO'
