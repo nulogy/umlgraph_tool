@@ -9,6 +9,15 @@ config:
 
 planning palegreen:
   ProjectOverviewController:
+    - '@depend - - - BillOfMaterialsCardPresenterBuilder'
+    - '@depend - - - ItemInformationCardPresenter'
+    - '@depend - - - NavigationPolicy'
+    - '@depend - - - PdfConfiguration'
+    - '@depend - - - ProductionCardPresenterBuilder'
+    - '@depend - - - ProjectInformationCardPresenter'
+    - '@depend - - - ReconciliationPresenterBuilder'
+    - '@depend - - - ReconciliationStatusCardPresenterBuilder'
+    - '@depend - - - RejectsCardPresenterBuilder'
 
 helpers lightblue:
   CardHelper:
@@ -56,7 +65,24 @@ domain lightcoral:
 
 presenters pink:
   BillOfMaterialsCardPresenter extends CardPresenter:
+    - '@depend - - - CardHeader'
+  BillOfMaterialsCardPresenterBuilder:
+    - '@depend - - - BillOfMaterialsCardPresenter'
   BillOfMaterialsItemPresenter extends CardPresenter:
+  BomItemDetails:
+      - '@stereotype PORO'
   CardPresenter:
+    - '@hidden'
   CardHeader:
       - '@stereotype PORO'
+  ItemInformationCardPresenter extends CardPresenter:
+    - '@depend - - - CardHeader'
+  JobDetailPresenter extends CardPresenter:
+  ProductionCardPresenter extends CardPresenter:
+  ProductionCardPresenterBuilder:
+    - '@depend - - - JobDetailsBuilder'
+    - '@depend - - - JobDetailPresenter'
+    - '@depend - - - ProductionCardPresenter'
+    - '@depend - - - ProductionLotPresenter'
+    - '@depend - - - ProductionLotsBuilder'
+  ProductionLotPresenter extends CardPresenter:
