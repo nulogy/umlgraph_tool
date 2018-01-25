@@ -21,9 +21,13 @@ planning palegreen:
 
 helpers lightblue:
   CardHelper:
+    - '@hidden'
   PrintHelper:
+    - '@hidden'
   ReconciliationSummaryHelper:
+    - '@hidden'
   SectionNavigationHelper:
+    - '@hidden'
 
 lib white:
   CompositeHash:
@@ -34,12 +38,12 @@ pdf white:
 policies white:
   NavigationPolicy:
 
-repositories white:
+repositories purple:
   ReconciliationRepository:
 
-domain lightcoral:
+domain yellow:
   JobDetail:
-      - '@stereotype PORO'
+    - '@stereotype PORO'
   JobDetailsBuilder:
     - '@depend - - - JobDetail'
   ProductionLot:
@@ -50,39 +54,82 @@ domain lightcoral:
       - '@stereotype PORO'
   ReconciliationBuilder:
     - '@depend - - - Reconciliation'
+    - '@depend - - - ReconciliationDetailsBuilder'
+    - '@depend - - - ReconciliationTotalsBuilder'
+  ReconciliationDetail:
+    - '@stereotype PORO'
+  ReconciliationDetailsBuilder:
+    - '@depend - - - ReconciliationDetail'
     - '@depend - - - ReconciliationDetailsCalculator'
+    - '@depend - - - ReconciliationDetailsCompositeHashBuilder'
   ReconciliationDetailsCalculator:
   ReconciliationDetailsCompositeHashBuilder:
     - '@depend - - - CompositeHash'
   ReconciliationTotals:
       - '@stereotype PORO'
   ReconciliationTotalsBuilder:
+    - '@depend - - - ReconciliationDetailsCalculator'
     - '@depend - - - ReconciliationTotals'
   Reject:
       - '@stereotype PORO'
   RejectsBuilder:
     - '@depend - - - Reject'
 
-presenters pink:
-  BillOfMaterialsCardPresenter extends CardPresenter:
-    - '@depend - - - CardHeader'
+builders red:
   BillOfMaterialsCardPresenterBuilder:
     - '@depend - - - BillOfMaterialsCardPresenter'
-  BillOfMaterialsItemPresenter extends CardPresenter:
-  BomItemDetails:
-      - '@stereotype PORO'
-  CardPresenter:
-    - '@hidden'
-  CardHeader:
-      - '@stereotype PORO'
-  ItemInformationCardPresenter extends CardPresenter:
-    - '@depend - - - CardHeader'
-  JobDetailPresenter extends CardPresenter:
-  ProductionCardPresenter extends CardPresenter:
+    - '@depend - - - BillOfMaterialsItemPresenter'
+    - '@depend - - - BomItemDetails'
   ProductionCardPresenterBuilder:
     - '@depend - - - JobDetailsBuilder'
     - '@depend - - - JobDetailPresenter'
     - '@depend - - - ProductionCardPresenter'
     - '@depend - - - ProductionLotPresenter'
     - '@depend - - - ProductionLotsBuilder'
+  ReconciliationPresenterBuilder:
+    - '@depend - - - ReconciliationBuilder'
+    - '@depend - - - ReconciliationCardPresenter'
+    - '@depend - - - ReconciliationRepository'
+    - '@depend - - - ReconciliationTotalsPresenter'
+    - '@depend - - - TrackByJobPresenter'
+    - '@depend - - - TrackByPalletPresenter'
+  ReconciliationStatusCardPresenterBuilder:
+    - '@depend - - - ReconciliationRepository'
+    - '@depend - - - ReconciliationStatusCardPresenter'
+    - '@depend - - - ReconciliationStatusPresenter'
+  RejectsCardPresenterBuilder:
+    - '@depend - - - RejectsCardPresenter'
+    - '@depend - - - RejectsBuilder'
+    - '@depend - - - RejectPresenter'
+
+presenters pink:
+  BillOfMaterialsCardPresenter extends CardPresenter:
+    - '@depend - - - CardHeader'
+  BillOfMaterialsItemPresenter extends CardPresenter:
+  BomItemDetails:
+      - '@stereotype PORO'
+  CardPresenter:
+      - '@hidden'
+  CardHeader:
+      - '@hidden'
+      - '@stereotype PORO'
+  ItemInformationCardPresenter extends CardPresenter:
+    - '@depend - - - CardHeader'
+  JobDetailPresenter extends CardPresenter:
+    - '@depend - - - JobDetail'
+  ProductionCardPresenter extends CardPresenter:
+    - '@depend - - - JobDetailPresenter'
+    - '@depend - - - ProductionLotPresenter'
   ProductionLotPresenter extends CardPresenter:
+    - '@depend - - - ProductionLot'
+  ProjectInformationCardPresenter extends CardPresenter:
+  ReconciliationCardPresenter extends CardPresenter:
+  ReconciliationDetailPresenter extends CardPresenter:
+  ReconciliationStatusCardPresenter extends CardPresenter:
+  ReconciliationStatusPresenter extends CardPresenter:
+  ReconciliationTotalsPresenter extends CardPresenter:
+  RejectPresenter extends CardPresenter:
+    - '@depend - - - Reject'
+  RejectsCardPresenter extends CardPresenter:
+  TrackByJobPresenter extends ReconciliationDetailPresenter:
+  TrackByPalletPresenter extends ReconciliationDetailPresenter:
