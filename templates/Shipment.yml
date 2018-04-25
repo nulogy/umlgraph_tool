@@ -8,13 +8,59 @@ config:
     - '@hidden'
 
 base white:
-  Shipment:
-    - '@composed - - - UnitShipment'
-    - '@has - - - OutboundTrailer'
-  UnitShipment:
-    - '@has - - - Sku'
-  OutboundTrailer:
-    - '@has - - - Customer'
+  Pallet:
+    - '@has - - - CurrentInventoryLevel'
+    - '@has - - - InventoryDelta'
+    - '@has - - - PalletAssignment'
+    - '@has - - - PalletShipment'
+    - '@has - - - UnitShipment'
+
   Sku:
-    - '@has - - - Customer'
-  Customer:
+    - '@has - - - CurrentInventoryLevel'
+    - '@has - - - InventoryDelta'
+    - '@has - - - ReservedInventoryLevel'
+    - '@has - - - ShipOrderItem'
+    - '@has - - - UnitShipment'
+
+
+reservable lightblue:
+  Project extends Reservable:
+    - '@hidden'
+
+  PickList extends Reservable:
+    - '@hidden'
+
+  Reservable:
+
+shipping palegreen:
+  ShipOrder extends Reservable:
+    - '@composed - - - Shipment'
+    - '@composed - - - ShipOrderItem'
+    - '@composed - - - PalletAssignment'
+    - '@composed - - - ReservedInventoryLevel'
+    - '@has - - - PlannedShipment'
+  ShipOrderItem:
+
+  PlannedShipment:
+    - '@has - - - Shipment'
+    - '@composed - - - PlannedShipmentItem'
+  PlannedShipmentItem:
+
+  PalletShipment:
+    - '@composed - - - UnitShipment'
+  Shipment:
+    - '@composed - - - PalletShipment'
+    - '@composed - - - UnitShipment'
+  UnitShipment:
+
+  OutboundTrailer:
+    - '@hidden'
+    - '@has - - - Shipment'
+
+
+inventory lightcoral:
+  CurrentInventoryLevel:
+    - '@hidden'
+  InventoryDelta:
+    - '@hidden'
+  ReservedInventoryLevel:
