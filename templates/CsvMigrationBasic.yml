@@ -1,5 +1,5 @@
 config:
-  CsvMigratioRoot:
+  CsvMigrationRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -15,13 +15,13 @@ framework lightgray:
   CsvMigration:
     - '@depend - - - ColumnDefinitionInterpreter'
     - 'void csv_import() {}'
+    - 'void column_definition() {}'
+    - 'void presenter() {}'
     - 'void before_run() {}'
     - 'void before_row() {}'
+    - 'void materialize_row() {}'
     - 'void after_processing_rows() {}'
     - 'void after_run() {}'
-    - 'void column_definition() {}'
-    - 'void materialize_row() {}'
-    - 'void presenter() {}'
 
 customer lightblue:
   CustomerPresenter extends BaseCsvPresenter:

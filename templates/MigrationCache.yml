@@ -1,0 +1,21 @@
+config:
+  MigrationCacheRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightblue:
+  CaseInsensitiveCache:
+    - 'void fetch() {}'
+    - 'void lookup_value() {}'
+  ScopedCache extends CaseInsensitiveCache:
+    - 'void lookup_value() {}'
+
+framework lightcoral:
+  ModelCache:
+    - '@stereotype Concern'
+    - '@depend - - - CaseInsensitiveCache'
+    - '@depend - - - ScopedCache'
