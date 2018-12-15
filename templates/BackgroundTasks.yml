@@ -1,0 +1,20 @@
+config:
+  BackgroundTasksRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+background palegreen:
+  BackgroundFileExporter:
+  BackgroundRunner:
+  BackgroundTask:
+  BackgroundTasksAction:
+  BackgroundTasksNotifier:
+  ScheduledTask:
+  ActionsReport extends BackgroundTasksAction:
+
+report lightblue:
+  SubcomponentShortageReportRunner:
