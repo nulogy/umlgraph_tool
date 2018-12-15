@@ -1,0 +1,22 @@
+config:
+  ScreengemRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+core palegreen:
+  Action:
+    - 'void execute() {}'
+  Actor:
+    - 'void asks() {}'
+    - 'void performs() {}'
+    - 'void recall() {}'
+    - 'void remember() {}'
+  Question:
+    - 'void answer() {}'
+  Task:
+    - 'void perform() {}'
+    - '@depend - - - Action'

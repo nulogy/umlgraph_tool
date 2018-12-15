@@ -1,0 +1,63 @@
+config:
+  ScreengemRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+roles lightcoral:
+  Actionable:
+    - '@hidden'
+  Configurable:
+    - '@hidden'
+  Dampenable:
+    - '@hidden'
+  Executable:
+    - '@hidden'
+
+core palegreen:
+  Action:
+    - 'void execute() {}'
+  Actor:
+    - 'void asks() {}'
+    - 'void performs() {}'
+    - 'void recall() {}'
+    - 'void remember() {}'
+  FeaturePage:
+  Question:
+    - 'void answer() {}'
+    - 'void execute() {}'
+  Task:
+    - 'void action() {}'
+    - 'void execute() {}'
+    - 'void perform() {}'
+
+factories lightblue:
+  ActionFactory:
+    - '@hidden'
+  BrowserActionFactory extends ActionFactory:
+    - '@hidden'
+    - '@depend - - - Action'
+  FactoryCreationError:
+    - '@hidden'
+  QuestionFactory:
+    - '@hidden'
+    - '@depend - - - Question'
+  StandardActionFactory extends ActionFactory:
+    - '@hidden'
+    - '@depend - - - Action'
+  TaskFactory:
+    - '@hidden'
+    - '@depend - - - Task'
+
+tools gray:
+  DampenConfiguration:
+    - '@hidden'
+  DampenConfigurationGenerator:
+    - '@hidden'
+    - '@depend - - - DampenConfiguration'
+  PageReferences:
+    - '@hidden'
+    - '@depend - - - FeaturePage'
