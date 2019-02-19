@@ -2,26 +2,26 @@
 
 Create UML diagrams rapidly.
 
-## Quickstart
+## Quick Start
 
     # Ensure Java is up to date (at least Java 7).
 
     brew install graphviz
-    git clone https://github.com/jchunky/umlgraph_tool
+    git clone https://github.com/amckinnell/umlgraph_tool
     cd umlgraph_tool
     rake
 
+
 ## Usage
 
-1. Define your UML diagram in a YAML file in the 'templates' folder.
-2. Run `rake`.
-3. View the generated graph in the `out` folder.
+To generate a single diagram:`./exe/generate ProductDomain`
 
-## Tips
 
-To generate a single diagram use `generate ProductDomain`
+## To Generate All Diagrams
 
-Note: the generate command is defined as: `rake "generate[ProductionDomain]" && open ./out/ProductionDomain.png`
+1. Define your UML diagram in a YAML file in the 'templates' folder
+2. Run `rake`
+3. View the generated graph in the `out` folder
 
 
 ## Reference
