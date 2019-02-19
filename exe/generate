@@ -1,10 +1,9 @@
 #!/usr/bin/env zsh
 
-if [ "$#" != 1 ]
-then
-    echo "Usage: generate <diagram name>"
-exit 1
+if [ "$#" != 1 ]; then
+  echo "Usage: generate <diagram name>"
+  exit 1
 fi
 
-rake "generate[$1]"
+bundle exec rake "generate[$1]"
 open "./out/$1.png"
