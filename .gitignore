@@ -1,4 +1,5 @@
 /.rake_tasks
-lib
-out
-temp
+/Gemfile.lock
+/lib
+/out
+/temp
