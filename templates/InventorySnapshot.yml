@@ -1,0 +1,56 @@
+config:
+  InventorySnapshotRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  ApplicationRecord:
+    - '@hidden'
+
+  BackgroundTaskAction:
+    - '@hidden'
+
+configuration lightcoral:
+  SnapshotConfiguration:
+
+  SkuWithExpiry extends SnapshotConfiguration:
+  SkuWithoutExpiry extends SnapshotConfiguration:
+  PalletLevel extends SnapshotConfiguration:
+  SkuWithoutExpiryWithZeroInventory extends SnapshotConfiguration:
+
+  SnapshotTaker:
+  CustomerSnapshotTaker extends SnapshotTaker:
+
+domain yellow:
+  SnapshotSchedulesController:
+    - '@depend - - - Customer'
+    - '@depend - - - SnapshotSchedule'
+    - '@depend - - - ScheduledTask'
+    - '@depend - - - TakeInventorySnapshot'
+
+  SnapshotService:
+    - '@depend - - - SnapshotConfiguration'
+    - '@depend - - - Snapshot'
+    - '@depend - - - CustomerSnapshotTaker'
+
+domain lightblue:
+  Customer extends ApplicationRecord:
+    - '@hidden'
+    - '@stereotype Model'
+
+  ScheduledTask extends ApplicationRecord:
+    - '@stereotype Queueable'
+
+  SnapshotSchedule extends ApplicationRecord:
+    - '@has - - - ScheduledTask'
+
+  Snapshot extends ApplicationRecord:
+
+domain palegreen:
+  TakeInventorySnapshot extends BackgroundTaskAction:
+    - '@stereotype Action'
+    - '@depend - - - SnapshotService'
