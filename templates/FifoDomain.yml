@@ -11,14 +11,14 @@ planning lightcoral:
   Project:
     - '@has - - - Job'
     - '@has - - - Scenario'
-    - '@has - - 1 Sku'
+    - '@has - - 1 FinishedGood'
 
 master palegreen:
   AssemblyProcedure:
     - '@composed - - - AssemblyStep'
   AssemblyStep:
     - '@hidden'
-  BillOfMaterials:
+  ProductionSpecification:
   BomItem:
     - '@hidden'
     - '@has - - - Sku'
@@ -39,20 +39,44 @@ master palegreen:
     - '@has - - - Sku'
   Line:
     - '@has - - - Job'
-  Sku:
+  FinishedGood extends Sku:
     - '@composed - - 1 AssemblyProcedure'
-    - '@composed - - 1 BillOfMaterials'
+    - '@composed - - 1 ProductionSpecification'
+  Sku:
+    - '@hidden'
+
 
 inventory lightblue:
-  Pallet:
-    - '@hidden'
-  WipPallet:
+  WipEvent:
+  MaterialsConsumed extends WipEvent:
+  MaterialsConsumedReversal extends WipEvent:
+  MaterialsMovedIntoWip extends WipEvent:
+  MaterialsMovedOutOfWip extends WipEvent:
+  MaterialsRejected extends WipEvent:
+  MaterialsRejectedReversal extends WipEvent:
+  MaterialstransferredIn extends WipEvent:
+  MaterialstransferredOut extends WipEvent:
+
+inventory lavender:
+  ConsumptionOrderings:
+    - '@composed - - - ConsumptionOrdering'
+  ConsumptionOrdering:
+    - '@composed - - - MaterialToConsume'
+  MaterialToConsume:
+    - '@composed - - - MaterialToConsumeDelta'
+  MaterialToConsumeDelta:
+    - '@has - - - WipEvent'
+
+icg pink:
+  FifoConsumptionScope:
+    - '@depend - - - ConsumptionOrderings'
 
 production plum:
   Job:
     - '@has - - - Production'
     - '@has - - - RejectedItem'
-    - '@has - - 1 WipPallet'
+    - '@composed - - 1 WipPallet'
+    - '@composed - - - WipEvent'
   JobReconciliation:
     - '@has - - - Job'
     - '@composed - - - JobReconciliationRecords'
@@ -64,6 +88,9 @@ production plum:
   RejectedItem:
     - '@has - - - Pallet'
   SubcomponentConsumption:
+  Pallet:
+    - '@hidden'
+  WipPallet:
 
 estimating yellow:
   Quote:
