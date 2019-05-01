@@ -1,0 +1,97 @@
+config:
+  AddProductionRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+controller lightgray:
+  SimpleJobsController:
+    - '@depend - - - AddProductionServiceAdaptor'
+  AddProductionServiceAdaptor:
+    - '@depend - - - AddProductionService'
+
+  JobController:
+    - 'void add_production() {}'
+    - '@depend - - - ConsumptionPlanBuilder'
+    - '@depend - - - ProductionConfig'
+    - '@depend - - - ProductionParameters'
+    - '@depend - - - AddProductionService'
+app_params cornsilk:
+  ProductionConfig:
+  ProductionParameters:
+    - '@has - - - ConsumptionPlan'
+
+  ConsumptionPlanBuilder:
+    - '@depend - - - ConsumptionPlan'
+  ConsumptionEntry:
+  ConsumptionPlan:
+    - '@depend - - - ConsumptionEntry'
+
+app_service lightcoral:
+  AddProductionService:
+    - 'void add_production() {}'
+    - '@depend - - - ConsumptionStrategyBuilder'
+    - '@depend - - - AddProductionWithSubstitutions'
+  ConsumptionStrategyBuilder:
+    - '@depend - - - ConsumptionPlan'
+    - '@depend - - - ConsumptionStrategy'
+  ConsumptionStrategy:
+    - 'void build_consumption_quantities() {}'
+    - '@composed - - - ItemToConsume'
+  ItemToConsume:
+
+add_production_with_substitutions palegreen:
+  AddProductionWithSubstitutions:
+    - '@depend - - - AddProductionValidator'
+    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - PalletAllocator'
+    - '@depend - - - PalletQuantity'
+    - '@depend - - - ProductionLotQuantityBuilder'
+    - '@depend - - - ProductionOnPalletBuilder'
+    - '@depend - - - ProductionOptions'
+  ProductionOptions:
+  ProductionLotQuantityBuilder:
+    - '@depend - - - FifoCodeGenerationService'
+  FifoCodeGenerationService:
+    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - IcgCodeGenerationService'
+    - '@depend - - - IcgProductionParameters'
+  AddProductionValidator:
+    - '@depend - - - ProductionLotQuantityValidator'
+  ProductionLotQuantityValidator:
+    - '@depend - - - ConsumptionStrategy'
+  ProductionOnPalletBuilder:
+    - '@depend - - - SubcomponentConsumptionBuilder'
+    - '@depend - - - Production'
+  SubcomponentConsumptionBuilder:
+    - '@depend - - - ItemToConsume'
+    - '@depend - - - SubcomponentConsumption'
+
+inventory lightblue:
+  PalletAllocator:
+    - '@depend - - - PalletQuantity'
+  PalletQuantity:
+  ProduceOnGivenPallet extends PalletAllocator:
+  TopUpGivenPallets extends PalletAllocator:
+  ProduceOnGeneratedPallets extends PalletAllocator:
+  TopUpGivenPalletThenProduceOnGeneratedPallets extends PalletAllocator:
+    - '@depend - - - ProduceOnGeneratedPallets'
+
+orderings lavender:
+  ConsumptionOrderings:
+
+production plum:
+  Production:
+    - '@composed - - - SubcomponentConsumption'
+  SubcomponentConsumption:
+
+icg pink:
+  IcgCodeGenerationService:
+    - '@depend - - - IcgProductionParameters'
+  IcgProductionParameters:
+    - '@depend - - - FifoConsumptionScope'
+  FifoConsumptionScope:
+    - '@depend - - - ConsumptionOrderings'
