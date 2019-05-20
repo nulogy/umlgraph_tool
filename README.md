@@ -4,8 +4,7 @@ Create UML diagrams rapidly.
 
 ## Quick Start
 
-    # Ensure Java is up to date (at least Java 7).
-
+    brew cask install java
     brew install graphviz
     git clone https://github.com/amckinnell/umlgraph_tool
     cd umlgraph_tool
