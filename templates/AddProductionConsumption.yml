@@ -49,16 +49,17 @@ app_service lightcoral:
   LotQuantity:
 
 add_production_with_substitutions palegreen:
+  AddProductionParameters:
+    - '@has - - - ConsumptionStrategy'
   AddProductionWithSubstitutions:
+    - '@has - - - AddProductionParameters'
     - '@depend - - - AddProductionValidator'
     - '@depend - - - ConsumptionStrategy'
     - '@depend - - - PalletAllocator'
     - '@depend - - - PalletQuantity'
     - '@depend - - - ProductionLotQuantityBuilder'
     - '@depend - - - ProductionOnPalletBuilder'
-    - '@depend - - - ProductionOptions'
     - '@depend - - - WipQuantityValidator'
-  ProductionOptions:
   ProductionLotQuantityBuilder:
     - '@depend - - - FifoCodeGenerationService'
   FifoCodeGenerationService:
@@ -68,7 +69,6 @@ add_production_with_substitutions palegreen:
   AddProductionValidator:
     - '@depend - - - ProductionLotQuantityValidator'
   ProductionLotQuantityValidator:
-    - '@depend - - - ConsumptionStrategy'
   ProductionOnPalletBuilder:
     - '@depend - - - SubcomponentConsumptionBuilder'
     - '@depend - - - Production'
