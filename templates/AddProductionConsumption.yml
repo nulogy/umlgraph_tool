@@ -16,28 +16,37 @@ controller lightgray:
     - '@depend - - - AddProductionService'
 
   JobController:
+    - '@stereotype validations'
     - 'void add_production() {}'
     - '@depend - - - ConsumptionPlanBuilder'
-    - '@depend - - - ProductionConfig'
-    - '@depend - - - ProductionParameters'
-    - '@depend - - - AddProductionService'
+    - '@depend - - - ProductionsParameters'
+    - '@depend - - - ProductionCreateCommand'
 app_params cornsilk:
-  ProductionConfig:
-  ProductionParameters:
+  ProductionsParameters:
     - '@has - - - ConsumptionPlan'
 
   ConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
   ConsumptionEntry:
+    - '@stereotype validations'
   ConsumptionPlan:
+    - '@stereotype validations'
     - '@depend - - - ConsumptionEntry'
 
 app_service lightcoral:
+  ProductionCreateCommand:
+  ProductionCreateHandler:
+    - '@depend - - - AddProductionParametersBuilder'
+    - '@depend - - - AddProductionService'
+    - '@depend - - - ConsumptionStrategyFromConsumptionPlanBuilder'
+    - '@depend - - - JobStateValidator'
+    - '@depend - - - ProductionCreateCommand'
   AddProductionService:
+    - '@stereotype validations'
     - 'void add_production() {}'
-    - '@depend - - - ConsumptionStrategyBuilder'
     - '@depend - - - AddProductionWithSubstitutions'
-  ConsumptionStrategyBuilder:
+    - '@depend - - - JobStateValidator'
+  ConsumptionStrategyFromConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
     - '@depend - - - ConsumptionStrategy'
   ConsumptionStrategy:
@@ -46,15 +55,20 @@ app_service lightcoral:
     - '@depend - - - ConsumptionOrderings'
   ItemToConsume:
     - '@depend - - - LotQuantity'
+  JobStateValidator:
+    - '@stereotype validations'
   LotQuantity:
 
 add_production_with_substitutions palegreen:
+  AddProductionParametersBuilder:
+    - '@depend - - - AddProductionParameters'
   AddProductionParameters:
     - '@has - - - ConsumptionStrategy'
   AddProductionWithSubstitutions:
+    - '@stereotype validations'
+    - 'void add_production() {}'
     - '@has - - - AddProductionParameters'
     - '@depend - - - AddProductionValidator'
-    - '@depend - - - ConsumptionStrategy'
     - '@depend - - - PalletAllocator'
     - '@depend - - - PalletQuantity'
     - '@depend - - - ProductionLotQuantityBuilder'
@@ -63,12 +77,15 @@ add_production_with_substitutions palegreen:
   ProductionLotQuantityBuilder:
     - '@depend - - - FifoCodeGenerationService'
   FifoCodeGenerationService:
-    - '@depend - - - ConsumptionStrategy'
+    - '@stereotype validations'
+    - '@depend - - - AddProductionParameters'
     - '@depend - - - IcgCodeGenerationService'
     - '@depend - - - IcgProductionParameters'
   AddProductionValidator:
+    - '@stereotype validations'
     - '@depend - - - ProductionLotQuantityValidator'
   ProductionLotQuantityValidator:
+    - '@stereotype validations'
   ProductionOnPalletBuilder:
     - '@depend - - - SubcomponentConsumptionBuilder'
     - '@depend - - - Production'
@@ -78,18 +95,12 @@ add_production_with_substitutions palegreen:
 
 inventory lightblue:
   PalletAllocator:
-    - '@hidden'
     - '@depend - - - PalletQuantity'
   PalletQuantity:
-    - '@hidden'
   ProduceOnGivenPallet extends PalletAllocator:
-    - '@hidden'
   TopUpGivenPallets extends PalletAllocator:
-    - '@hidden'
   ProduceOnGeneratedPallets extends PalletAllocator:
-    - '@hidden'
   TopUpGivenPalletThenProduceOnGeneratedPallets extends PalletAllocator:
-    - '@hidden'
     - '@depend - - - ProduceOnGeneratedPallets'
 
 orderings lavender:
@@ -97,12 +108,15 @@ orderings lavender:
 
 job lightgray:
   WipQuantityValidator:
+    - '@stereotype validations'
     - '@depend - - - ConsumptionStrategy'
 
 production plum:
   Production:
+    - '@stereotype validations'
     - '@composed - - - SubcomponentConsumption'
   SubcomponentConsumption:
+    - '@stereotype validations'
 
 icg pink:
   IcgCodeGenerationService:
