@@ -8,19 +8,23 @@ config:
     - '@hidden'
 
 controller lightgray:
-  SimpleJobsController:
-    - '@hidden'
-    - '@depend - - - AddProductionServiceAdaptor'
   AddProductionServiceAdaptor:
+    - '@depend - - - AddProductionServiceBuilder'
+    - '@depend - - - ConsumptionPlanRepository'
+    - '@depend - - - ProductionPalletNumberGenerationStrategy'
+  ConsumptionPlanRepository:
     - '@hidden'
-    - '@depend - - - AddProductionService'
-
+  ProductionPalletNumberGenerationStrategy:
+    - '@hidden'
   JobController:
-    - '@stereotype validations'
     - 'void add_production() {}'
     - '@depend - - - ConsumptionPlanBuilder'
     - '@depend - - - ProductionsParameters'
     - '@depend - - - ProductionCreateCommand'
+  SimpleJobsController:
+    - '@depend - - - AddProductionServiceAdaptor'
+    - 'void add_production() {}'
+
 app_params cornsilk:
   ProductionsParameters:
     - '@has - - - ConsumptionPlan'
@@ -28,24 +32,33 @@ app_params cornsilk:
   ConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
   ConsumptionEntry:
-    - '@stereotype validations'
   ConsumptionPlan:
-    - '@stereotype validations'
-    - '@depend - - - ConsumptionEntry'
+    - '@composed - - - ConsumptionEntry'
 
-app_service lightcoral:
+command yellow:
   ProductionCreateCommand:
   ProductionCreateHandler:
-    - '@depend - - - AddProductionParametersBuilder'
-    - '@depend - - - AddProductionService'
-    - '@depend - - - ConsumptionStrategyFromConsumptionPlanBuilder'
-    - '@depend - - - JobStateValidator'
+    - '@depend - - - AddProductionServiceBuilder'
     - '@depend - - - ProductionCreateCommand'
+
+app_service lightcoral:
+  AddProductionServiceBuilder:
+    - '@depend - - - AddProductionParametersBuilder'
+    - '@depend - - - AddProductionParametersValidator'
+    - '@depend - - - AddProductionService'
+    - '@depend - - - AddProductionUseCasePreconditionChecker'
+    - '@depend - - - AddProductionWithSubstitutions'
+    - '@depend - - - ConsumptionStrategyFromConsumptionPlanBuilder'
+    - '@depend - - - FifoCodeGenerationService'
+  AddProductionParametersBuilder:
+    - '@depend - - - AddProductionParameters'
+  AddProductionParametersValidator:
+    - '@depend - - - AddProductionParameters'
+  AddProductionUseCasePreconditionChecker:
+    - '@depend - - - AddProductionParameters'
   AddProductionService:
-    - '@stereotype validations'
     - 'void add_production() {}'
     - '@depend - - - AddProductionWithSubstitutions'
-    - '@depend - - - JobStateValidator'
   ConsumptionStrategyFromConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
     - '@depend - - - ConsumptionStrategy'
@@ -55,37 +68,24 @@ app_service lightcoral:
     - '@depend - - - ConsumptionOrderings'
   ItemToConsume:
     - '@depend - - - LotQuantity'
-  JobStateValidator:
-    - '@stereotype validations'
   LotQuantity:
 
 add_production_with_substitutions palegreen:
-  AddProductionParametersBuilder:
-    - '@depend - - - AddProductionParameters'
   AddProductionParameters:
     - '@has - - - ConsumptionStrategy'
   AddProductionWithSubstitutions:
-    - '@stereotype validations'
     - 'void add_production() {}'
     - '@has - - - AddProductionParameters'
     - '@depend - - - AddProductionValidator'
     - '@depend - - - PalletAllocator'
     - '@depend - - - PalletQuantity'
-    - '@depend - - - ProductionLotQuantityBuilder'
     - '@depend - - - ProductionOnPalletBuilder'
     - '@depend - - - WipQuantityValidator'
-  ProductionLotQuantityBuilder:
-    - '@depend - - - FifoCodeGenerationService'
-  FifoCodeGenerationService:
-    - '@stereotype validations'
-    - '@depend - - - AddProductionParameters'
-    - '@depend - - - IcgCodeGenerationService'
-    - '@depend - - - IcgProductionParameters'
   AddProductionValidator:
-    - '@stereotype validations'
+    - '@depend - - - AddProductionParameters'
     - '@depend - - - ProductionLotQuantityValidator'
   ProductionLotQuantityValidator:
-    - '@stereotype validations'
+    - '@depend - - - AddProductionParameters'
   ProductionOnPalletBuilder:
     - '@depend - - - SubcomponentConsumptionBuilder'
     - '@depend - - - Production'
@@ -108,23 +108,30 @@ orderings lavender:
 
 job lightgray:
   WipQuantityValidator:
-    - '@stereotype validations'
+    - '@hidden'
     - '@depend - - - ConsumptionStrategy'
 
 production plum:
   Production:
-    - '@stereotype validations'
     - '@composed - - - SubcomponentConsumption'
   SubcomponentConsumption:
-    - '@stereotype validations'
 
 icg pink:
+  FifoCodeGenerationService:
+    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - FifoConsumptionScope'
+    - '@depend - - - IcgCodeGenerationService'
+    - '@depend - - - IcgProductionParameters'
+  FifoConsumptionScope:
+    - '@hidden'
+    - '@depend - - - ConsumptionOrderings'
   IcgCodeGenerationService:
     - '@hidden'
     - '@depend - - - IcgProductionParameters'
   IcgProductionParameters:
     - '@hidden'
     - '@depend - - - FifoConsumptionScope'
-  FifoConsumptionScope:
-    - '@hidden'
-    - '@depend - - - ConsumptionOrderings'
+
+spec orange:
+  AddProductionSpecHelper:
+    - '@depend - - - AddProductionServiceBuilder'
