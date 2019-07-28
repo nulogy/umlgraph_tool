@@ -47,7 +47,6 @@ app_service lightcoral:
     - '@depend - - - AddProductionParametersValidator'
     - '@depend - - - AddProductionService'
     - '@depend - - - AddProductionUseCasePreconditionChecker'
-    - '@depend - - - AddProductionWithSubstitutions'
     - '@depend - - - ConsumptionStrategyFromConsumptionPlanBuilder'
     - '@depend - - - FifoCodeGenerationService'
   AddProductionParametersBuilder:
@@ -56,12 +55,22 @@ app_service lightcoral:
     - '@depend - - - AddProductionParameters'
   AddProductionUseCasePreconditionChecker:
     - '@depend - - - AddProductionParameters'
-  AddProductionService:
-    - 'void add_production() {}'
-    - '@depend - - - AddProductionWithSubstitutions'
   ConsumptionStrategyFromConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
     - '@depend - - - ConsumptionStrategy'
+
+add_production_with_substitutions palegreen:
+  AddProductionService:
+    - 'void add_production() {}'
+    - '@depend - - - AddProductionValidator'
+    - '@depend - - - PalletAllocator'
+    - '@depend - - - PalletQuantity'
+    - '@depend - - - ProductionOnPalletBuilder'
+    - '@depend - - - WipQuantityValidator'
+  AddProductionParameters:
+    - '@has - - - ConsumptionStrategy'
+  AddProductionValidator:
+    - '@depend - - - AddProductionParameters'
   ConsumptionStrategy:
     - 'void build_consumption_quantities() {}'
     - '@composed - - - ItemToConsume'
@@ -69,20 +78,6 @@ app_service lightcoral:
   ItemToConsume:
     - '@depend - - - LotQuantity'
   LotQuantity:
-
-add_production_with_substitutions palegreen:
-  AddProductionParameters:
-    - '@has - - - ConsumptionStrategy'
-  AddProductionWithSubstitutions:
-    - 'void add_production() {}'
-    - '@has - - - AddProductionParameters'
-    - '@depend - - - AddProductionValidator'
-    - '@depend - - - PalletAllocator'
-    - '@depend - - - PalletQuantity'
-    - '@depend - - - ProductionOnPalletBuilder'
-    - '@depend - - - WipQuantityValidator'
-  AddProductionValidator:
-    - '@depend - - - AddProductionParameters'
   ProductionOnPalletBuilder:
     - '@depend - - - SubcomponentConsumptionBuilder'
     - '@depend - - - Production'
@@ -94,6 +89,7 @@ inventory lightblue:
   PalletAllocator:
     - '@depend - - - PalletQuantity'
   PalletQuantity:
+    - '@hidden'
   ProduceOnGivenPallet extends PalletAllocator:
   TopUpGivenPallets extends PalletAllocator:
   ProduceOnGeneratedPallets extends PalletAllocator:
@@ -105,7 +101,6 @@ orderings lavender:
 
 job lightgray:
   WipQuantityValidator:
-    - '@hidden'
     - '@depend - - - ConsumptionStrategy'
 
 production plum:
