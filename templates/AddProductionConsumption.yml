@@ -47,7 +47,7 @@ app_service lightcoral:
     - '@depend - - - AddProductionParametersValidator'
     - '@depend - - - AddProductionService'
     - '@depend - - - AddProductionUseCasePreconditionChecker'
-    - '@depend - - - ConsumptionStrategyFromConsumptionPlanBuilder'
+    - '@depend - - - ConsumptionDetailsFromConsumptionPlanBuilder'
     - '@depend - - - FifoCodeGenerationService'
   AddProductionParametersBuilder:
     - '@depend - - - AddProductionParameters'
@@ -55,9 +55,9 @@ app_service lightcoral:
     - '@depend - - - AddProductionParameters'
   AddProductionUseCasePreconditionChecker:
     - '@depend - - - AddProductionParameters'
-  ConsumptionStrategyFromConsumptionPlanBuilder:
+  ConsumptionDetailsFromConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
-    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - ConsumptionDetails'
 
 add_production_with_substitutions palegreen:
   AddProductionService:
@@ -68,10 +68,10 @@ add_production_with_substitutions palegreen:
     - '@depend - - - ProductionOnPalletBuilder'
     - '@depend - - - WipQuantityValidator'
   AddProductionParameters:
-    - '@has - - - ConsumptionStrategy'
+    - '@has - - - ConsumptionDetails'
   AddProductionValidator:
     - '@depend - - - AddProductionParameters'
-  ConsumptionStrategy:
+  ConsumptionDetails:
     - 'void build_consumption_quantities() {}'
     - '@composed - - - ItemToConsume'
     - '@depend - - - ConsumptionOrderings'
@@ -101,7 +101,7 @@ orderings lavender:
 
 job lightgray:
   WipQuantityValidator:
-    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - ConsumptionDetails'
 
 production plum:
   Production:
@@ -110,7 +110,7 @@ production plum:
 
 icg pink:
   FifoCodeGenerationService:
-    - '@depend - - - ConsumptionStrategy'
+    - '@depend - - - ConsumptionDetails'
     - '@depend - - - FifoConsumptionScope'
     - '@depend - - - IcgCodeGenerationService'
     - '@depend - - - IcgProductionParameters'
@@ -126,4 +126,5 @@ icg pink:
 
 spec orange:
   AddProductionSpecHelper:
+    - '@hidden'
     - '@depend - - - AddProductionServiceBuilder'
