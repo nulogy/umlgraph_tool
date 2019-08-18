@@ -44,16 +44,10 @@ command yellow:
 app_service lightcoral:
   AddProductionServiceBuilder:
     - '@depend - - - AddProductionParametersBuilder'
-    - '@depend - - - AddProductionParametersValidator'
     - '@depend - - - AddProductionService'
-    - '@depend - - - AddProductionUseCasePreconditionChecker'
     - '@depend - - - ConsumptionDetailsFromConsumptionPlanBuilder'
     - '@depend - - - FifoCodeGenerationService'
   AddProductionParametersBuilder:
-    - '@depend - - - AddProductionParameters'
-  AddProductionParametersValidator:
-    - '@depend - - - AddProductionParameters'
-  AddProductionUseCasePreconditionChecker:
     - '@depend - - - AddProductionParameters'
   ConsumptionDetailsFromConsumptionPlanBuilder:
     - '@depend - - - ConsumptionPlan'
@@ -62,17 +56,13 @@ app_service lightcoral:
 add_production_with_substitutions palegreen:
   AddProductionService:
     - 'void add_production() {}'
-    - '@depend - - - AddProductionValidator'
     - '@depend - - - PalletAllocator'
     - '@depend - - - PalletQuantity'
     - '@depend - - - ProductionOnPalletBuilder'
     - '@depend - - - WipQuantityValidator'
   AddProductionParameters:
     - '@has - - - ConsumptionDetails'
-  AddProductionValidator:
-    - '@depend - - - AddProductionParameters'
   ConsumptionDetails:
-    - 'void build_consumption_quantities() {}'
     - '@composed - - - ItemToConsume'
     - '@depend - - - ConsumptionOrderings'
   ItemToConsume:
@@ -126,5 +116,4 @@ icg pink:
 
 spec orange:
   AddProductionSpecHelper:
-    - '@hidden'
     - '@depend - - - AddProductionServiceBuilder'
