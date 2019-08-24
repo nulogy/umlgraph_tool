@@ -1,0 +1,56 @@
+config:
+  LineReplenishmentConfigurationDomainRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+planning lightcoral:
+  Project:
+    - '@has - - - Job'
+    - '@has - - 1 FinishedGood'
+
+production plum:
+  Job:
+
+line_replenishment lightblue:
+  ReplenishmentPolicy:
+    - 'String minimum_safety_stock;'
+    - 'String replenishment_stock;'
+    - '@assoc 1 - * Line'
+    - '@assoc 1 - * StagingLocation'
+    - '@assoc 1 - * VersionedBomItem'
+
+master palegreen:
+  AssemblyProcedure:
+    - '@hidden'
+    - '@composed - - - AssemblyStep'
+  AssemblyStep:
+    - '@hidden'
+  ProductionSpecification:
+    - '@composed - - - VersionedBomItem'
+  VersionedBomItem:
+    - '@assoc 1 - 1 Subcomponent'
+  Customer:
+    - '@hidden'
+    - '@has - - - Project'
+  Line:
+    - 'String description;'
+    - 'String line_type;'
+    - '@has - at - Location'
+    - '@has - replenished_by - StagingLocation'
+    - '@has - - - Job'
+  FinishedGood:
+    - '@composed - - 1 AssemblyProcedure'
+    - '@composed - - 1 ProductionSpecification'
+  Subcomponent:
+  Location:
+    - 'String code;'
+    - 'String name;'
+    - 'String pallet_capacity;'
+    - '@assoc 0 - 1 WarehouseZone'
+  StagingLocation extends Location:
+  WarehouseZone:
+    - '@hidden'
