@@ -1,8 +1,8 @@
-u# UML Graph Tool
+## UML Graph Tool
 
 Create UML diagrams rapidly.
 
-## Quick Start
+### Quick Start
 
     brew cask install java
     brew install graphviz
@@ -11,19 +11,19 @@ Create UML diagrams rapidly.
     rake
 
 
-## Usage
+### Usage
 
 To generate a single diagram:`./exe/generate ProductDomain`
 
 
-## To Generate All Diagrams
+### To Generate All Diagrams
 
 1. Define your UML diagram in a YAML file in the 'templates' folder
 2. Run `rake`
 3. View the generated graph in the `out` folder
 
 
-## References
+### References
 
 [UMLGraph](https://www.spinellis.gr/umlgraph/) is the original project that this project is based on
 
