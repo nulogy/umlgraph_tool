@@ -25,8 +25,8 @@ To generate a single diagram:`./exe/generate ProductDomain`
 
 ## References
 
-[UMLGraph](https://www.spinellis.gr/umlgraph/)
+[UMLGraph](https://www.spinellis.gr/umlgraph/) is the original project that this project is based on
 
-[Colors](http://www.graphviz.org/doc/info/colors.html)
+[Colors](http://www.graphviz.org/doc/info/colors.html) that you can use in your templates
 
-[Tags](http://www.spinellis.gr/umlgraph/doc/cd-model.html)
+[Tags](http://www.spinellis.gr/umlgraph/doc/cd-model.html) are used to specify your UML diagram
