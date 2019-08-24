@@ -1,4 +1,4 @@
-# umlgraph_tool
+u# UML Graph Tool
 
 Create UML diagrams rapidly.
 
@@ -6,7 +6,7 @@ Create UML diagrams rapidly.
 
     brew cask install java
     brew install graphviz
-    git clone https://github.com/amckinnell/umlgraph_tool
+    git clone git@github.com:nulogy/umlgraph_tool.git
     cd umlgraph_tool
     rake
 
@@ -23,7 +23,9 @@ To generate a single diagram:`./exe/generate ProductDomain`
 3. View the generated graph in the `out` folder
 
 
-## Reference
+## References
+
+[UMLGraph](https://www.spinellis.gr/umlgraph/)
 
 [Colors](http://www.graphviz.org/doc/info/colors.html)
 
