@@ -1,0 +1,42 @@
+config:
+  InboundStockTransfersRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+isto lightblue:
+  InboundStockTransferOrder:
+    - '@stereotype location'
+    - '@composed - - - InboundStockTransferOrderItem'
+    - '@has - - - InboundStockTransfer'
+  InboundStockTransferOrderItem:
+    - '@stereotype location'
+    - '@has - - - Sku'
+
+isti lightcoral:
+  InboundStockTransfer:
+    - '@composed - - - InboundStockTransferPallet'
+  InboundStockTransferPallet:
+    - '@composed - - - InboundStockTransferItem'
+  InboundStockTransferItem:
+    - '@stereotype location'
+
+master_data palegreen:
+  Location:
+    - '@hidden'
+    - '@has - - - InboundStockTransferOrder'
+    - '@has - - - InventoryDelta'
+  Sku:
+    - '@has - - - InventoryDelta'
+    - '@has - - - InboundStockTransferItem'
+  Pallet:
+    - '@has - - - InboundStockTransferPallet'
+    - '@has - - - InventoryDelta'
+
+inventory plum:
+  InventoryDelta:
+    - '@stereotype location'
+    - '@has - - - InboundStockTransferItem'
