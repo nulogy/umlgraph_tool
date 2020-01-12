@@ -18,36 +18,29 @@ roles lightcoral:
     - '@hidden'
 
 core palegreen:
-  Action:
-    - 'void execute() {}'
   Actor:
     - 'void asks() {}'
     - 'void performs() {}'
     - 'void recall() {}'
     - 'void remember() {}'
-  FeaturePage:
+  ScreenElement:
   Question:
     - 'void answer() {}'
     - 'void execute() {}'
+
+    - '@depend - - - ScreenElement'
   Task:
-    - 'void action() {}'
     - 'void execute() {}'
     - 'void perform() {}'
 
+    - '@depend - - - ScreenElement'
+
 factories lightblue:
-  ActionFactory:
-    - '@hidden'
-  BrowserActionFactory extends ActionFactory:
-    - '@hidden'
-    - '@depend - - - Action'
   FactoryCreationError:
     - '@hidden'
   QuestionFactory:
     - '@hidden'
     - '@depend - - - Question'
-  StandardActionFactory extends ActionFactory:
-    - '@hidden'
-    - '@depend - - - Action'
   TaskFactory:
     - '@hidden'
     - '@depend - - - Task'
@@ -58,6 +51,3 @@ tools gray:
   DampenConfigurationGenerator:
     - '@hidden'
     - '@depend - - - DampenConfiguration'
-  PageReferences:
-    - '@hidden'
-    - '@depend - - - FeaturePage'
