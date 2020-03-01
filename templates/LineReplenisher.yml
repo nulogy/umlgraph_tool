@@ -5,6 +5,14 @@ config:
     - '@opt vertical'
     - '@hidden'
 
+facade mediumPurple:
+  LineReplenisherKicker:
+    - '@depend - - - ReplenishLineCommand'
+  LineReplenisherStager:
+    - '@depend - - - StageLineCommand'
+    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
+    - '@depend - - - StageJobCommandPreconditions'
+
 commands deepSkyBlue:
   LineReplenisherCommand:
     - '@has - - - Job'
@@ -19,10 +27,6 @@ commands deepSkyBlue:
   StageLineCommand extends LineReplenisherCommand:
     - '@depend - - - LineReplenisher'
     - '@depend - - - StageLineJobConfigurationQuery'
-  StageJobCommand:
-    - '@depend - - - StageLineCommand'
-    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
-    - '@depend - - - StageJobCommandPreconditions'
   StageJobCommandPreconditions:
     - '@hidden'
 
