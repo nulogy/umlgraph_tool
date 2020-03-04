@@ -5,7 +5,15 @@ config:
     - '@opt vertical'
     - '@hidden'
 
-facade mediumPurple:
+client papayaWhip:
+  InventoryDiscrepancyController:
+    - '@depend - - - LineReplenisherKicker'
+  JobsController:
+    - '@depend - - - LineReplenisherStager'
+  UnitMove:
+    - '@depend - - - LineReplenisherKicker'
+
+facade sandyBrown:
   LineReplenisherKicker:
     - '@depend - - - ReplenishLineCommand'
   LineReplenisherStager:
@@ -16,36 +24,34 @@ facade mediumPurple:
 commands deepSkyBlue:
   LineReplenisherCommand:
     - '@has - - - Job'
-    - '@depend - - - LineReplenisherFactory'
-    - '@depend - - - LineReplenisherParameters'
+    - '@depend - - - ReplenishmentEventFactoryFactory'
+    - '@depend - - - ReplenishmentParameters'
   ReplenishLineCommand extends LineReplenisherCommand:
-    - '@depend - - - LineReplenisher'
+    - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - ReplenishLineJobConfigurationQuery'
     - '@depend - - - ReplenishLineCommandPreconditions'
   ReplenishLineCommandPreconditions:
     - '@hidden'
   StageLineCommand extends LineReplenisherCommand:
-    - '@depend - - - LineReplenisher'
+    - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - StageLineJobConfigurationQuery'
   StageJobCommandPreconditions:
     - '@hidden'
 
 line_replennisher lightblue:
-  LineReplenisherFactory:
-    - '@depend - - - LineReplenisher'
-    - '@depend - - - ReplenishmentSourceFactoryBuilder'
-  LineReplenisher:
+  ReplenishmentEventFactoryFactory:
+    - '@depend - - - ReplenishmentEventFactory'
+    - '@depend - - - ProjectRemainingBalancesCalculator'
+    - '@depend - - - ReplenishmentSourceFactory'
+  ReplenishmentEventFactory:
     - '@depend - - - ReplenishmentEvent'
     - '@composed - - - ReplenishmentSourceFactory'
-    - '@composed - - - LineReplenisherParameters'
+    - '@composed - - - ReplenishmentParameters'
     - '@depend - - - ReplenishmentSource'
-  LineReplenisherParameters:
+  ReplenishmentParameters:
     - '@has - - - JobJitLineReplenishmentConfiguration'
   LineStagingLocationInventory:
     - '@depend - - - CurrentInventoryAtStagingLocationsQuery'
-  ReplenishmentSourceFactoryBuilder:
-    - '@depend - - - ProjectRemainingBalancesCalculator'
-    - '@depend - - - ReplenishmentSourceFactory'
   ReplenishmentSourceFactory:
     - '@composed - - - ProjectRemainingBalances'
     - '@composed - - - LineStagingLocationInventory'
