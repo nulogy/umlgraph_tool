@@ -7,36 +7,42 @@ config:
 
 client papayaWhip:
   InventoryDiscrepancyController:
-    - '@depend - - - LineReplenisherKicker'
+    - '@depend - - - LineReplenisherClient'
   JobsController:
-    - '@depend - - - LineReplenisherStager'
+    - '@depend - - - LineReplenisherClient'
   UnitMove:
-    - '@depend - - - LineReplenisherKicker'
+    - '@depend - - - LineReplenisherClient'
 
 facade sandyBrown:
-  LineReplenisherKicker:
-    - '@depend - - - ReplenishLineCommand'
-  LineReplenisherStager:
-    - '@depend - - - StageLineCommand'
-    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
-    - '@depend - - - StageJobCommandPreconditions'
+  LineReplenisherClient:
+    - '@depend - - - LineReplenisher'
 
 commands deepSkyBlue:
-  LineReplenisherCommand:
+  LineReplenisher:
+    - '@depend - - - ConfigureJobAction'
+    - '@depend - - - ConfigureJobGuard'
+    - '@depend - - - ReplenishInventoryAction'
+    - '@depend - - - ReplenishJobAction'
+  ConfigureJobAction:
+    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
+  ConfigureJobGuard:
+    - '@depend - - - ConfigureJobPreconditions'
+  ReplenishInventoryAction:
+    - '@depend - - - ReplenishInventoryCommand'
+  ReplenishJobAction:
+    - '@depend - - - ReplenishJobCommand'
+
+  ReplenishCommand:
     - '@has - - - Job'
     - '@depend - - - ReplenishmentEventFactoryFactory'
     - '@depend - - - ReplenishmentParameters'
-  ReplenishLineCommand extends LineReplenisherCommand:
+  ReplenishInventoryCommand extends ReplenishCommand:
     - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - ReplenishLineJobConfigurationQuery'
-    - '@depend - - - ReplenishLineCommandPreconditions'
-  ReplenishLineCommandPreconditions:
-    - '@hidden'
-  StageLineCommand extends LineReplenisherCommand:
+  ReplenishJobCommand extends ReplenishCommand:
     - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - StageLineJobConfigurationQuery'
-  StageJobCommandPreconditions:
-    - '@hidden'
+  ConfigureJobPreconditions:
 
 line_replennisher lightblue:
   ReplenishmentEventFactoryFactory:
