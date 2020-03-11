@@ -16,22 +16,26 @@ client papayaWhip:
 facade sandyBrown:
   LineReplenisherClient:
     - '@depend - - - LineReplenisher'
+    - '@depend - - - LineReplenisherLocator'
 
 commands deepSkyBlue:
+  CreateLineReplenisherPreconditions:
+  LineReplenisherLocator:
+    - '@depend - - - LineReplenisher'
+    - '@depend - - - LineReplenisherFactory'
+    - '@depend - - - LineReplenisherByInventoryQuery'
+  LineReplenisherFactory:
+    - '@depend - - - CreateLineReplenisherPreconditions'
+    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
+    - '@depend - - - LineReplenisher'
+    - '@depend - - - ReadyToRunPolicy'
   LineReplenisher:
-    - '@depend - - - ConfigureJobAction'
-    - '@depend - - - ConfigureJobGuard'
     - '@depend - - - ReplenishInventoryAction'
     - '@depend - - - ReplenishJobAction'
-  ConfigureJobAction:
-    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
-  ConfigureJobGuard:
-    - '@depend - - - ConfigureJobPreconditions'
   ReplenishInventoryAction:
     - '@depend - - - ReplenishInventoryCommand'
   ReplenishJobAction:
     - '@depend - - - ReplenishJobCommand'
-
   ReplenishCommand:
     - '@has - - - Job'
     - '@depend - - - ReplenishmentEventFactoryFactory'
@@ -42,9 +46,11 @@ commands deepSkyBlue:
   ReplenishJobCommand extends ReplenishCommand:
     - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - StageLineJobConfigurationQuery'
-  ConfigureJobPreconditions:
+  CreateLineReplenisherPreconditions:
+    - '@depend - - - ReadyToRunPolicy'
 
 line_replennisher lightblue:
+  ReadyToRunPolicy:
   ReplenishmentEventFactoryFactory:
     - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - ProjectRemainingBalancesCalculator'
@@ -78,6 +84,8 @@ query lightgray:
     - '@depend - - - CurrentInventoryLevel'
   InboundStockTransferOrdersByProjectQuery:
     - '@depend - - - InboundStockTransferOrder'
+  LineReplenisherByInventoryQuery:
+    - '@depend - - - LineReplenisher'
   ReplenishLineJobConfigurationQuery:
     - '@hidden'
   StageLineJobConfigurationQuery:
