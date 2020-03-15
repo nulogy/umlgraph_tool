@@ -20,13 +20,14 @@ facade sandyBrown:
 
 commands deepSkyBlue:
   CreateLineReplenisherPreconditions:
+    - '@depend - - - ReadyToRunPolicy'
   LineReplenisherLocator:
     - '@depend - - - LineReplenisher'
     - '@depend - - - LineReplenisherFactory'
     - '@depend - - - LineReplenisherByInventoryQuery'
   LineReplenisherFactory:
     - '@depend - - - CreateLineReplenisherPreconditions'
-    - '@depend - - - JobJitLineReplenishmentConfigurationFactory'
+    - '@depend - - - LineReplenisherJitConfigurationFactory'
     - '@depend - - - LineReplenisher'
     - '@depend - - - ReadyToRunPolicy'
   LineReplenisher:
@@ -46,8 +47,6 @@ commands deepSkyBlue:
   ReplenishJobCommand extends ReplenishCommand:
     - '@depend - - - ReplenishmentEventFactory'
     - '@depend - - - StageLineJobConfigurationQuery'
-  CreateLineReplenisherPreconditions:
-    - '@depend - - - ReadyToRunPolicy'
 
 line_replennisher lightblue:
   ReadyToRunPolicy:
@@ -61,7 +60,7 @@ line_replennisher lightblue:
     - '@composed - - - ReplenishmentParameters'
     - '@depend - - - ReplenishmentSource'
   ReplenishmentParameters:
-    - '@has - - - JobJitLineReplenishmentConfiguration'
+    - '@has - - - LineReplenisherJitConfiguration'
   LineStagingLocationInventory:
     - '@depend - - - CurrentInventoryAtStagingLocationsQuery'
   ReplenishmentSourceFactory:
@@ -73,9 +72,9 @@ line_replennisher lightblue:
   ProjectRemainingBalancesCalculator:
     - '@depend - - - InboundStockTransferOrdersByProjectQuery'
     - '@depend - - - ProjectRemainingBalances'
-  JobJitLineReplenishmentConfigurationFactory:
+  LineReplenisherJitConfigurationFactory:
     - '@depend - - - ConfigurationByJobQuery'
-    - '@depend - - - JobJitLineReplenishmentConfiguration'
+    - '@depend - - - LineReplenisherJitConfiguration'
 
 query lightgray:
   ConfigurationByJobQuery:
@@ -105,7 +104,7 @@ model coral:
 
 jit palegreen:
   JitLineReplenishmentConfiguration:
-  JobJitLineReplenishmentConfiguration:
+  LineReplenisherJitConfiguration:
   ReplenishmentEvent:
     - '@assoc - - - InboundStockTransfer'
 
