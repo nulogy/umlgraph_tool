@@ -18,35 +18,41 @@ facade sandyBrown:
     - '@depend - - - LineReplenisher'
     - '@depend - - - LineReplenisherLocator'
 
-commands deepSkyBlue:
-  CreateLineReplenisherPreconditions:
-    - '@depend - - - ReadyToRunPolicy'
+engine deepSkyBlue:
   LineReplenisherLocator:
     - '@depend - - - LineReplenisher'
     - '@depend - - - LineReplenisherFactory'
     - '@depend - - - LineReplenisherByInventoryQuery'
   LineReplenisherFactory:
-    - '@depend - - - CreateLineReplenisherPreconditions'
     - '@depend - - - LineReplenisherJitConfigurationFactory'
     - '@depend - - - LineReplenisher'
-    - '@depend - - - ReadyToRunPolicy'
   LineReplenisher:
-    - '@depend - - - ReplenishInventoryAction'
-    - '@depend - - - ReplenishJobAction'
-  ReplenishInventoryAction:
-    - '@depend - - - ReplenishInventoryCommand'
-  ReplenishJobAction:
-    - '@depend - - - ReplenishJobCommand'
-  ReplenishCommand:
     - '@has - - - Job'
+
+    - '@depend - - - LineReplenishmentPausedNotificationAction'
+    - '@depend - - - ReplenishJobAction'
+    - '@depend - - - ReplenishInventoryAction'
+
+    - '@depend - - - JobStartedGuard'
+    - '@depend - - - ReplenishForGuard'
+    - '@depend - - - ReadyToReplenishGuard'
+
+actions LightSteelBlue:
+  LineReplenishmentPausedNotificationAction:
+    - '@hidden'
+  ReplenishAction:
     - '@depend - - - ReplenishmentEventFactoryFactory'
-    - '@depend - - - ReplenishmentParameters'
-  ReplenishInventoryCommand extends ReplenishCommand:
     - '@depend - - - ReplenishmentEventFactory'
-    - '@depend - - - ReplenishLineJobConfigurationQuery'
-  ReplenishJobCommand extends ReplenishCommand:
-    - '@depend - - - ReplenishmentEventFactory'
-    - '@depend - - - StageLineJobConfigurationQuery'
+  ReplenishJobAction extends ReplenishAction:
+  ReplenishInventoryAction extends ReplenishAction:
+
+guards LightSteelBlue:
+  JobStartedGuard:
+    - '@hidden'
+  ReplenishForGuard:
+    - '@hidden'
+  ReadyToReplenishGuard:
+    - '@depend - - - ReadyToRunPolicy'
 
 line_replennisher lightblue:
   ReadyToRunPolicy:
@@ -62,7 +68,7 @@ line_replennisher lightblue:
   ReplenishmentParameters:
     - '@has - - - LineReplenisherJitConfiguration'
   LineStagingLocationInventory:
-    - '@depend - - - CurrentInventoryAtStagingLocationsQuery'
+    - '@depend - - - CurrentInventoryLevel'
   ReplenishmentSourceFactory:
     - '@composed - - - ProjectRemainingBalances'
     - '@composed - - - LineStagingLocationInventory'
@@ -70,20 +76,24 @@ line_replennisher lightblue:
   ProjectRemainingBalances:
     - '@composed - - - RemainingBalance'
   ProjectRemainingBalancesCalculator:
-    - '@depend - - - InboundStockTransferOrdersByProjectQuery'
+    - '@depend - - - InboundStockTransferOrder'
     - '@depend - - - ProjectRemainingBalances'
   LineReplenisherJitConfigurationFactory:
-    - '@depend - - - ConfigurationByJobQuery'
+    - '@depend - - - JitLineReplenishmentConfiguration'
     - '@depend - - - LineReplenisherJitConfiguration'
 
 query lightgray:
   ConfigurationByJobQuery:
+    - '@hidden'
     - '@depend - - - JitLineReplenishmentConfiguration'
   CurrentInventoryAtStagingLocationsQuery:
+    - '@hidden'
     - '@depend - - - CurrentInventoryLevel'
   InboundStockTransferOrdersByProjectQuery:
+    - '@hidden'
     - '@depend - - - InboundStockTransferOrder'
   LineReplenisherByInventoryQuery:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
   ReplenishLineJobConfigurationQuery:
     - '@hidden'
