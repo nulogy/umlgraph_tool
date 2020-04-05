@@ -58,7 +58,7 @@ line_replennisher lightblue:
   ReadyToRunPolicy:
   ReplenishmentEventFactoryFactory:
     - '@depend - - - ReplenishmentEventFactory'
-    - '@depend - - - ProjectRemainingBalancesCalculator'
+    - '@depend - - - RemainingProjectBalancesCalculator'
     - '@depend - - - ReplenishmentSourceFactory'
   ReplenishmentEventFactory:
     - '@depend - - - ReplenishmentEvent'
@@ -70,14 +70,14 @@ line_replennisher lightblue:
   LineStagingLocationInventory:
     - '@depend - - - CurrentInventoryLevel'
   ReplenishmentSourceFactory:
-    - '@composed - - - ProjectRemainingBalances'
+    - '@composed - - - RemainingProjectBalances'
     - '@composed - - - LineStagingLocationInventory'
     - '@depend - - - ReplenishmentSource'
-  ProjectRemainingBalances:
+  RemainingProjectBalances:
     - '@composed - - - RemainingBalance'
-  ProjectRemainingBalancesCalculator:
+  RemainingProjectBalancesCalculator:
     - '@depend - - - InboundStockTransferOrder'
-    - '@depend - - - ProjectRemainingBalances'
+    - '@depend - - - RemainingProjectBalances'
   LineReplenisherJitConfigurationFactory:
     - '@depend - - - JitLineReplenishmentConfiguration'
     - '@depend - - - LineReplenisherJitConfiguration'
