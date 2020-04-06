@@ -55,32 +55,34 @@ guards LightSteelBlue:
     - '@depend - - - ReadyToRunPolicy'
 
 line_replennisher lightblue:
-  ReadyToRunPolicy:
-  ReplenishmentEventFactoryFactory:
-    - '@depend - - - ReplenishmentEventFactory'
-    - '@depend - - - RemainingProjectBalancesCalculator'
-    - '@depend - - - ReplenishmentSourceFactory'
-  ReplenishmentEventFactory:
-    - '@depend - - - ReplenishmentEvent'
-    - '@composed - - - ReplenishmentSourceFactory'
-    - '@composed - - - ReplenishmentParameters'
-    - '@depend - - - ReplenishmentSource'
-  ReplenishmentParameters:
-    - '@has - - - LineReplenisherJitConfiguration'
+  InTransitInventory:
+  LineReplenisherJitConfigurationFactory:
+    - '@depend - - - JitLineReplenishmentConfiguration'
+    - '@depend - - - LineReplenisherJitConfiguration'
   LineStagingLocationInventory:
     - '@depend - - - CurrentInventoryLevel'
-  ReplenishmentSourceFactory:
-    - '@composed - - - RemainingProjectBalances'
-    - '@composed - - - LineStagingLocationInventory'
-    - '@depend - - - ReplenishmentSource'
+  ReadyToRunPolicy:
   RemainingProjectBalances:
     - '@composed - - - RemainingBalance'
   RemainingProjectBalancesCalculator:
     - '@depend - - - InboundStockTransferOrder'
     - '@depend - - - RemainingProjectBalances'
-  LineReplenisherJitConfigurationFactory:
-    - '@depend - - - JitLineReplenishmentConfiguration'
-    - '@depend - - - LineReplenisherJitConfiguration'
+  ReplenishmentEventFactory:
+    - '@depend - - - ReplenishmentEvent'
+    - '@composed - - - ReplenishmentSourceFactory'
+    - '@composed - - - ReplenishmentParameters'
+    - '@depend - - - ReplenishmentSource'
+  ReplenishmentEventFactoryFactory:
+    - '@depend - - - ReplenishmentEventFactory'
+    - '@depend - - - RemainingProjectBalancesCalculator'
+    - '@depend - - - ReplenishmentSourceFactory'
+  ReplenishmentParameters:
+    - '@has - - - LineReplenisherJitConfiguration'
+  ReplenishmentSourceFactory:
+    - '@composed - - - RemainingProjectBalances'
+    - '@composed - - - LineStagingLocationInventory'
+    - '@depend - - - InTransitInventory'
+    - '@depend - - - ReplenishmentSource'
 
 query lightgray:
   ConfigurationByJobQuery:
