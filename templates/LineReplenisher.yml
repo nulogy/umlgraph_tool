@@ -10,6 +10,8 @@ client papayaWhip:
     - '@depend - - - LineReplenisherClient'
   JobsController:
     - '@depend - - - LineReplenisherClient'
+  MaterialsCard:
+    - '@depend - - - LineReplenisherClient'
   UnitMove:
     - '@depend - - - LineReplenisherClient'
 
