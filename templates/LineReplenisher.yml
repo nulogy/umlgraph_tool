@@ -60,6 +60,8 @@ line_replennisher lightblue:
   InTransitInventory:
     - '@depend - - - ReplenishmentEvent'
     - '@depend - - - InboundStockTransfer'
+  InTransitRemainingBalances:
+    - '@depend - - - InboundStockTransfer'
   LineReplenisherJitConfigurationFactory:
     - '@depend - - - JitLineReplenishmentConfiguration'
     - '@depend - - - LineReplenisherJitConfiguration'
@@ -70,6 +72,7 @@ line_replennisher lightblue:
     - '@composed - - - RemainingBalance'
   RemainingProjectBalancesCalculator:
     - '@depend - - - InboundStockTransferOrder'
+    - '@depend - - - InTransitRemainingBalances'
     - '@depend - - - RemainingProjectBalances'
   ReplenishmentEventFactory:
     - '@depend - - - ReplenishmentEvent'
