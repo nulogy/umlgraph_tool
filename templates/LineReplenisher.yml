@@ -7,18 +7,39 @@ config:
 
 client papayaWhip:
   InventoryDiscrepancyController:
-    - '@depend - - - LineReplenisherClient'
+    - '@depend - - - Replenishment'
   JobsController:
-    - '@depend - - - LineReplenisherClient'
+    - '@depend - - - Replenishment'
   MaterialsCard:
-    - '@depend - - - LineReplenisherClient'
+    - '@depend - - - Replenishment'
   UnitMove:
-    - '@depend - - - LineReplenisherClient'
+    - '@depend - - - Replenishment'
 
 facade sandyBrown:
-  LineReplenisherClient:
-    - '@depend - - - LineReplenisher'
+  Replenishment:
+    - '@depend - - - ReplenishmentMethods'
+  ReplenishmentMethods:
+    - '@depend - - - ReplenishmentCommand'
+    - '@depend - - - ReplenishmentQuery'
+
+  ReplenishmentCommand:
     - '@depend - - - LineReplenisherLocator'
+
+  PauseLineReplenisherCommand extends ReplenishmentCommand:
+    - '@depend - - - LineReplenisher'
+  RefreshLineReplenisherCommand extends ReplenishmentCommand:
+    - '@depend - - - LineReplenisher'
+  ReplenishInventoryCommand extends ReplenishmentCommand:
+    - '@depend - - - LineReplenisher'
+  ResumeLineReplenisherCommand extends ReplenishmentCommand:
+    - '@depend - - - LineReplenisher'
+  StageJobCommand extends ReplenishmentCommand:
+    - '@depend - - - LineReplenisher'
+
+  ReplenishmentQuery:
+  LookupLineReplenisherQuery extends ReplenishmentQuery:
+    - '@depend - - - LineReplenisherLocator'
+  StartedJobsQuery extends ReplenishmentQuery:
 
 engine deepSkyBlue:
   LineReplenisherLocator:
