@@ -16,7 +16,7 @@ client papayaWhip:
     - '@depend - - - Replenishment'
 
 facade sandyBrown:
-  Replenishment:
+  Replenishment :
     - '@depend - - - ReplenishmentMethods'
   ReplenishmentMethods:
     - '@depend - - - ReplenishmentCommand'
