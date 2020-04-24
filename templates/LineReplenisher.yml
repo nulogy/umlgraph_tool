@@ -17,29 +17,41 @@ client papayaWhip:
 
 facade sandyBrown:
   Replenishment :
-    - '@depend - - - ReplenishmentMethods'
+#    - '@depend - - - ReplenishmentMethods'
+    - '@depend - - - LineReplenisherLocator'
+    - '@depend - - - LineReplenisher'
   ReplenishmentMethods:
+    - '@hidden'
     - '@depend - - - ReplenishmentCommand'
     - '@depend - - - ReplenishmentQuery'
 
   ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisherLocator'
 
   PauseLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
   RefreshLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
   ReplenishInventoryCommand extends ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
   ResumeLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
   StageJobCommand extends ReplenishmentCommand:
+    - '@hidden'
     - '@depend - - - LineReplenisher'
 
   ReplenishmentQuery:
+    - '@hidden'
   LookupLineReplenisherQuery extends ReplenishmentQuery:
+    - '@hidden'
     - '@depend - - - LineReplenisherLocator'
   StartedJobsQuery extends ReplenishmentQuery:
+    - '@hidden'
 
 engine deepSkyBlue:
   LineReplenisherLocator:
