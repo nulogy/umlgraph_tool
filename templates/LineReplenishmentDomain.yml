@@ -7,50 +7,39 @@ config:
     - '@opt operations'
     - '@hidden'
 
-planning lightcoral:
-  Project:
-    - '@has - - - Job'
-    - '@has - - 1 FinishedGood'
+jit lightsalmon:
+  JitLineReplenishmentConfiguration:
+    - 'String safety_stock;'
+    - 'String replenishment_point;'
+    - '@assoc - - - BomVersion'
+    - '@assoc - - - Line'
+    - '@assoc - - - StagingLocation'
+    - '@assoc - - - Subcomponent'
+  LineReplenisherJitConfiguration:
+    - 'String safety_stock;'
+    - 'String replenishment_point;'
+    - '@assoc - - - JitLineReplenishmentConfiguration'
+    - '@assoc - - - Job'
 
-production plum:
+production_management lightcoral:
   Job:
+  Project:
+    - '@assoc - - - Job'
+    - '@assoc - - - FinishedGood'
 
-line_replenishment lightblue:
-  ReplenishmentPolicy:
-    - 'String minimum_safety_stock;'
-    - 'String replenishment_stock;'
-    - '@assoc 1 - * Line'
-    - '@assoc 1 - * StagingLocation'
-    - '@assoc 1 - * VersionedBomItem'
+inventory_control yellow:
+  Line:
+    - '@assoc - - - StagingLocation'
+    - '@assoc - - - Job'
+  StagingLocation:
 
 master palegreen:
-  AssemblyProcedure:
-    - '@hidden'
-    - '@composed - - - AssemblyStep'
-  AssemblyStep:
-    - '@hidden'
-  ProductionSpecification:
-    - '@composed - - - VersionedBomItem'
-  VersionedBomItem:
-    - '@assoc 1 - 1 Subcomponent'
-  Customer:
-    - '@hidden'
-    - '@has - - - Project'
-  Line:
-    - 'String description;'
-    - 'String line_type;'
-    - '@has - at - Location'
-    - '@has - replenished_by - StagingLocation'
-    - '@has - - - Job'
+  BomVersion:
+    - '@composed - - - BomItem'
+  BomItem:
+    - '@assoc - - - Subcomponent'
   FinishedGood:
-    - '@composed - - 1 AssemblyProcedure'
-    - '@composed - - 1 ProductionSpecification'
+    - '@stereotype Sku'
+    - '@composed - - - BomVersion'
   Subcomponent:
-  Location:
-    - 'String code;'
-    - 'String name;'
-    - 'String pallet_capacity;'
-    - '@assoc 0 - 1 WarehouseZone'
-  StagingLocation extends Location:
-  WarehouseZone:
-    - '@hidden'
+    - '@stereotype Sku'
