@@ -1,0 +1,29 @@
+config:
+  TdcRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+roles lightcoral:
+  GeneratorBase:
+    - '@has - - - CatalogEntries'
+    - '@has - - - DataDefinition'
+  SingularGenerator extends GeneratorBase:
+  StandardGenerator extends GeneratorBase:
+
+core palegreen:
+  CatalogEntries:
+
+factories lightblue:
+  DefinitionResolvable:
+  DefinitionSourcable:
+  InstanceDefinitionConfigurable extends DefinitionSourcable:
+    - '@hidden'
+
+tools gray:
+  DataDefinition:
+  InMemoryDataDefinition extends DataDefinition:
+  DataDefinitionFileReader extends DataDefinition:
