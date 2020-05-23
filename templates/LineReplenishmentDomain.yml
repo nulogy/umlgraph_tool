@@ -1,0 +1,45 @@
+config:
+  LineReplenishmentConfigurationDomainRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+jit lightsalmon:
+  JitLineReplenishmentConfiguration:
+    - 'String safety_stock;'
+    - 'String replenishment_point;'
+    - '@assoc - - - BomVersion'
+    - '@assoc - - - Line'
+    - '@assoc - - - StagingLocation'
+    - '@assoc - - - Subcomponent'
+  LineReplenisherJitConfiguration:
+    - 'String safety_stock;'
+    - 'String replenishment_point;'
+    - '@assoc - - - JitLineReplenishmentConfiguration'
+    - '@assoc - - - Job'
+
+production_management lightcoral:
+  Job:
+  Project:
+    - '@assoc - - - Job'
+    - '@assoc - - - FinishedGood'
+
+inventory_control yellow:
+  Line:
+    - '@assoc - - - StagingLocation'
+    - '@assoc - - - Job'
+  StagingLocation:
+
+master palegreen:
+  BomVersion:
+    - '@composed - - - BomItem'
+  BomItem:
+    - '@assoc - - - Subcomponent'
+  FinishedGood:
+    - '@stereotype Sku'
+    - '@composed - - - BomVersion'
+  Subcomponent:
+    - '@stereotype Sku'

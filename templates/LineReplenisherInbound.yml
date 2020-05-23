@@ -1,0 +1,16 @@
+config:
+  LineReplenisherInboundRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@hidden'
+
+model coral:
+  CurrentInventoryLevel:
+  InboundStockTransfer:
+    - '@composed - - - InboundStockTransferItem'
+  InboundStockTransferItem:
+    - '@hidden'
+  InboundStockTransferOrder:
+    - '@composed - - - InboundStockTransferOrderItem'
+  InboundStockTransferOrderItem:

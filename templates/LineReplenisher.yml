@@ -1,0 +1,165 @@
+config:
+  LineReplenisherRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@hidden'
+
+client papayaWhip:
+  InventoryDiscrepancyController:
+    - '@depend - - - Replenishment'
+  JobsController:
+    - '@depend - - - Replenishment'
+  MaterialsCard:
+    - '@depend - - - Replenishment'
+  UnitMove:
+    - '@depend - - - Replenishment'
+
+facade sandyBrown:
+  Replenishment :
+#    - '@depend - - - ReplenishmentMethods'
+    - '@depend - - - LineReplenisherLocator'
+    - '@depend - - - LineReplenisher'
+  ReplenishmentMethods:
+    - '@hidden'
+    - '@depend - - - ReplenishmentCommand'
+    - '@depend - - - ReplenishmentQuery'
+
+  ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisherLocator'
+
+  PauseLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+  RefreshLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+  ReplenishInventoryCommand extends ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+  ResumeLineReplenisherCommand extends ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+  StageJobCommand extends ReplenishmentCommand:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+
+  ReplenishmentQuery:
+    - '@hidden'
+  LookupLineReplenisherQuery extends ReplenishmentQuery:
+    - '@hidden'
+    - '@depend - - - LineReplenisherLocator'
+  StartedJobsQuery extends ReplenishmentQuery:
+    - '@hidden'
+
+engine deepSkyBlue:
+  LineReplenisherLocator:
+    - '@depend - - - LineReplenisher'
+    - '@depend - - - LineReplenisherFactory'
+    - '@depend - - - LineReplenisherByInventoryQuery'
+  LineReplenisherFactory:
+    - '@depend - - - LineReplenisherJitConfigurationFactory'
+    - '@depend - - - LineReplenisher'
+  LineReplenisher:
+    - '@has - - - Job'
+
+    - '@depend - - - LineReplenishmentPausedNotificationAction'
+    - '@depend - - - ReplenishJobAction'
+    - '@depend - - - ReplenishInventoryAction'
+
+    - '@depend - - - JobStartedGuard'
+    - '@depend - - - ReplenishForGuard'
+    - '@depend - - - ReadyToReplenishGuard'
+
+actions LightSteelBlue:
+  LineReplenishmentPausedNotificationAction:
+    - '@hidden'
+  ReplenishAction:
+    - '@depend - - - ReplenishmentEventFactoryFactory'
+    - '@depend - - - ReplenishmentEventFactory'
+  ReplenishJobAction extends ReplenishAction:
+  ReplenishInventoryAction extends ReplenishAction:
+
+guards LightSteelBlue:
+  JobStartedGuard:
+    - '@hidden'
+  ReplenishForGuard:
+    - '@hidden'
+  ReadyToReplenishGuard:
+    - '@depend - - - ReadyToRunPolicy'
+
+line_replennisher lightblue:
+  InTransitInventory:
+    - '@depend - - - ReplenishmentEvent'
+    - '@depend - - - InboundStockTransfer'
+  InTransitRemainingBalances:
+    - '@depend - - - InboundStockTransfer'
+  LineReplenisherJitConfigurationFactory:
+    - '@depend - - - JitLineReplenishmentConfiguration'
+    - '@depend - - - LineReplenisherJitConfiguration'
+  LineStagingLocationInventory:
+    - '@depend - - - CurrentInventoryLevel'
+  ReadyToRunPolicy:
+  RemainingProjectBalances:
+    - '@composed - - - RemainingBalance'
+  RemainingProjectBalancesCalculator:
+    - '@depend - - - InboundStockTransferOrder'
+    - '@depend - - - InTransitRemainingBalances'
+    - '@depend - - - RemainingProjectBalances'
+  ReplenishmentEventFactory:
+    - '@depend - - - ReplenishmentEvent'
+    - '@composed - - - ReplenishmentSourceFactory'
+    - '@composed - - - ReplenishmentParameters'
+    - '@depend - - - ReplenishmentSource'
+  ReplenishmentEventFactoryFactory:
+    - '@depend - - - ReplenishmentEventFactory'
+    - '@depend - - - RemainingProjectBalancesCalculator'
+    - '@depend - - - ReplenishmentSourceFactory'
+  ReplenishmentParameters:
+    - '@has - - - LineReplenisherJitConfiguration'
+  ReplenishmentSourceFactory:
+    - '@composed - - - RemainingProjectBalances'
+    - '@composed - - - LineStagingLocationInventory'
+    - '@depend - - - InTransitInventory'
+    - '@depend - - - ReplenishmentSource'
+
+query lightgray:
+  ConfigurationByJobQuery:
+    - '@hidden'
+    - '@depend - - - JitLineReplenishmentConfiguration'
+  CurrentInventoryAtStagingLocationsQuery:
+    - '@hidden'
+    - '@depend - - - CurrentInventoryLevel'
+  InboundStockTransferOrdersByProjectQuery:
+    - '@hidden'
+    - '@depend - - - InboundStockTransferOrder'
+  LineReplenisherByInventoryQuery:
+    - '@hidden'
+    - '@depend - - - LineReplenisher'
+  ReplenishLineJobConfigurationQuery:
+    - '@hidden'
+  StageLineJobConfigurationQuery:
+    - '@hidden'
+
+model coral:
+  CurrentInventoryLevel:
+  InboundStockTransfer:
+    - '@composed - - - InboundStockTransferItem'
+  InboundStockTransferItem:
+    - '@hidden'
+  InboundStockTransferOrder:
+    - '@composed - - - InboundStockTransferOrderItem'
+  InboundStockTransferOrderItem:
+  Job:
+    - '@hidden'
+
+jit palegreen:
+  JitLineReplenishmentConfiguration:
+  LineReplenisherJitConfiguration:
+  ReplenishmentEvent:
+    - '@assoc - - - InboundStockTransfer'
+
+values pink:
+  RemainingBalance:
+  ReplenishmentSource:
