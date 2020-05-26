@@ -7,14 +7,16 @@ config:
     - '@opt operations'
     - '@hidden'
 
+application gold:
+  ApplicationSingularGenerator extends SingularGenerator:
+  ApplicationStandardGenerator extends StandardGenerator:
+
 roles lightcoral:
   GeneratorBase:
     - '@has - - - CatalogEntries'
     - '@has - - - DataDefinition'
   ConfigurableGenerator extends GeneratorBase:
     - '@depend - - - DefinitionSourcable'
-
-roles lightpink:
   SingularGenerator extends ConfigurableGenerator:
   StandardGenerator extends ConfigurableGenerator:
 
