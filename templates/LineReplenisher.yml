@@ -7,51 +7,20 @@ config:
 
 client papayaWhip:
   InventoryDiscrepancyController:
-    - '@depend - - - Replenishment'
+    - '@depend - - - ReplenishmentFacade'
   JobsController:
-    - '@depend - - - Replenishment'
+    - '@depend - - - ReplenishmentFacade'
   MaterialsCard:
-    - '@depend - - - Replenishment'
+    - '@depend - - - ReplenishmentFacade'
+  Project:
+    - '@depend - - - ReplenishmentFacade'
   UnitMove:
-    - '@depend - - - Replenishment'
+    - '@depend - - - ReplenishmentFacade'
 
 facade sandyBrown:
-  Replenishment :
-#    - '@depend - - - ReplenishmentMethods'
+  ReplenishmentFacade:
     - '@depend - - - LineReplenisherLocator'
     - '@depend - - - LineReplenisher'
-  ReplenishmentMethods:
-    - '@hidden'
-    - '@depend - - - ReplenishmentCommand'
-    - '@depend - - - ReplenishmentQuery'
-
-  ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisherLocator'
-
-  PauseLineReplenisherCommand extends ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisher'
-  RefreshLineReplenisherCommand extends ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisher'
-  ReplenishInventoryCommand extends ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisher'
-  ResumeLineReplenisherCommand extends ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisher'
-  StageJobCommand extends ReplenishmentCommand:
-    - '@hidden'
-    - '@depend - - - LineReplenisher'
-
-  ReplenishmentQuery:
-    - '@hidden'
-  LookupLineReplenisherQuery extends ReplenishmentQuery:
-    - '@hidden'
-    - '@depend - - - LineReplenisherLocator'
-  StartedJobsQuery extends ReplenishmentQuery:
-    - '@hidden'
 
 engine deepSkyBlue:
   LineReplenisherLocator:
@@ -63,31 +32,35 @@ engine deepSkyBlue:
     - '@depend - - - LineReplenisher'
   LineReplenisher:
     - '@has - - - Job'
-
-    - '@depend - - - LineReplenishmentPausedNotificationAction'
-    - '@depend - - - ReplenishJobAction'
     - '@depend - - - ReplenishInventoryAction'
-
-    - '@depend - - - JobStartedGuard'
-    - '@depend - - - ReplenishForGuard'
+    - '@depend - - - ReplenishJobAction'
     - '@depend - - - ReadyToReplenishGuard'
-
 actions LightSteelBlue:
-  LineReplenishmentPausedNotificationAction:
+  LineReplenisherAction:
     - '@hidden'
-  ReplenishAction:
-    - '@depend - - - ReplenishmentEventFactoryFactory'
-    - '@depend - - - ReplenishmentEventFactory'
-  ReplenishJobAction extends ReplenishAction:
+  ReplenishAction extends LineReplenisherAction:
+    - '@hidden'
+
+  JobStagedNotificationAction extends LineReplenisherAction:
+    - '@hidden'
+  LineReplenishmentPausedNotificationAction extends LineReplenisherAction:
+    - '@hidden'
+  LineReplenishmentUnavailableNotificationAction extends LineReplenisherAction:
+    - '@hidden'
   ReplenishInventoryAction extends ReplenishAction:
+    - '@depend - - - ReplenishmentEventFactoryFactory'
+  ReplenishJobAction extends ReplenishAction:
+    - '@depend - - - ReplenishmentEventFactoryFactory'
 
 guards LightSteelBlue:
-  JobStartedGuard:
+  LineReplenisherGuard:
     - '@hidden'
-  ReplenishForGuard:
+  JobStartedGuard extends LineReplenisherGuard:
     - '@hidden'
-  ReadyToReplenishGuard:
+  ReadyToReplenishGuard extends LineReplenisherGuard:
     - '@depend - - - ReadyToRunPolicy'
+  ReplenishInventoryGuard extends LineReplenisherGuard:
+    - '@hidden'
 
 line_replennisher lightblue:
   InTransitInventory:
@@ -152,7 +125,6 @@ model coral:
     - '@composed - - - InboundStockTransferOrderItem'
   InboundStockTransferOrderItem:
   Job:
-    - '@hidden'
 
 jit palegreen:
   JitLineReplenishmentConfiguration:
