@@ -1,0 +1,80 @@
+config:
+  OutboundTrailerRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+
+inventory_control lightcoral:
+  Carrier:
+  Consignee:
+    - '@has - - - ShipOrder'
+  CurrentInventoryLevel:
+    - '@hidden'
+  InventoryDelta:
+    - '@hidden'
+  PlannedShipment:
+    - '@has - - - Shipment'
+    - '@composed - - - PlannedShipmentItem'
+  Pallet:
+    - '@composed - - - PalletShipment'
+    - '@has - - - CurrentInventoryLevel'
+    - '@has - - - InventoryDelta'
+    - '@composed - - - PalletAssignment'
+  PalletAssignment:
+  PlannedShipmentItem:
+  ReservedInventoryLevel:
+    - '@hidden'
+  StagingLocation:
+    - '@has - - - OutboundTrailer'
+
+
+inventory_control-shipping pink:
+  ExpectedOrder:
+  PalletShipment:
+    - '@composed - - - UnitShipment'
+  Shipment:
+    - '@composed - - - PalletShipment'
+    - '@composed - - - UnitShipment'
+  UnitShipment:
+
+
+inventory_control-ship-orders tomato:
+  ShipOrder:
+    - '@composed - - - ExpectedOrder'
+    - '@composed - - - ReservedInventoryLevel'
+    - '@composed - - - ShipOrderItem'
+    - '@composed - - - PalletAssignment'
+    - '@has - - - Carrier'
+    - '@has - - - PlannedShipment'
+    - '@has - - - Shipment'
+  ShipOrderItem:
+
+
+inventory_control-trailers lightblue:
+  DockAppointment:
+    - '@has - - - ExpectedOrder'
+  OutboundTrailer:
+    - '@has - - - DockAppointment'
+    - '@has - - - Shipment'
+  OutboundTrailerRoute:
+    - '@has - - - DockAppointment'
+    - '@composed - - - OutboundTrailerStop'
+  OutboundTrailerStop:
+    - '@assoc - - - Consignee'
+
+
+master_data palegreen:
+  Customer:
+    - '@has - - - DockAppointment'
+    - '@has - - - ShipOrder'
+    - '@has - - - OutboundTrailer'
+  Sku:
+    - '@composed - - - ReservedInventoryLevel'
+    - '@has - - - CurrentInventoryLevel'
+    - '@has - - - InventoryDelta'
+    - '@has - - - ShipOrderItem'
+    - '@has - - - UnitShipment'
