@@ -1,0 +1,74 @@
+config:
+  JobReconciliationDomainRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+# -----------------------------------------------------------------------------
+# ACP Module: Generic
+# -----------------------------------------------------------------------------
+
+generic lightgrey:
+  User:
+    - '@has - - - JobReconciliation'
+
+# -----------------------------------------------------------------------------
+# ACP Module: Inventory Control
+# -----------------------------------------------------------------------------
+
+inventory_adjustments bisque:
+  InventoryDiscrepancy:
+    - '@has - Add - InventoryDelta'
+    - '@has - Remove - InventoryDelta'
+  InventoryDelta:
+
+inventory_control burlywood:
+  Pallet:
+    - '@has - - - JobReconciliationCount'
+
+# -----------------------------------------------------------------------------
+# ACP Module: Master Data
+# -----------------------------------------------------------------------------
+
+item_master palegreen:
+  FinishedGood:
+
+# -----------------------------------------------------------------------------
+# ACP Module: Production Management
+# -----------------------------------------------------------------------------
+
+production_jobs violet:
+  Job:
+    - '@has - - - Production'
+    - '@has - - - RejectedItem'
+
+production_job_reconciliations magenta:
+  JobReconciliation:
+    - '@has - - - Job'
+    - '@composed - - - JobReconciliationCount'
+    - '@composed - - - JobReconciliationRecord'
+    - '@has - - - InventoryDiscrepancy'
+  JobReconciliationCount:
+  JobReconciliationRecord:
+  ReconciliationReason:
+    - '@has - - - JobReconciliationRecord'
+
+production_rejects blueviolet:
+  RejectedItem:
+    - '@has - - - Pallet'
+
+production_tracking plum:
+  Production:
+    - '@has - - - Pallet'
+    - '@has - - - InventoryDiscrepancy'
+    - '@has - - - SubcomponentConsumption'
+  SubcomponentConsumption:
+
+projects darkviolet:
+  Project:
+    - '@has - - - Job'
+    - '@has - - 1 FinishedGood'
+

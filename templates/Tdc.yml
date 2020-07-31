@@ -7,14 +7,21 @@ config:
     - '@opt operations'
     - '@hidden'
 
+application gold:
+  ApplicationDefinitionResolver extends DefinitionResolver:
+  ApplicationSingularGenerator extends SingularGenerator:
+  ApplicationStandardGenerator extends StandardGenerator:
+
 roles lightcoral:
   GeneratorBase:
     - '@has - - - CatalogEntries'
     - '@has - - - DataDefinition'
   ConfigurableGenerator extends GeneratorBase:
     - '@depend - - - DefinitionSourcable'
+  TagResolver extends DefinitionResolver:
 
 roles lightpink:
+  DefinitionResolver:
   SingularGenerator extends ConfigurableGenerator:
   StandardGenerator extends ConfigurableGenerator:
 
@@ -23,6 +30,7 @@ core palegreen:
 
 factories lightblue:
   DefinitionResolvable:
+    - '@depend - - - DefinitionResolver'
   DefinitionSourcable:
   InstanceDefinitionConfigurable extends DefinitionSourcable:
     - '@hidden'
