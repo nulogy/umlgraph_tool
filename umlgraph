@@ -2,20 +2,23 @@
 #
 
 UMLGRAPH_HOME=lib
-JAVA_HOME=`/usr/libexec/java_home`
+JAVA_HOME=`/usr/libexec/java_home -v 12`
 
 if [ x$2 = x ]
 then
   echo usage: umlgraph base_file_name filetype [umlgraph arguments] 1>&2
   echo example: umlgraph MyClass png 1>&2
   echo '(The above will convert MyClass.java into MyClass.png)' 1>&2
+
   exit 1
 else
   INPUT_FILE=$1
   OUTPUT_FILE=$2
   FILETYPE=$3
+
   shift 2
+
   java -classpath "$UMLGRAPH_HOME/UmlGraph.jar:$JAVA_HOME/lib/tools.jar" \
-  org.umlgraph.doclet.UmlGraph -package $* -output - $INPUT_FILE |
-  dot -T$FILETYPE -o$OUTPUT_FILE
+    org.umlgraph.doclet.UmlGraph -package $* -output - $INPUT_FILE | \
+    dot -T$FILETYPE -o$OUTPUT_FILE
 fi
