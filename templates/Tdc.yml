@@ -9,7 +9,6 @@ config:
 
 application gold:
   ApplicationDefinitionResolver extends DefinitionResolver:
-  ApplicationSingularGenerator extends SingularGenerator:
   ApplicationStandardGenerator extends StandardGenerator:
 
 roles lightcoral:
@@ -22,7 +21,6 @@ roles lightcoral:
 
 roles lightpink:
   DefinitionResolver:
-  SingularGenerator extends ConfigurableGenerator:
   StandardGenerator extends ConfigurableGenerator:
 
 core palegreen:
