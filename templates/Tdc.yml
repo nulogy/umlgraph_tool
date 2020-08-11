@@ -10,6 +10,7 @@ config:
 application gold:
   ApplicationDefinitionResolver extends DefinitionResolver:
   ApplicationStandardGenerator extends StandardGenerator:
+  ApplicationInterpreter extends InterpreterBase:
 
 roles lightcoral:
   GeneratorBase:
@@ -19,9 +20,14 @@ roles lightcoral:
     - '@depend - - - DefinitionSourcable'
   TagResolver extends DefinitionResolver:
 
-roles lightpink:
+extensions lightpink:
   DefinitionResolver:
   StandardGenerator extends ConfigurableGenerator:
+
+interpreters lightpink:
+  InterpreterBase:
+  InterpreterRegistry:
+    - '@depend - - - InterpreterBase'
 
 core palegreen:
   CatalogEntries:
