@@ -16,13 +16,12 @@ roles lightcoral:
   GeneratorBase:
     - '@has - - - CatalogEntries'
     - '@has - - - DataDefinition'
-  ConfigurableGenerator extends GeneratorBase:
-    - '@depend - - - DefinitionSourcable'
   TagResolver extends DefinitionResolver:
 
 extensions lightpink:
   DefinitionResolver:
-  StandardGenerator extends ConfigurableGenerator:
+  StandardGenerator extends GeneratorBase:
+    - '@depend - - - DefinitionSourcable'
 
 interpreters lightpink:
   InterpreterBase:
