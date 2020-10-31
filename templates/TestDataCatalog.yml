@@ -1,0 +1,161 @@
+config:
+  TestDataCatalogRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+tdc_gem pink:
+  TdcDataDefinition:
+  TdcDefaultInterpreter:
+  TdcDefinitionResolver:
+  TdcGeneratorBase:
+  TdcStandardGenerator:
+
+definition_resolvers lightcoral:
+  ApplicationDefinitionResolver extends TdcDefinitionResolver:
+    - 'void perform_resolve();'
+    - 'void resolve();'
+  ExpiryDateResolver extends ApplicationDefinitionResolver:
+  InboundStockTransferOrderItemResolver extends ApplicationDefinitionResolver:
+  InventoryStatusResolver extends ApplicationDefinitionResolver:
+  JobUuidResolver extends ApplicationDefinitionResolver:
+  LineReplenisherResolver extends ApplicationDefinitionResolver:
+  LocationNameResolver extends ApplicationDefinitionResolver:
+  PalletNumberResolver extends ApplicationDefinitionResolver:
+  ProductionStrategyResolver extends ApplicationDefinitionResolver:
+  ProjectCodeResolver extends ApplicationDefinitionResolver:
+  ProjectStatusResolver extends ApplicationDefinitionResolver:
+  QuantityResolver extends ApplicationDefinitionResolver:
+  SkuCodeResolver extends ApplicationDefinitionResolver:
+
+target_environment palegreen:
+  CatalogConfiguration:
+  EnvironmentFactory extends EnvironmentProtection:
+    - '@depend - - - PartitionedEnvironment'
+    - '@depend - - - UnpartitionedEnvironment'
+  EnvironmentProtection:
+  TargetEnvironmentBase:
+  PartitionedEnvironment extends TargetEnvironmentBase:
+    - '@depend - - - CatalogOrganization'
+  UnpartitionedEnvironment extends TargetEnvironmentBase:
+
+extended_attributes:
+  ApplicationInterpreter extends TdcDefaultInterpreter:
+
+framework:
+  CatalogDirectories:
+  SalesDemoIdentifiable:
+
+# ------------------------------------------------------------------------------------------
+# Generators
+# ------------------------------------------------------------------------------------------
+
+boss_generators:
+  CatalogGenerator:
+  ProjectScheduler:
+
+generators pink:
+  ApplicationStandardGenerator extends TdcStandardGenerator:
+  ApplicationGeneratorBase extends TdcGeneratorBase:
+  CommandBuilder:
+  CurrentCatalogHelper:
+  FailFastOnErrors:
+  SequentialGenerator extends ApplicationStandardGenerator:
+
+icg_generators:
+  IcgReferenceDataGenerator extends ApplicationGeneratorBase:
+  DateTableGenerator extends IcgReferenceDataGenerator:
+  FragmentGenerator:
+  GenerateExpiryDateRuleGenerator:
+  LineTableGenerator extends IcgReferenceDataGenerator:
+  LotCodeRuleGenerator:
+  MaterialsValidationsGenerator extends IcgReferenceDataGenerator:
+  ReferenceDataGenerator extends ApplicationGeneratorBase:
+  ReferenceTables:
+  RuleGenerator extends ApplicationGeneratorBase:
+  ShiftTableGenerator extends IcgReferenceDataGenerator:
+  SiteTableGenerator extends IcgReferenceDataGenerator:
+  UserDefinedTableGenerator extends IcgReferenceDataGenerator:
+
+inventory_generators:
+  InboundStockTransferOrderGenerator extends ApplicationGeneratorBase:
+  InboundStockTransferGenerator extends ApplicationGeneratorBase:
+  InboundStockTransfer_orderGenerator extends ApplicationGeneratorBase:
+  InboundStockTransfer_order_itemGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustmentAddGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustmentGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustment_removeGenerator extends ApplicationGeneratorBase:
+  Pallet_assignmentGenerator extends ApplicationGeneratorBase:
+  ReceiptGenerator extends ApplicationGeneratorBase:
+  ReceiveOrderGenerator extends ApplicationGeneratorBase:
+  ReceiveOrderItemsGenerator extends ApplicationGeneratorBase:
+  ReservationGenerator extends ApplicationGeneratorBase:
+  ShipOrderGenerator extends ApplicationGeneratorBase:
+  ShipOrderItemGenerator extends ApplicationGeneratorBase:
+
+item_master_generators:
+  BomItemCreator:
+  BomItemsGenerator extends ApplicationStandardGenerator:
+  BomVersionGenerator extends ApplicationStandardGenerator:
+  ItemCategoryGenerator extends ApplicationStandardGenerator:
+  ItemClassGenerator extends ApplicationStandardGenerator:
+  ItemFamilyGenerator extends ApplicationStandardGenerator:
+  ItemGenerator extends ApplicationStandardGenerator:
+  ItemShelfLifeGenerator extends ApplicationStandardGenerator:
+  ItemTypeGenerator extends ApplicationStandardGenerator:
+  PrimarySubcomponentsGenerator extends ApplicationStandardGenerator:
+  SubstitutesGenerator extends ApplicationStandardGenerator:
+
+organization_generators:
+  AccountGenerator extends ApplicationStandardGenerator:
+  BookmarkGenerator extends ApplicationStandardGenerator:
+  CarrierGenerator extends ApplicationStandardGenerator:
+  CompanyGenerator extends ApplicationStandardGenerator:
+  ConsigneeGenerator extends ApplicationStandardGenerator:
+  CustomerGenerator extends ApplicationStandardGenerator:
+  DowntimeReasonGenerator extends ApplicationStandardGenerator:
+  NulogyAdminGenerator extends ApplicationStandardGenerator:
+  NulogyRestrictedUserGenerator extends ApplicationStandardGenerator:
+  ReconciliationReasonGenerator extends ApplicationStandardGenerator:
+  RejectReasonGenerator extends ApplicationStandardGenerator:
+  ShiftGenerator extends ApplicationStandardGenerator:
+  SiteGenerator extends ApplicationStandardGenerator:
+  SsccSequenceGenerator extends ApplicationStandardGenerator:
+  UserGenerator extends ApplicationStandardGenerator:
+  UserGroupGenerator extends ApplicationStandardGenerator:
+  VendorGenerator extends ApplicationStandardGenerator:
+
+planning_generators:
+  PickListGenerator extends ApplicationStandardGenerator:
+  PickListLineItemGenerator extends ApplicationStandardGenerator:
+  Projectenerator extends ApplicationStandardGenerator:
+
+production_generators:
+  AddProductionGenerator extends ApplicationStandardGenerator:
+  JobBaseGenerator extends ApplicationStandardGenerator:
+  JobDowntimeGenerator extends JobBaseGenerator:
+  JobGenerator extends ApplicationStandardGenerator:
+  JobMaterialGenerator extends JobBaseGenerator:
+  JobProductionGenerator extends JobBaseGenerator:
+  JobTimeReportGenerator extends JobBaseGenerator:
+  VoveIntoWipGenerator extends ApplicationStandardGenerator:
+  ProjectOverviewSignatureGenerator extends ApplicationStandardGenerator:
+  ProjectOverviewSignaturesGenerator extends ApplicationStandardGenerator:
+  RejectedItemGenerator extends ApplicationStandardGenerator:
+  ReplenishmentEventGenerator extends ApplicationStandardGenerator:
+
+warehouse_generators:
+  BadgeTypeGenerator extends ApplicationStandardGenerator:
+  FloorLocationGenerator extends ApplicationStandardGenerator:
+  InventoryStatusGenerator extends ApplicationStandardGenerator:
+  JitLineReplenishmentConfigurationGenerator extends ApplicationStandardGenerator:
+  LineGenerator extends ApplicationStandardGenerator:
+  PalletGenerator extends ApplicationStandardGenerator:
+  RackGenerator extends ApplicationStandardGenerator:
+  ReplenishmentParametersGenerator extends ApplicationStandardGenerator:
+  ShipmentGenerator extends ApplicationStandardGenerator:
+  StagingLocationGenerator extends ApplicationStandardGenerator:
+  WarehouseZoneGenerator extends ApplicationStandardGenerator:
