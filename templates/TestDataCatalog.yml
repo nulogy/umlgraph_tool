@@ -9,7 +9,7 @@ config:
 
 tdc_gem pink:
   TdcTdcDefinitionResolver:
-  TdcDataDefinition
+  TdcDataDefinition:
   TdcGeneratorBase:
   TdcStandardGenerator:
 
@@ -116,9 +116,32 @@ organization_generators:
 
 planning_generators:
   PickListGenerator extends ApplicationStandardGenerator:
+  PickListLineItemGenerator extends ApplicationStandardGenerator:
+  Projectenerator extends ApplicationStandardGenerator:
 
 production_generators:
+  AddProductionGenerator extends ApplicationStandardGenerator:
   JobBaseGenerator extends ApplicationStandardGenerator:
+  JobDowntimeGenerator extends JobBaseGenerator:
+  JobGenerator extends ApplicationStandardGenerator:
+  JobMaterialGenerator extends JobBaseGenerator:
+  JobProductionGenerator extends JobBaseGenerator:
+  JobTimeReportGenerator extends JobBaseGenerator:
+  VoveIntoWipGenerator extends ApplicationStandardGenerator:
+  ProjectOverviewSignatureGenerator extends ApplicationStandardGenerator:
+  ProjectOverviewSignaturesGenerator extends ApplicationStandardGenerator:
+  RejectedItemGenerator extends ApplicationStandardGenerator:
+  ReplenishmentEventGenerator extends ApplicationStandardGenerator:
 
 warehouse_generators:
   BadgeTypeGenerator extends ApplicationStandardGenerator:
+  FloorLocationGenerator extends ApplicationStandardGenerator:
+  InventoryStatusGenerator extends ApplicationStandardGenerator:
+  JitLineReplenishmentConfigurationGenerator extends ApplicationStandardGenerator:
+  LineGenerator extends ApplicationStandardGenerator:
+  PalletGenerator extends ApplicationStandardGenerator:
+  RackGenerator extends ApplicationStandardGenerator:
+  ReplenishmentParametersGenerator extends ApplicationStandardGenerator:
+  ShipmentGenerator extends ApplicationStandardGenerator:
+  StagingLocationGenerator extends ApplicationStandardGenerator:
+  WarehouseZoneGenerator extends ApplicationStandardGenerator:
