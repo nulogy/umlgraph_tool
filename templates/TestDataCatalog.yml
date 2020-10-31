@@ -1,0 +1,85 @@
+config:
+  TestDataCatalogRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+tdc_gem pink:
+  TdcTdcDefinitionResolver:
+  TdcDataDefinition
+  TdcGeneratorBase:
+  TdcStandardGenerator:
+
+definition_resolvers lightcoral:
+  ApplicationTdcDefinitionResolver extends TdcDefinitionResolver:
+    - 'void perform_resolve();'
+    - 'void resolve();'
+  ExpiryDateResolver extends ApplicationTdcDefinitionResolver:
+  InboundStockTransferOrderItemResolver extends ApplicationTdcDefinitionResolver:
+  InventoryStatusResolver extends ApplicationTdcDefinitionResolver:
+  JobUuidResolver extends ApplicationTdcDefinitionResolver:
+  LineReplenisherResolver extends ApplicationTdcDefinitionResolver:
+  LocationNameResolver extends ApplicationTdcDefinitionResolver:
+  PalletNumberResolver extends ApplicationTdcDefinitionResolver:
+  ProductionStrategyResolver extends ApplicationTdcDefinitionResolver:
+  ProjectCodeResolver extends ApplicationTdcDefinitionResolver:
+  ProjectXtatusResolver extends ApplicationTdcDefinitionResolver:
+  QuantityResolver extends ApplicationTdcDefinitionResolver:
+  SkuCodeResolver extends ApplicationTdcDefinitionResolver:
+
+target_environment palegreen:
+  CatalogConfiguration:
+  EnvironmentFactory extends EnvironmentProtection:
+    - '@depend - - - PartitionedEnvironment'
+    - '@depend - - - UnpartitionedEnvironment'
+  EnvironmentProtection:
+  TargetEnvironmentBase:
+  PartitionedEnvironment extends TargetEnvironmentBase:
+    - '@depend - - - CatalogOrganization'
+  UnpartitionedEnvironment extends TargetEnvironmentBase:
+
+  CatalogOrganization:
+
+generators pink:
+  ApplicationStandardGenerator extends TdcStandardGenerator:
+  ApplicationGeneratorBase extends TdcGeneratorBase:
+  CommandBuilder:
+  CurrentCatalogHelper:
+  FailFastOnErrors:
+  SequentialGenerator extends ApplicationStandardGenerator:
+
+icg_generators:
+  IcgReferenceDataGenerator extends ApplicationGeneratorBase:
+  DateTableGenerator extends IcgReferenceDataGenerator:
+  FragmentGenerator:
+  GenerateExpiryDateRuleGenerator:
+  LineTableGenerator extends IcgReferenceDataGenerator:
+  LotCodeRuleGenerator:
+  MaterialsValidationsGenerator extends IcgReferenceDataGenerator:
+  ReferenceDataGenerator extends ApplciationGeneratorBase:
+  ReferenceTables:
+  RuleGenerator extends ApplciationGeneratorBase:
+  ShiftTableGenerator extends IcgReferenceDataGenerator:
+  SiteTableGenerator extends IcgReferenceDataGenerator:
+  UserDefinedTableGenerator extends IcgReferenceDataGenerator:
+
+inventory_generators:
+  InboundStockTransferOrderGenerator extends ApplicationGeneratorBase:
+
+item_master_generators:
+  BomItemsGenerator extends ApplicationStandardGenerator:
+
+organization_generators:
+  AccountGenerator extends ApplicationStandardGenerator:
+
+planning_generators:
+  PickListGenerator extends ApplicationStandardGenerator:
+
+production_generators:
+  JobBaseGenerator extends ApplicationStandardGenerator:
+
+warehouse_generators:
+  BadgeTypeGenerator extends ApplicationStandardGenerator:
