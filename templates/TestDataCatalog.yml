@@ -8,27 +8,27 @@ config:
     - '@hidden'
 
 tdc_gem pink:
-  TdcTdcDefinitionResolver:
+  TdcDefinitionResolver:
   TdcDataDefinition:
   TdcGeneratorBase:
   TdcStandardGenerator:
 
 definition_resolvers lightcoral:
-  ApplicationTdcDefinitionResolver extends TdcDefinitionResolver:
+  ApplicationDefinitionResolver extends TdcDefinitionResolver:
     - 'void perform_resolve();'
     - 'void resolve();'
-  ExpiryDateResolver extends ApplicationTdcDefinitionResolver:
-  InboundStockTransferOrderItemResolver extends ApplicationTdcDefinitionResolver:
-  InventoryStatusResolver extends ApplicationTdcDefinitionResolver:
-  JobUuidResolver extends ApplicationTdcDefinitionResolver:
-  LineReplenisherResolver extends ApplicationTdcDefinitionResolver:
-  LocationNameResolver extends ApplicationTdcDefinitionResolver:
-  PalletNumberResolver extends ApplicationTdcDefinitionResolver:
-  ProductionStrategyResolver extends ApplicationTdcDefinitionResolver:
-  ProjectCodeResolver extends ApplicationTdcDefinitionResolver:
-  ProjectXtatusResolver extends ApplicationTdcDefinitionResolver:
-  QuantityResolver extends ApplicationTdcDefinitionResolver:
-  SkuCodeResolver extends ApplicationTdcDefinitionResolver:
+  ExpiryDateResolver extends ApplicationDefinitionResolver:
+  InboundStockTransferOrderItemResolver extends ApplicationDefinitionResolver:
+  InventoryStatusResolver extends ApplicationDefinitionResolver:
+  JobUuidResolver extends ApplicationDefinitionResolver:
+  LineReplenisherResolver extends ApplicationDefinitionResolver:
+  LocationNameResolver extends ApplicationDefinitionResolver:
+  PalletNumberResolver extends ApplicationDefinitionResolver:
+  ProductionStrategyResolver extends ApplicationDefinitionResolver:
+  ProjectCodeResolver extends ApplicationDefinitionResolver:
+  ProjectXtatusResolver extends ApplicationDefinitionResolver:
+  QuantityResolver extends ApplicationDefinitionResolver:
+  SkuCodeResolver extends ApplicationDefinitionResolver:
 
 target_environment palegreen:
   CatalogConfiguration:
@@ -40,8 +40,6 @@ target_environment palegreen:
   PartitionedEnvironment extends TargetEnvironmentBase:
     - '@depend - - - CatalogOrganization'
   UnpartitionedEnvironment extends TargetEnvironmentBase:
-
-  CatalogOrganization:
 
 generators pink:
   ApplicationStandardGenerator extends TdcStandardGenerator:
@@ -59,9 +57,9 @@ icg_generators:
   LineTableGenerator extends IcgReferenceDataGenerator:
   LotCodeRuleGenerator:
   MaterialsValidationsGenerator extends IcgReferenceDataGenerator:
-  ReferenceDataGenerator extends ApplciationGeneratorBase:
+  ReferenceDataGenerator extends ApplicationGeneratorBase:
   ReferenceTables:
-  RuleGenerator extends ApplciationGeneratorBase:
+  RuleGenerator extends ApplicationGeneratorBase:
   ShiftTableGenerator extends IcgReferenceDataGenerator:
   SiteTableGenerator extends IcgReferenceDataGenerator:
   UserDefinedTableGenerator extends IcgReferenceDataGenerator:
