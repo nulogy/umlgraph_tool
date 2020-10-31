@@ -9,21 +9,24 @@ config:
 
 application gold:
   ApplicationDefinitionResolver extends DefinitionResolver:
-  ApplicationSingularGenerator extends SingularGenerator:
   ApplicationStandardGenerator extends StandardGenerator:
+  ApplicationInterpreter extends InterpreterBase:
 
 roles lightcoral:
   GeneratorBase:
     - '@has - - - CatalogEntries'
     - '@has - - - DataDefinition'
-  ConfigurableGenerator extends GeneratorBase:
-    - '@depend - - - DefinitionSourcable'
   TagResolver extends DefinitionResolver:
 
-roles lightpink:
+extensions lightpink:
   DefinitionResolver:
-  SingularGenerator extends ConfigurableGenerator:
-  StandardGenerator extends ConfigurableGenerator:
+  StandardGenerator extends GeneratorBase:
+    - '@depend - - - DefinitionSourcable'
+
+interpreters lightpink:
+  InterpreterBase:
+  InterpreterRegistry:
+    - '@depend - - - InterpreterBase'
 
 core palegreen:
   CatalogEntries:
