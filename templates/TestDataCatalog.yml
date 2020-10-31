@@ -68,12 +68,51 @@ icg_generators:
 
 inventory_generators:
   InboundStockTransferOrderGenerator extends ApplicationGeneratorBase:
+  InboundStockTransferGenerator extends ApplicationGeneratorBase:
+  InboundStockTransfer_orderGenerator extends ApplicationGeneratorBase:
+  InboundStockTransfer_order_itemGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustmentAddGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustmentGenerator extends ApplicationGeneratorBase:
+  InventoryAdjustment_removeGenerator extends ApplicationGeneratorBase:
+  Pallet_assignmentGenerator extends ApplicationGeneratorBase:
+  ReceiptGenerator extends ApplicationGeneratorBase:
+  ReceiveOrderGenerator extends ApplicationGeneratorBase:
+  ReceiveOrderItemsGenerator extends ApplicationGeneratorBase:
+  ReservationGenerator extends ApplicationGeneratorBase:
+  ShipOrderGenerator extends ApplicationGeneratorBase:
+  ShipOrderItemGenerator extends ApplicationGeneratorBase:
 
 item_master_generators:
+  BomItemCreator:
   BomItemsGenerator extends ApplicationStandardGenerator:
+  BomVersionGenerator extends ApplicationStandardGenerator:
+  ItemCategoryGenerator extends ApplicationStandardGenerator:
+  ItemClassGenerator extends ApplicationStandardGenerator:
+  ItemFamilyGenerator extends ApplicationStandardGenerator:
+  ItemGenerator extends ApplicationStandardGenerator:
+  ItemShelfLifeGenerator extends ApplicationStandardGenerator:
+  ItemTypeGenerator extends ApplicationStandardGenerator:
+  PrimarySubcomponentsGenerator extends ApplicationStandardGenerator:
+  SubstitutesGenerator extends ApplicationStandardGenerator:
 
 organization_generators:
   AccountGenerator extends ApplicationStandardGenerator:
+  BookmarkGenerator extends ApplicationStandardGenerator:
+  CarrierGenerator extends ApplicationStandardGenerator:
+  CompanyGenerator extends ApplicationStandardGenerator:
+  ConsigneeGenerator extends ApplicationStandardGenerator:
+  CustomerGenerator extends ApplicationStandardGenerator:
+  DowntimeReasonGenerator extends ApplicationStandardGenerator:
+  NulogyAdminGenerator extends ApplicationStandardGenerator:
+  NulogyRestrictedUserGenerator extends ApplicationStandardGenerator:
+  ReconciliationReasonGenerator extends ApplicationStandardGenerator:
+  RejectReasonGenerator extends ApplicationStandardGenerator:
+  ShiftGenerator extends ApplicationStandardGenerator:
+  SiteGenerator extends ApplicationStandardGenerator:
+  SsccSequenceGenerator extends ApplicationStandardGenerator:
+  UserGenerator extends ApplicationStandardGenerator:
+  UserGroupGenerator extends ApplicationStandardGenerator:
+  VendorGenerator extends ApplicationStandardGenerator:
 
 planning_generators:
   PickListGenerator extends ApplicationStandardGenerator:
