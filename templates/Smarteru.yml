@@ -1,0 +1,64 @@
+config:
+  SmarteruRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+production white:
+  LearningPlansForRemoval:
+    - '@depend - - - SmarteruLearningPlanFactory'
+    - '@depend - - - SmarteruLegacyLearningPlanFactory'
+  NulogyUniversityDataRepository:
+    - '@composed - - - SmarteruApiRequestor'
+    - '@depend - - - SmarteruApiException'
+    - '@depend - - - SmarteruLearningPlanFactory'
+    - '@depend - - - SmarteruUserFactory'
+  NulogyUniversityDataRepositoryFactory:
+    - '@depend - - - NulogyUniversityDataRepository'
+  OpsCoreAdapter:
+  PushToSmarteruAction extends BackgroundTaskAction:
+    - '@depend - - - NulogyUniversityDataRepositoryFactory'
+    - '@depend - - - SmarteruPusher'
+  SmarteruApiException:
+  SmarteruApiRequestor:
+    - '@composed - - - SmarteruClient'
+  SmarteruLegacyLearningPlanFactory:
+  SmarteruPusher:
+    - 'void push_to_smarteru() {}'
+    - '@composed - - - NulogyUniversityDataRepository'
+    - '@composed - - - OpsCoreAdapter'
+    - '@depend - - - SmarteruGroupFactory'
+    - '@depend - - - SmarteruUsersCalculator'
+  SmarteruUsersCalculator:
+    - '@depend - - - LearningPlansForRemoval'
+    - '@depend - - - SmarteruUserFactory'
+  UniversalLearningPlanSelector:
+
+domain pink:
+  SmarteruGroupFactory:
+    - '@depend - - - SmarteruGroup'
+  SmarteruLearningPlanFactory:
+    - '@depend - - - SmarteruLearningPlan'
+    - '@depend - - - UniversalLearningPlanSelector'
+  SmarteruUserFactory:
+    - '@depend - - - SmarteruUser'
+
+  SmarteruGroup:
+  SmarteruLearningPlan:
+  SmarteruUser:
+
+
+smarteru_gem coral:
+  SmarteruClient:
+
+background_framework lightseagreen:
+  BackgroundTaskAction:
+
+controllers lightgray:
+  NulogyController:
+    - '@depend - - - PushToSmarteruAction'
+  UsersController:
+    - '@depend - - - PushToSmarteruAction'
