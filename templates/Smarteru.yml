@@ -62,3 +62,6 @@ controllers lightgray:
     - '@depend - - - PushToSmarteruAction'
   UsersController:
     - '@depend - - - PushToSmarteruAction'
+
+thor palegreen:
+  NulogyUniversity extends Thor:
