@@ -25,7 +25,7 @@ inventory_adjustments bisque:
     - '@has - Remove - InventoryDelta'
   InventoryDelta:
 
-inventory_control burlywood:
+inventory_control bisque:
   Pallet:
     - '@has - - - JobReconciliationCount'
 
@@ -45,7 +45,7 @@ production_jobs violet:
     - '@has - - - Production'
     - '@has - - - RejectedItem'
 
-production_job_reconciliations magenta:
+production_job_reconciliations lightblue:
   JobReconciliation:
     - '@has - - - Job'
     - '@composed - - - JobReconciliationCount'
@@ -56,19 +56,19 @@ production_job_reconciliations magenta:
   ReconciliationReason:
     - '@has - - - JobReconciliationRecord'
 
-production_rejects blueviolet:
+production_rejects violet:
   RejectedItem:
     - '@has - - - Pallet'
 
-production_tracking plum:
+production_tracking coral:
   Production:
     - '@has - - - Pallet'
     - '@has - - - InventoryDiscrepancy'
     - '@has - - - SubcomponentConsumption'
   SubcomponentConsumption:
 
-projects darkviolet:
-  Project:
+projects violet:
+  WorkOrder:
     - '@has - - - Job'
     - '@has - - 1 FinishedGood'
 
