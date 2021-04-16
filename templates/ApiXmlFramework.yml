@@ -8,8 +8,18 @@ config:
     - '@hidden'
 
 
-framework lightgray:
+clients lightblue:
+  CsvMigration:
+    - '@depend - - - EventQueue'
+
   ResourcesController:
+
+inbound lightgray:
+  CsvMigration:
+    - '@depend - - - EventQueue'
+
+  ResourcesController:
+    - '@depend - - - EventQueue'
     - '@depend - - - SerializerFactory'
     - '@depend - - - ResourceRepositories'
     - '@depend - - - DeserializationService'
@@ -46,6 +56,22 @@ framework lightgray:
     - '@depend - create - ShipOrderItemValidator'
 
   ErrorSerializer:
+
+outbound coral:
+  EventQueue:
+    - '@depend - - - DomainEventRelay'
+
+  DomainEventRelay:
+    - '@depend - - - EventStoringSubscriber'
+
+  EventStoringSubscriber:
+    - '@depend - - - CpiNotifier'
+    - '@depend - - - Events'
+
+  CpiNotifier:
+    - '@depend - - - Events'
+
+  Events:
 
 
 base white:
