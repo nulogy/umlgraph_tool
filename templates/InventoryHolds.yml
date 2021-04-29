@@ -36,13 +36,16 @@ services cornsilk:
     - '@depend - - - HoldInventoryService'
 
 item_locator_indicators lightgoldenrod:
-  OnCycleCountIndicator:
+  ItemLocatorIndicator:
+    - '@hidden'
+
+  OnCycleCountIndicator extends ItemLocatorIndicator:
     - '@depend - - - HoldInventoryRepository'
 
-  OnOstIndicator:
+  OnOstIndicator extends ItemLocatorIndicator:
     - '@depend - - - HoldInventoryRepository'
 
-  OnPalletShipmentIndicator:
+  OnPalletShipmentIndicator extends ItemLocatorIndicator:
     - '@depend - - - HoldInventoryRepository'
 
 validators lightsalmon:
