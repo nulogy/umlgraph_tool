@@ -80,7 +80,7 @@ ostp_clients lightblue:
     - '@depend - - - OutboundStockTransferPallet'
     - '@depend - - - PalletInventoryHolder'
 
-  RemovingPalletFromOST:
+  RemovingPalletFromOst:
     - '@depend - - - OutboundStockTransferPallet'
     - '@depend - - - PalletInventoryHolder'
 
