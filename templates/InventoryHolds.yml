@@ -1,0 +1,83 @@
+config:
+  InventoryHoldsRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+#    - '@opt attributes'
+#    - '@opt operations'
+    - '@hidden'
+
+
+models plum:
+  CurrentInventoryLevel:
+
+  CycleCount:
+    - '@depend - - - HoldInventoryService'
+
+  OutboundStockTransferPallet:
+
+  Shipment:
+    - '@depend - - - PalletInventoryHolder'
+
+services cornsilk:
+  HeldBy:
+    - 'void class_name() {}'
+    - 'void id() {}'
+
+  HoldInventoryRepository:
+    - '@depend - - - CurrentInventoryLevel'
+    - '@depend - - - HeldBy'
+
+  HoldInventoryService:
+    - '@depend - - - CurrentInventoryLevel'
+    - '@depend - - - HoldInventoryRepository'
+
+  PalletInventoryHolder:
+    - '@depend - - - HoldInventoryService'
+
+item_locator_indicators lightgoldenrod:
+  OnCycleCountIndicator:
+    - '@depend - - - HoldInventoryRepository'
+
+  OnOstIndicator:
+    - '@depend - - - HoldInventoryRepository'
+
+  OnPalletShipmentIndicator:
+    - '@depend - - - HoldInventoryRepository'
+
+validators lightsalmon:
+  DestinationPalletValidator:
+    - '@depend - - - HoldInventoryRepository'
+
+  InventoryHoldValidations:
+    - '@depend - - - HoldInventoryRepository'
+
+  PickUpValidator:
+    - '@depend - - - HoldInventoryRepository'
+
+cycle_count_clients palegreen:
+  CycleCountCloser:
+    - '@depend - - - CycleCount'
+    - '@depend - - - HoldInventoryService'
+
+  CycleCountCreator:
+    - '@depend - - - CycleCount'
+    - '@depend - - - HoldInventoryService'
+
+  RecordPhysicalCount:
+    - '@depend - - - CycleCount'
+    - '@depend - - - HoldInventoryService'
+
+ostp_clients lightblue:
+  OutboundStockTransferCompleter:
+    - '@depend - - - OutboundStockTransferPallet'
+    - '@depend - - - PalletInventoryHolder'
+
+  OutboundStockTransferPalletFactory:
+    - '@depend - - - OutboundStockTransferPallet'
+    - '@depend - - - PalletInventoryHolder'
+
+  RemovingPalletFromOST:
+    - '@depend - - - OutboundStockTransferPallet'
+    - '@depend - - - PalletInventoryHolder'
+
