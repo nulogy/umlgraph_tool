@@ -3,8 +3,8 @@ config:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
-#    - '@opt attributes'
-#    - '@opt operations'
+    - '@opt attributes'
+    - '@opt operations'
     - '@hidden'
 
 
@@ -20,10 +20,6 @@ models plum:
     - '@depend - - - PalletInventoryHolder'
 
 services cornsilk:
-  HeldBy:
-    - 'void class_name() {}'
-    - 'void id() {}'
-
   HoldInventoryRepository:
     - '@depend - - - CurrentInventoryLevel'
     - '@depend - - - HeldBy'
