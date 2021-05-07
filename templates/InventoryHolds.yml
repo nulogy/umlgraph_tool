@@ -22,7 +22,6 @@ models plum:
 services cornsilk:
   HoldInventoryRepository:
     - '@depend - - - CurrentInventoryLevel'
-    - '@depend - - - HeldBy'
 
   HoldInventoryService:
     - '@depend - - - CurrentInventoryLevel'
