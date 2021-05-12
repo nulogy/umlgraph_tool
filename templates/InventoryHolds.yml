@@ -11,24 +11,33 @@ config:
 models plum:
   CurrentInventoryLevel:
 
+  InventoryDelta:
+    - '@depend - - - InventoryHoldValidations'
+
+  ReceiptItem:
+    - '@depend - - - InventoryHoldValidations'
+
+  UnitShipment:
+    - '@depend - - - InventoryHoldValidations'
+
+holders tomato:
   CycleCount:
     - '@depend - - - HoldInventoryService'
 
   OutboundStockTransferPallet:
 
   Shipment:
-    - '@depend - - - PalletInventoryHolder'
+    - '@depend - - - HoldInventoryService'
 
 services cornsilk:
   HoldInventoryRepository:
     - '@depend - - - CurrentInventoryLevel'
+    - '@depend - - - HeldBy'
+
+  HeldBy:
 
   HoldInventoryService:
     - '@depend - - - CurrentInventoryLevel'
-    - '@depend - - - HoldInventoryRepository'
-
-  PalletInventoryHolder:
-    - '@depend - - - HoldInventoryService'
 
 item_locator_indicators lightgoldenrod:
   ItemLocatorIndicator:
@@ -44,14 +53,16 @@ item_locator_indicators lightgoldenrod:
     - '@depend - - - HoldInventoryRepository'
 
 validators lightsalmon:
-  DestinationPalletValidator:
-    - '@depend - - - HoldInventoryRepository'
+  DestinationPalletValidations:
+    - '@depend - - - CurrentInventoryLevel'
+    - '@hidden'
 
   InventoryHoldValidations:
     - '@depend - - - HoldInventoryRepository'
 
   PickUpValidator:
-    - '@depend - - - HoldInventoryRepository'
+    - '@depend - - - CurrentInventoryLevel'
+    - '@hidden'
 
 cycle_count_clients palegreen:
   CycleCountCloser:
@@ -69,13 +80,13 @@ cycle_count_clients palegreen:
 ostp_clients lightblue:
   OutboundStockTransferCompleter:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - PalletInventoryHolder'
+    - '@depend - - - HoldInventoryService'
 
   OutboundStockTransferPalletFactory:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - PalletInventoryHolder'
+    - '@depend - - - HoldInventoryService'
 
   RemovingPalletFromOst:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - PalletInventoryHolder'
+    - '@depend - - - HoldInventoryService'
 
