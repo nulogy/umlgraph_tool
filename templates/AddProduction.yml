@@ -52,6 +52,8 @@ add_production_with_substitutions palegreen:
     - '@depend - - - ProductionLotQuantityBuilder'
     - '@depend - - - ProductionOnPalletBuilder'
     - '@depend - - - ProductionOptions'
+    - '@note This class has been inlined: see AddProductionConsumption instead'
+
   ProductionOptions:
   ProductionLotQuantityBuilder:
     - '@depend - - - FifoCodeGenerationService'
