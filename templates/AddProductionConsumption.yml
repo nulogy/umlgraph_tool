@@ -16,7 +16,7 @@ controller lightgray:
     - '@hidden'
   ProductionPalletNumberGenerationStrategy:
     - '@hidden'
-  JobController:
+  JobsController:
     - 'void add_production() {}'
     - '@depend - - - ConsumptionPlanBuilder'
     - '@depend - - - ProductionsParameters'

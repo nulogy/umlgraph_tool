@@ -18,7 +18,7 @@ controller lightgray:
   AddProductionServiceAdaptor:
     - '@depend - - - AddProductionService'
 
-  JobController:
+  JobsController:
     - 'void add_production() {}'
     - '@depend - - - ConsumptionPlanBuilder'
     - '@depend - - - ProductionConfig'
