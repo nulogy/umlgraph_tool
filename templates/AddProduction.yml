@@ -1,3 +1,8 @@
+#
+# Legacy View from the time of refactoring the AddProductionService for FIFO
+#
+# See AddProductionConsumption.yml instead.
+#
 config:
   AddProductionRoot:
     - '@hidden'
