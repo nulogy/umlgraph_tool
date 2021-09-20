@@ -1,0 +1,98 @@
+#
+# Automated Production Entry
+#
+
+#
+# Notes:
+#
+# 1. Why is there a belongs_to :production on an ExternalProductionEntry? Use has_one instead?
+#
+
+config:
+  AddProductionRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+automated_production_entry lightcoral:
+  BlockedProductionEntriesAction:
+    - '@hidden'
+    - '@depend - - - BlockedProductionEntriesProcessor'
+  BlockedProductionEntriesProcessor:
+    - '@has - - - Job'
+    - '@depend - - - ExternalProductionEntryProcessor'
+  ExternalProductionEntry:
+  ExternalProductionEntryProcessor:
+    - '@depend - - - ExternalProductionEntry'
+    - '@depend - - - ProductionCreateCommand'
+    - '@depend - - - WipMessage'
+  FirstBlockedProductionEntriesProcessor:
+    - '@depend - - - ExternalProductionEntryProcessor'
+
+js mediumSeaGreen:
+  BlockedProductionRecordsSidebar:
+    - '@depend - - - BlockedProductionRecordsContext'
+  BlockedProductionRecordsView:
+    - '@depend - - - BlockedProductionRecordsContext'
+    - '@depend - - - BlockedProductionRecordsSidebar'
+    - '@depend - - - DeleteConfirmation'
+    - '@depend - - - WipErrors'
+  BlockedProductionRecordsContext:
+  BlockedProductionRecordsProvider:
+    - '@depend - - - BlockedProductionRecordsContext'
+    - '@depend - - - DeleteExternalProductionEntryMutation'
+    - '@depend - - - ProcessExternalProductionEntriesMutation'
+    - '@depend - - - EditExternalProductionEntryMutation'
+    - '@depend - - - GraphqlController'
+  DeleteConfirmation:
+  WipErrors:
+
+graphql palegreen:
+  GraphqlController:
+    - '@hidden'
+    - '@stereotype ProductionManagementPrivateGraphqlApi'
+    - '@depend - - - Job'
+  DeleteExternalProductionEntryMutation:
+    - '@depend - - - ExternalProductionEntry'
+  ProcessExternalProductionEntriesMutation:
+    - '@depend - background - BlockedProductionEntriesAction'
+    - '@depend - UAT - BlockedProductionEntriesProcessor'
+    - '@depend - MVP - FirstBlockedProductionEntriesProcessor'
+  EditExternalProductionEntryMutation:
+    - '@depend - - - ExternalProductionEntry'
+
+xml_api pink:
+  JobsController:
+    - '@stereotype Api::Xml::Actions'
+    - '@depend - - - AddExternalProductionEntryService'
+    - '@depend - - - AddExternalProductionService'
+    - '@depend - - - AddProductionXmlParameters'
+  AddExternalProductionEntryService:
+    - '@depend - - - AddProductionXmlParameters'
+    - '@depend - create - ExternalProductionEntry'
+    - '@depend - - - ExternalProductionEntryProcessor'
+  AddExternalProductionService:
+    - '@hidden'
+    - '@stereotype deprecated'
+    - '@depend - - - ProductionCreateCommand'
+  AddProductionXmlParameters:
+
+  FindActiveJobService:
+    - '@hidden'
+    - '@depend - - - FindActiveOnLine'
+  FindActiveOnLine:
+    - '@hidden'
+
+miscellaneous lightblue:
+  Job:
+    - '@has - - - ExternalProductionEntry'
+    - '@has - - - Production'
+  Production:
+    - '@has - - - ExternalProductionEntry'
+  ProductionCreateCommand:
+    - '@depend - - - Production'
+  WipMessage:
+    - '@hidden'
