@@ -19,9 +19,11 @@ config:
 
 automated_production_entry lightcoral:
   BlockedProductionEntriesAction:
-    - '@hidden'
-    - '@depend - - - BlockedProductionEntriesProcessor'
+    - '@depend - - - ExternalProductionEntryQueue'
+  BlockedProductionEntriesActionFactory:
+    - '@depend - create - BlockedProductionEntriesAction'
   BlockedProductionEntriesProcessor:
+    - '@hidden'
     - '@has - - - Job'
     - '@depend - - - ExternalProductionEntryProcessor'
   ExternalProductionEntry:
@@ -29,8 +31,26 @@ automated_production_entry lightcoral:
     - '@depend - - - ExternalProductionEntry'
     - '@depend - - - ProductionCreateCommand'
     - '@depend - - - WipMessage'
+  ExternalProductionEntryQueue:
+    - '@depend - - - AddCommand'
+    - '@depend - - - DiscardCommand'
+    - '@depend - - - ProcessCommand'
+    - '@depend - - - ReviseCommand'
   FirstBlockedProductionEntriesProcessor:
+    - '@hidden'
     - '@depend - - - ExternalProductionEntryProcessor'
+
+automated_production_entry_commands crimson:
+  AddCommand:
+    - '@depend - - - ExternalProductionEntry'
+    - '@depend - - - ExternalProductionEntryProcessor'
+  DiscardCommand:
+    - '@depend - - - ExternalProductionEntry'
+  ProcessCommand:
+    - '@depend - - - ExternalProductionEntry'
+    - '@depend - - - ExternalProductionEntryProcessor'
+  ReviseCommand:
+    - '@depend - - - ExternalProductionEntry'
 
 js mediumSeaGreen:
   BlockedProductionRecordsSidebar:
@@ -56,13 +76,13 @@ graphql palegreen:
     - '@stereotype ProductionManagementPrivateGraphqlApi'
     - '@depend - - - Job'
   DeleteExternalProductionEntryMutation:
-    - '@depend - - - ExternalProductionEntry'
+    - '@depend - - - ExternalProductionEntryQueue'
   ProcessExternalProductionEntriesMutation:
-    - '@depend - background - BlockedProductionEntriesAction'
-    - '@depend - UAT - BlockedProductionEntriesProcessor'
+    - '@depend - - - BlockedProductionEntriesActionFactory'
+    - '@depend - - - BlockedProductionEntriesProcessor'
     - '@depend - MVP - FirstBlockedProductionEntriesProcessor'
   EditExternalProductionEntryMutation:
-    - '@depend - - - ExternalProductionEntry'
+    - '@depend - - - ExternalProductionEntryQueue'
 
 xml_api pink:
   JobsController:
@@ -73,7 +93,7 @@ xml_api pink:
   AddExternalProductionEntryService:
     - '@depend - - - AddProductionXmlParameters'
     - '@depend - create - ExternalProductionEntry'
-    - '@depend - - - ExternalProductionEntryProcessor'
+    - '@depend - - - ExternalProductionEntryQueue'
   AddExternalProductionService:
     - '@hidden'
     - '@stereotype deprecated'
@@ -93,6 +113,6 @@ miscellaneous lightblue:
   Production:
     - '@has - - - ExternalProductionEntry'
   ProductionCreateCommand:
-    - '@depend - - - Production'
+    - '@depend - create - Production'
   WipMessage:
     - '@hidden'
