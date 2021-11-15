@@ -22,6 +22,8 @@ automated_production_entry lightcoral:
     - '@depend - - - ExternalProductionEntryQueue'
   BlockedProductionEntriesActionFactory:
     - '@depend - create - BlockedProductionEntriesAction'
+    - '@depend - - - BackgroundTasksForJob'
+  BackgroundTasksForJob:
   BlockedProductionEntriesProcessor:
     - '@hidden'
     - '@has - - - Job'
