@@ -48,12 +48,12 @@ inbound lightgray:
 
   AggregateBuilder:
     - '@depend - - - CollectionValidatorFactory'
-    - '@depend - - - ShipOrderItemValidator'
+    - '@depend - - - ShipOrderItemsValidator'
     - '@depend - - - ShipOrderItemRepository'
     - 'void apply_changes() {}'
 
   CollectionValidatorFactory:
-    - '@depend - create - ShipOrderItemValidator'
+    - '@depend - create - ShipOrderItemsValidator'
 
   ErrorSerializer:
 
@@ -85,5 +85,5 @@ base white:
   ShipOrderItemRepository extends DefaultRepository:
     - 'void lookup_or_build() {}'
 
-  ShipOrderItemValidator:
+  ShipOrderItemsValidator:
     - 'void validate() {}'
