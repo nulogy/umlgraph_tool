@@ -12,7 +12,7 @@ client papayaWhip:
     - '@depend - - - ReplenishmentFacade'
   MaterialsCard:
     - '@depend - - - ReplenishmentFacade'
-  Project:
+  WorkOrder:
     - '@depend - - - ReplenishmentFacade'
   UnitMove:
     - '@depend - - - ReplenishmentFacade'
@@ -74,12 +74,12 @@ line_replennisher lightblue:
   LineStagingLocationInventory:
     - '@depend - - - CurrentInventoryLevel'
   ReadyToRunPolicy:
-  RemainingProjectBalances:
+  RemainingWorkOrderBalances:
     - '@composed - - - RemainingBalance'
-  RemainingProjectBalancesCalculator:
+  RemainingWorkOrderBalancesCalculator:
     - '@depend - - - InboundStockTransferOrder'
     - '@depend - - - InTransitRemainingBalances'
-    - '@depend - - - RemainingProjectBalances'
+    - '@depend - - - RemainingWorkOrderBalances'
   ReplenishmentEventFactory:
     - '@depend - - - ReplenishmentEvent'
     - '@composed - - - ReplenishmentSourceFactory'
@@ -87,12 +87,12 @@ line_replennisher lightblue:
     - '@depend - - - ReplenishmentSource'
   ReplenishmentEventFactoryFactory:
     - '@depend - - - ReplenishmentEventFactory'
-    - '@depend - - - RemainingProjectBalancesCalculator'
+    - '@depend - - - RemainingWorkOrderBalancesCalculator'
     - '@depend - - - ReplenishmentSourceFactory'
   ReplenishmentParameters:
     - '@has - - - LineReplenisherJitConfiguration'
   ReplenishmentSourceFactory:
-    - '@composed - - - RemainingProjectBalances'
+    - '@composed - - - RemainingWorkOrderBalances'
     - '@composed - - - LineStagingLocationInventory'
     - '@depend - - - InTransitInventory'
     - '@depend - - - ReplenishmentSource'
@@ -104,7 +104,7 @@ query lightgray:
   CurrentInventoryAtStagingLocationsQuery:
     - '@hidden'
     - '@depend - - - CurrentInventoryLevel'
-  InboundStockTransferOrdersByProjectQuery:
+  InboundStockTransferOrdersByWorkOrderQuery:
     - '@hidden'
     - '@depend - - - InboundStockTransferOrder'
   LineReplenisherByInventoryQuery:

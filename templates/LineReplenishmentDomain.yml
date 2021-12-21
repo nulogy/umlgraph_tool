@@ -23,7 +23,7 @@ jit lightsalmon:
 
 production_management lightcoral:
   Job:
-  Project:
+  WorkOrder:
     - '@assoc - - - Job'
     - '@assoc - - - FinishedGood'
 
