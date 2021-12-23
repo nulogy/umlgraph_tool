@@ -25,6 +25,7 @@ holders tomato:
     - '@depend - - - HoldInventoryService'
 
   OutboundStockTransferPallet:
+    - '@depend - - - HoldInventoryService'
 
   Shipment:
     - '@depend - - - HoldInventoryService'
@@ -67,26 +68,23 @@ validators lightsalmon:
 cycle_count_clients palegreen:
   CycleCountCloser:
     - '@depend - - - CycleCount'
-    - '@depend - - - HoldInventoryService'
 
   CycleCountCreator:
     - '@depend - - - CycleCount'
-    - '@depend - - - HoldInventoryService'
 
   RecordPhysicalCount:
     - '@depend - - - CycleCount'
-    - '@depend - - - HoldInventoryService'
 
 ostp_clients lightblue:
   OutboundStockTransferCompleter:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - HoldInventoryService'
 
   OutboundStockTransferPalletFactory:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - HoldInventoryService'
 
   RemovingPalletFromOst:
     - '@depend - - - OutboundStockTransferPallet'
-    - '@depend - - - HoldInventoryService'
 
+shipment_clients aquamarine:
+  PalletShipment:
+    - '@depend - - - Shipment'
