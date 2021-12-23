@@ -8,12 +8,12 @@ end
 
 desc "Generate a diagram for each template"
 task :default do
-  Dir.glob("templates/*.yml").each { |template| generate_diagram(template) }
+  Dir.glob("templates/*.yml").sort.each { |template| generate_diagram(template) }
 end
 
 desc "Generate a diagram for each template matching the template pattern"
 task :generate, [:template_pattern] do |_, args|
-  Dir.glob("templates/*#{args.template_pattern}*.yml").each { |template| generate_diagram(template) }
+  Dir.glob("templates/*#{args.template_pattern}*.yml").sort.each { |template| generate_diagram(template) }
 end
 
 def generate_diagram(template)
