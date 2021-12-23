@@ -20,13 +20,12 @@ controller lightgray:
 
   JobsController:
     - 'void add_production() {}'
-    - '@depend - - - ConsumptionPlanBuilder'
-    - '@depend - - - ProductionConfig'
-    - '@depend - - - ProductionParameters'
     - '@depend - - - AddProductionService'
+    - '@depend - - - ConsumptionPlanBuilder'
+    - '@depend - - - ProductionsParameters'
+
 app_params cornsilk:
-  ProductionConfig:
-  ProductionParameters:
+  ProductionsParameters:
     - '@has - - - ConsumptionPlan'
 
   ConsumptionPlanBuilder:
@@ -35,41 +34,34 @@ app_params cornsilk:
   ConsumptionPlan:
     - '@depend - - - ConsumptionEntry'
 
-app_service lightcoral:
-  AddProductionService:
-    - 'void add_production() {}'
-    - '@depend - - - ConsumptionStrategyBuilder'
-    - '@depend - - - AddProductionWithSubstitutions'
-  ConsumptionStrategyBuilder:
-    - '@depend - - - ConsumptionPlan'
-    - '@depend - - - ConsumptionStrategy'
-  ConsumptionStrategy:
-    - 'void build_consumption_quantities() {}'
-    - '@composed - - - ItemToConsume'
-  ItemToConsume:
-
-add_production_with_substitutions palegreen:
-  AddProductionWithSubstitutions:
-    - '@depend - - - AddProductionValidator'
-    - '@depend - - - ConsumptionStrategy'
-    - '@depend - - - PalletAllocator'
-    - '@depend - - - PalletQuantity'
-    - '@depend - - - ProductionLotQuantityBuilder'
-    - '@depend - - - ProductionOnPalletBuilder'
-    - '@depend - - - ProductionOptions'
-    - '@note This class has been inlined: see AddProductionConsumption instead'
-
-  ProductionOptions:
-  ProductionLotQuantityBuilder:
+add_production_service_builder tan:
+  AddProductionServiceBuilder:
+    - '@depend - - - AddProductionParametersBuilder'
+    - '@depend - - - AddProductionParametersValidations'
+    - '@depend - - - AddProductionUseCasePreconditions'
+    - '@depend - - - ConsumptionDetailsFromConsumptionPlanBuilder'
     - '@depend - - - FifoCodeGenerationService'
+  AddProductionParametersBuilder:
+    - '@depend - - - AddProductionParameters'
+  AddProductionParametersValidations:
+  AddProductionUseCasePreconditions:
+  ConsumptionDetailsFromConsumptionPlanBuilder:
+    - '@depend - - - ConsumptionDetails'
   FifoCodeGenerationService:
-    - '@depend - - - ConsumptionStrategy'
     - '@depend - - - IcgCodeGenerationService'
     - '@depend - - - IcgProductionParameters'
-  AddProductionValidator:
-    - '@depend - - - ProductionLotQuantityValidator'
-  ProductionLotQuantityValidator:
-    - '@depend - - - ConsumptionStrategy'
+
+add_production_service palegreen:
+  AddProductionParameters:
+    - '@depend - - - ConsumptionDetails'
+    - '@depend - - - PalletAllocator'
+  AddProductionService:
+    - 'void add_production() {}'
+    - '@depend - - - AddProductionParameters'
+    - '@depend - - - PalletAllocator'
+    - '@depend - - - ProductionOnPalletBuilder'
+  ConsumptionDetails:
+  ItemToConsume:
   ProductionOnPalletBuilder:
     - '@depend - - - SubcomponentConsumptionBuilder'
     - '@depend - - - Production'
@@ -79,8 +71,11 @@ add_production_with_substitutions palegreen:
 
 inventory lightblue:
   PalletAllocator:
-    - '@depend - - - PalletQuantity'
-  PalletQuantity:
+    - '@depend - - - PalletAllocationStrategyValidations'
+    - '@depend - - - PalletAllocation'
+  PalletAllocationStrategyValidations:
+  PalletAllocation
+    - '@hidden'
   ProduceOnGivenPallet extends PalletAllocator:
   TopUpGivenPallets extends PalletAllocator:
   ProduceOnGeneratedPallets extends PalletAllocator:
