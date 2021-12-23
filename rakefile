@@ -1,4 +1,4 @@
-require_relative "src/uml_creator.rb"
+require_relative "src/uml_creator"
 
 desc "Clean the /out and /temp directories"
 task :clean do
