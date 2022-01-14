@@ -4,7 +4,7 @@ Create UML diagrams rapidly.
 
 ### Quick Start
 
-    brew install --cask java
+    brew install java
     brew install graphviz
     git clone git@github.com:nulogy/umlgraph_tool.git
     cd umlgraph_tool
