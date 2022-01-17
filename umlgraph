@@ -2,7 +2,7 @@
 #
 
 UMLGRAPH_HOME=lib
-JAVA_HOME=`/usr/libexec/java_home -v 12`
+JAVA_HOME=`/usr/libexec/java_home -v 11`
 
 if [ x$2 = x ]
 then
@@ -18,7 +18,7 @@ else
 
   shift 2
 
-  java -classpath "$UMLGRAPH_HOME/UmlGraph.jar:$JAVA_HOME/lib/tools.jar" \
+  java -classpath "$UMLGRAPH_HOME/UmlGraph.jar" \
     org.umlgraph.doclet.UmlGraph -package $* -output - $INPUT_FILE | \
     dot -T$FILETYPE -o$OUTPUT_FILE
 fi
