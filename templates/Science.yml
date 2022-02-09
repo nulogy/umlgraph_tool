@@ -42,9 +42,9 @@ publication_policy violet:
   PublishSimpleResult extends PublicationPolicy:
     - '@stereotype TemplateMethod'
 
-  PublishToAirbrake extends PublishSimpleResult:
+  PublishAsError extends PublishSimpleResult:
 
-  PublishToKibana extends PublishSimpleResult:
+  PublishToCloudwatch extends PublishSimpleResult:
 
   ExperimentResultLogger:
     - '@hidden'
