@@ -1,0 +1,80 @@
+#
+# Mass Inventory Adjustments Script
+#
+
+config:
+  MassInventoryAdjustmentRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+scripts lightgray:
+  CreateSampleInventoryAdjustmentsSource:
+    - '@stereotype Script'
+  InventoryAdjustmentS3Upload:
+    - '@stereotype Script'
+    - '@depend - - - S3Upload'
+  MassInventoryAdjustments:
+    - '@stereotype Script'
+    - '@depend - - - InventoryAdjustmentCreator'
+    - '@depend - - - InventoryAdjustmentSource'
+
+update_tool lightblue:
+  CsvContents:
+    - '@stereotype DuckType'
+  InventoryAdjustmentCreator:
+    - '@has - - - InventoryAdjustmentSpecification'
+    - '@depend - - - InventoryDiscrepancyFactory'
+    - '@depend - - - InventoryDiscrepancyRepository'
+  InventoryAdjustmentFileCsvContents extends CsvContents:
+  InventoryAdjustmentS3CsvContents extends CsvContents:
+    - '@depend - - - S3Upload'
+  InventoryAdjustmentSource:
+    - '@depend - - - CSV'
+    - '@has - - - CsvContents'
+    - '@depend - - - InventoryAdjustmentSpecification'
+    - '@depend - - - InventoryAdjustmentSpecificationRow'
+  InventoryAdjustmentSpecification:
+    - '@depend - - - CurrentInventoryRepository'
+    - '@has - - - InventoryAdjustmentSpecificationRow'
+    - '@depend - - - InventoryStatusRepository'
+    - '@depend - - - Lot'
+    - '@depend - - - Pallet'
+    - '@depend - - - Sku'
+  InventoryAdjustmentSpecificationRow:
+    - '@stereotype ValueObject'
+    - '@depend - - - Row'
+
+domain palegreen:
+  CurrentInventoryRepository:
+    - '@depend - - - CurrentInventoryLevel'
+  InventoryDiscrepancyFactory:
+    - '@depend - - - InventoryDelta'
+    - '@depend - - - InventoryDiscrepancy'
+  InventoryDiscrepancyRepository:
+    - '@depend - - - InventoryDiscrepancy'
+  InventoryStatusRepository:
+    - '@depend - - - InventoryStatus'
+
+domain orchid:
+  CurrentInventoryLevel:
+  InventoryDelta:
+  InventoryDiscrepancy:
+    - '@has - - - InventoryDelta'
+  InventoryStatus:
+  Lot:
+    - '@hidden'
+  Pallet:
+  Sku:
+
+util palegreen:
+  S3Upload:
+
+ruby lightcoral:
+  CSV:
+    - '@hidden'
+  Row:
+    - '@hidden'
