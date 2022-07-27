@@ -1,0 +1,60 @@
+config:
+  AuditTrailsRoot:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+
+audit_trails palegreen:
+  AttributionEnforcementStrategy:
+
+  AttributionBuilder:
+    - '@stereotype CommandContext'
+    - '@depend - - - AttributionEnforcementStrategy'
+    - '@depend - - - Fingerprint'
+    - '@depend - - - Signature'
+
+  ChangeRecordHandler:
+    - '@stereotype CommandContext'
+
+
+attributions yellowgreen:
+  Base:
+
+  Fingerprint extends Base:
+
+  Integration extends Base:
+
+  Signature extends Base:
+
+
+commands coral:
+  SkuCreateHandler:
+    - '@stereotype CommandContext'
+    - '@depend - - - Base'
+    - '@depend - - - ChangeRecordHandler'
+    - '@depend - - - Creating'
+
+
+electronic_signatures lightyellow:
+  InvalidElectronicSignature:
+
+
+master lightblue:
+  Creating:
+    - '@stereotype Skus'
+
+  UomParamsBuilderForStandardUoms:
+    - '@stereotype Skus'
+
+other white:
+  CatalogGenerator:
+    - '@depend - - - AttributionBuilder'
+    - '@depend - - - AttributionEnforcementStrategy'
+    - '@depend - - - CommandContext'
+    - '@depend - - - InvalidElectronicSignature'
+    - '@depend - - - SkuCreateHandler'
+    - '@depend - - - UomParamsBuilderForStandardUoms'
+
+  CommandContext:

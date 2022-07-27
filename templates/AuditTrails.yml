@@ -1,60 +1,58 @@
 config:
   AuditTrailsRoot:
+    - '@hidden'
+  UMLOptions:
     - '@opt vertical'
     - '@opt attributes'
     - '@opt operations'
     - '@hidden'
 
-
 audit_trails palegreen:
-  AttributionEnforcementStrategy:
+  ChangeRecord:
 
-  AttributionBuilder:
-    - '@stereotype CommandContext'
-    - '@depend - - - AttributionEnforcementStrategy'
-    - '@depend - - - Fingerprint'
-    - '@depend - - - Signature'
+  DisplayTypeLookup:
 
-  ChangeRecordHandler:
-    - '@stereotype CommandContext'
+  NaturalKeyLookup:
 
+  RecordIdentifier:
+    - 'String display_type;'
 
-attributions yellowgreen:
-  Base:
+  RecordSnapshot:
 
-  Fingerprint extends Base:
+  Snapshotter:
+    - 'void record() {}'
+    - 'void record_group() {}'
+    - '@depend - - - DisplayTypeLookup'
+    - '@depend - - - RecordIdentifier'
 
-  Integration extends Base:
+  SnapshotTakerLookup:
+    - '@depend - - - SnapshotValidator'
 
-  Signature extends Base:
+  SnapshotValidator:
 
+  ShipmentSnapshotTaker:
+    - '@depend - - - RecordIdentifier'
 
-commands coral:
-  SkuCreateHandler:
-    - '@stereotype CommandContext'
-    - '@depend - - - Base'
-    - '@depend - - - ChangeRecordHandler'
-    - '@depend - - - Creating'
+  SkuSnapshotTaker:
+    - '@depend - - - RecordIdentifier'
 
-
-electronic_signatures lightyellow:
-  InvalidElectronicSignature:
-
-
-master lightblue:
-  Creating:
-    - '@stereotype Skus'
-
-  UomParamsBuilderForStandardUoms:
-    - '@stereotype Skus'
-
-other white:
-  CatalogGenerator:
-    - '@depend - - - AttributionBuilder'
-    - '@depend - - - AttributionEnforcementStrategy'
-    - '@depend - - - CommandContext'
-    - '@depend - - - InvalidElectronicSignature'
-    - '@depend - - - SkuCreateHandler'
-    - '@depend - - - UomParamsBuilderForStandardUoms'
-
-  CommandContext:
+snapshot_takers lightblue:
+  AssemblyProcedureSnapshotTaker extends Snapshotter:
+  AssemblyStepSnapshotTaker extends Snapshotter:
+  AttachmentSnapshotTaker extends Snapshotter:
+  AutoQuarantineOverrideSnapshotTaker extends Snapshotter:
+  BomItemSnapshotTaker extends Snapshotter:
+  BomVersionSnapshotTaker extends Snapshotter:
+  JobLotExpirySnapshotTaker extends Snapshotter:
+  JobReconciliationCountSnapshotTaker extends Snapshotter:
+  JobReconciliationRecordSnapshotTaker extends Snapshotter:
+  PalletShipmentSnapshotTaker extends Snapshotter:
+  ProductionSnapshotTaker extends Snapshotter:
+  RejectedItemSnapshotTaker extends Snapshotter:
+  ShipmentSnapshotTaker extends Snapshotter:
+  SkuSnapshotTaker extends Snapshotter:
+  SubcomponentConsumptionSnapshotTaker extends Snapshotter:
+  UnitOfMeasureSnapshotTaker extends Snapshotter:
+  UnitShipmentSnapshotTaker extends Snapshotter:
+  UomContextSnapshotTaker extends Snapshotter:
+  UomRatioSnapshotTaker extends Snapshotter:
