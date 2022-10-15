@@ -1,0 +1,72 @@
+config:
+  JobTransferRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+graphql cornsilk:
+  TransferMaterialsMutation:
+    - '@depend - - - TransferMaterials'
+    - 'void resolve() {}'
+  TransferMaterials:
+    - '@depend - - - JobLotExpiriesAdjuster'
+    - '@composed - - - TransferMaterialsSourceJob'
+    - '@composed - - - TransferMaterialsValidator'
+    - '@depend - - - UnitMover'
+    - 'void transfer_from_jobs() {}'
+  TransferMaterialsSourceJob:
+  TransferMaterialsValidator:
+
+controllers lightblue:
+  JobsController:
+    - '@depend - - - AcceptLineMaterialsService'
+    - 'void accept_line_materials() {}'
+  MoveOutController:
+    - '@depend - - - MoveOutOfWipService'
+    - 'void perform() {}'
+  SimpleJobsController:
+    - '@depend - - - AcceptLineMaterialsService'
+    - 'void accept_materials() {}'
+  MobileUnitMovesController:
+    - '@depend - - - MobileUnitMovesService'
+  UnitMovesController:
+    - '@depend - - - JobLotExpiriesAdjuster'
+    - '@depend - - - UnitMoveCreator'
+    - 'void create_from_expected() {}'
+    - 'void create_unit_move() {}'
+
+jobs lightgreen:
+  AcceptLineMaterialsService:
+    - '@depend - - - Job'
+  JobLotExpiriesAdjuster:
+    - '@hidden'
+  Job:
+    - 'void accept_line_materials() {}'
+    - '@depend - - - JobLotExpiriesAdjuster'
+    - '@depend - - - UnitMover'
+
+moves lightcoral:
+  Move:
+  MoveOutOfWipService:
+    - '@depend - - - UnitMover'
+  MovesMediator:
+    - '@depend - - - InventoryAssignmentValidator'
+  MovesActualizer:
+    - '@composed - - - MovesMediator'
+    - '@has - - - Move'
+  UnitMoveCreator:
+    - '@depend - - - UnitMover'
+  UnitMover:
+    - '@depend - - - MovesActualizer'
+    - '@has - - - Move'
+    - '@has - - - TransferMaterialsSourceJob'
+    - 'void move_units() {}'
+  MobileUnitMovesService:
+    - '@depend - - - UnitMoveCreator'
+
+inventory plum:
+  InventoryAssignmentValidator:
+    - 'void validate_pallet_change() {}'
