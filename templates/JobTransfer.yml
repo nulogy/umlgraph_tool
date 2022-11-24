@@ -12,11 +12,17 @@ graphql cornsilk:
     - '@depend - - - TransferMaterials'
     - 'void resolve() {}'
   TransferMaterials:
-    - '@depend - - - JobLotExpiriesAdjuster'
+    - '@depend - - - TransferMaterialsLegacy'
+    - '@depend - - - TransferMaterialsRework'
     - '@composed - - - TransferMaterialsSourceJob'
     - '@composed - - - TransferMaterialsValidator'
-    - '@depend - - - UnitMover'
     - 'void transfer_from_jobs() {}'
+  TransferMaterialsLegacy:
+    - '@depend - - - JobLotExpiriesAdjuster'
+    - '@depend - - - UnitMover'
+    - '@has - - - TransferMaterialsSourceJob'
+  TransferMaterialsRework:
+    - '@has - - - TransferMaterialsSourceJob'
   TransferMaterialsSourceJob:
   TransferMaterialsValidator:
 
@@ -62,7 +68,6 @@ moves lightcoral:
   UnitMover:
     - '@depend - - - MovesActualizer'
     - '@has - - - Move'
-    - '@has - - - TransferMaterialsSourceJob'
     - 'void move_units() {}'
   MobileUnitMovesService:
     - '@depend - - - UnitMoveCreator'
