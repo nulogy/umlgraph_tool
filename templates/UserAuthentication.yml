@@ -1,0 +1,58 @@
+config:
+  UserAuthenticationRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+controller lightgray:
+  ApplicationController:
+    - '@depend - - - SignInWorkflow'
+    - '@depend - - - SignInWorkflowFactory'
+  OmniauthCallbacksController:
+    - '@depend - - - OmniauthAuthenticationDetails'
+    - '@depend - - - SharedAccessCookieSetter'
+    - '@depend - - - SharedAccessCookieWorkflow'
+  UserSessionsController:
+    - '@depend - - - Auth0Logout'
+
+authentication lightblue:
+  Auth0Logout:
+    - '@depend - - - AuthenticationConfiguration'
+    - '@depend - - - SharedAccessCookieName'
+  AuthenticationConfiguration:
+    - '@hidden'
+  JWTVerifier:
+    - '@depend - - - AuthenticationConfiguration'
+    - '@depend - - - Auth0RS256JWTVerifier'
+  OmniauthAuthenticationDetails:
+  SharedAccessCookieName:
+    - '@hidden'
+    - '@depend - - - AuthenticationConfiguration'
+  SharedAccessCookieSetter:
+    - '@depend - - - SharedAccessCookieName'
+  SignInWorkflow:
+    - 'void application_controller() {}'
+    - 'void execute_workflow() {}'
+  SignInWorkflowFactory:
+    - '@depend - create - SignInWorkflow'
+  AskForCredentials extends SignInWorkflow:
+  AttemptTokenRefresh extends SignInWorkflow:
+  ExistingUserSession extends SignInWorkflow:
+  LegacyWorkflow extends SignInWorkflow:
+  SharedAccessCookie extends SignInWorkflow:
+    - '@depend - - - SharedAccessCookieWorkflow'
+  SharedAccessCookieWorkflow:
+    - '@depend - - - Auth0Logout'
+    - '@depend - - - JWTVerifier'
+    - '@depend - - - NulogyUserManagement'
+    - '@depend - - - SharedAccessCookieName'
+
+user-management lightyellow:
+  NulogyUserManagement:
+    - 'void provision() {}'
+
+third-party pink:
+  Auth0RS256JWTVerifier:

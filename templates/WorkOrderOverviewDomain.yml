@@ -1,5 +1,5 @@
 config:
-  ProjectOverviewDomainRoot:
+  WorkOrderOverviewDomainRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -8,7 +8,7 @@ config:
     - '@hidden'
 
 planning lightcoral:
-  Project:
+  WorkOrder:
     - '@has - - - Job'
     - '@has - - - Scenario'
     - '@has - - 1 Sku'
@@ -23,7 +23,7 @@ master palegreen:
     - '@hidden'
     - '@has - - - Sku'
   Customer:
-    - '@has - - - Project'
+    - '@has - - - WorkOrder'
     - '@has - - - Quote'
   ItemCategory:
     - '@hidden'
