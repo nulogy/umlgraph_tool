@@ -1,0 +1,45 @@
+config:
+  MovesRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+jobs lightgreen:
+  Job:
+    - '@composed - wip - Pallet'
+  Shipment:
+    - '@hidden'
+
+moves lightcoral:
+  ExpectedUnitMove:
+    - '@hidden'
+  Move:
+    - '@has - - - Job'
+    - '@has - - - Shipment'
+    - '@composed - - - ExpectedUnitMove'
+    - '@composed - - - PalletMove'
+    - '@composed - - - PickConstraint'
+    - '@composed - - - ReservedInventoryLevel'
+    - '@composed - - - UnitMove'
+  PalletMove:
+    - '@hidden'
+    - '@composed - - - UnitMove'
+  UnitMove:
+    - '@composed - to - InventoryDelta'
+    - '@composed - from - InventoryDelta'
+    - '@composed - to - Location'
+    - '@composed - from - Location'
+    - '@composed - to - Pallet'
+    - '@composed - from - Pallet'
+
+inventory cornsilk:
+  InventoryDelta:
+  Location:
+  Pallet:
+  PickConstraint:
+    - '@hidden'
+  ReservedInventoryLevel:
+    - '@hidden'
