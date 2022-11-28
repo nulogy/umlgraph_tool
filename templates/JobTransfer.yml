@@ -8,27 +8,40 @@ config:
     - '@hidden'
 
 graphql cornsilk:
-  TransferMaterialsMutation:
-    - '@depend - - - TransferMaterials'
-    - 'void resolve() {}'
-  TransferMaterials:
-    - '@depend - - - TransferMaterialsLegacy'
-    - '@depend - - - TransferMaterialsRework'
-    - '@composed - - - TransferMaterialsSourceJob'
-    - '@composed - - - TransferMaterialsValidator'
+  MoveFactory:
+  TransferMaterialsWorkflow:
+    - '@depend - - - UnitMoveTransfersLegacy'
+    - '@depend - - - UnitMoveTransfers'
+    - '@depend - - - TransferFromSourceJob'
+    - '@depend - - - TransferableWipEventsCollector'
+    - '@composed - - - SourceJobDecorator'
+    - '@composed - - - WorkflowValidator'
     - 'void transfer_from_jobs() {}'
-  TransferMaterialsLegacy:
+  TransferFromSourceJob:
+  SourceJobsQuery:
+  SourceJobDecorator:
+  TransferableWipEventsCollector:
+  UnitMoveFactory:
+  UnitMoveTransfers:
+    - '@has - - - SourceJobDecorator'
+    - '@depend - - - MoveFactory'
+    - '@depend - - - UnitMoveFactory'
+  UnitMoveTransfersLegacy:
     - '@depend - - - JobLotExpiriesAdjuster'
+    - '@depend - - - MoveFactory'
     - '@depend - - - UnitMover'
-    - '@has - - - TransferMaterialsSourceJob'
-  TransferMaterialsRework:
-    - '@has - - - TransferMaterialsSourceJob'
-  TransferMaterialsSourceJob:
-  TransferMaterialsValidator:
+    - '@has - - - SourceJobDecorator'
+  WorkflowValidator:
+
 
 controllers lightblue:
+  TransferMaterialsMutation:
+    - '@depend - - - SourceJobsQuery'
+    - '@depend - - - TransferMaterialsWorkflow'
+    - 'void resolve() {}'
   JobsController:
     - '@depend - - - AcceptLineMaterialsService'
+    - '@depend - - - SourceJobsQuery'
     - 'void accept_line_materials() {}'
   MoveOutController:
     - '@depend - - - MoveOutOfWipService'
