@@ -9,14 +9,18 @@ config:
 
 graphql cornsilk:
   TransferMaterialsMutation:
-    - '@depend - - - TransferMaterials'
+    - '@depend - - - TransferMaterialsWorkflow'
     - 'void resolve() {}'
-  TransferMaterials:
+  TransferMaterialsWorkflow:
     - '@depend - - - TransferMaterialsLegacy'
     - '@depend - - - TransferMaterialsRework'
+    - '@depend - - - TransferMaterialsFromSourceJob'
+    - '@depend - - - TransferableWipEventsCollector'
     - '@composed - - - TransferMaterialsSourceJob'
     - '@composed - - - TransferMaterialsValidator'
     - 'void transfer_from_jobs() {}'
+  TransferMaterialsFromSourceJob:
+  TransferMaterialsSourceJobsQuery:
   TransferMaterialsLegacy:
     - '@depend - - - JobLotExpiriesAdjuster'
     - '@depend - - - UnitMover'
@@ -25,10 +29,12 @@ graphql cornsilk:
     - '@has - - - TransferMaterialsSourceJob'
   TransferMaterialsSourceJob:
   TransferMaterialsValidator:
+  TransferableWipEventsCollector:
 
 controllers lightblue:
   JobsController:
     - '@depend - - - AcceptLineMaterialsService'
+    - '@depend - - - TransferMaterialsSourceJobsQuery'
     - 'void accept_line_materials() {}'
   MoveOutController:
     - '@depend - - - MoveOutOfWipService'
