@@ -10,14 +10,14 @@ config:
 graphql cornsilk:
   MoveFactory:
   TransferMaterialsWorkflow:
-    - '@depend - - - UnitMoveTransfersLegacy'
-    - '@depend - - - UnitMoveTransfers'
     - '@depend - - - TransferFromSourceJob'
-    - '@depend - - - TransferableWipEventsCollector'
     - '@composed - - - SourceJobDecorator'
     - '@composed - - - WorkflowValidator'
     - 'void transfer_from_jobs() {}'
   TransferFromSourceJob:
+    - '@depend - - - TransferableWipEventsCollector'
+    - '@depend - - - UnitMoveTransfers'
+    - '@depend - - - UnitMoveTransfersLegacy'
   SourceJobsQuery:
   SourceJobDecorator:
   TransferableWipEventsCollector:
