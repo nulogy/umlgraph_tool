@@ -1,0 +1,76 @@
+config:
+  AccountLocaleRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  PgTools:
+    - 'void create_collated_text_domain() {}'
+    - 'void create_schema() {}'
+    - 'void create_schema_with_collation() {}'
+  UtilsI18n:
+    - 'void account_locale() {}'
+    - 'void in_locale() {}'
+    - 'void set_locale() {}'
+
+background lightblue:
+  BackgroundTaskAction:
+    - 'void perform() {}'
+  ExportAction extends BackgroundTaskAction:
+    - '@has - - - SkusContentProvider'
+  BackgroundTaskRunner:
+    - 'void configure_locale_schema_and_timezone() {}'
+    - 'void run_in_locale() {}'
+    - '@depend - - - BackgroundTaskAction'
+    - '@depend - - - UtilsI18n'
+
+csv_import_export palegreen:
+  BaseCsvPresenter:
+  CsvImporter:
+    - 'void locale() {}'
+  SkusImporter extends CsvImporter:
+    - '@has - - - SkusPresenter'
+  SkusPresenter extends BaseCsvPresenter:
+  SkusTranslatedCsvExporter extends TranslatedCsvExporter:
+    - '@depend - - - UtilsI18n'
+  TranslatedCsvExporter:
+    - 'void locale() {}'
+    - '@depend - - - UtilsI18n'
+    - '@has - - - SkusPresenter'
+
+controller pink:
+  SkusContentProvider:
+    - '@depend - - - SkusExport'
+  SkuController:
+    - 'void offer_skus_csv_download() {}'
+    - 'void user_import_from_csv() {}'
+    - '@depend - - - ExportAction'
+    - '@depend - - - SkusContentProvider'
+    - '@depend - - - SkusImporter'
+  SkusExport:
+    - '@depend - - - SkusTranslatedCsvExporter'
+    - '@depend - - - TranslatedCsvExporter'
+
+model lightcoral:
+  Account:
+    - 'void locale() {}'
+    - '@has - - - Site'
+    - '@has - - - AccountPartition'
+  AccountPartition:
+    - 'void prepare_schema() {}'
+    - '@depend - - - PgTools'
+  Company:
+    - '@has - - - Account'
+    - '@has - - - CompanyLocale'
+  CompanyLocale:
+    - 'void locale() {}'
+  Site:
+  User:
+    - 'void locale() {}'
+    - '@depend - - - Account'
+    - '@depend - - - Company'
+    - '@depend - - - Site'
