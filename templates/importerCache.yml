@@ -1,5 +1,5 @@
 config:
-  MigrationCacheRoot:
+  ImporterCacheRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'

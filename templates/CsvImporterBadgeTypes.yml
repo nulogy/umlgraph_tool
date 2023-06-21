@@ -1,5 +1,5 @@
 config:
-  CsvMigrationBadgeTypeRoot:
+  CsvImporterBadgeTypesRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -10,8 +10,8 @@ config:
 framework lightgray:
   BaseCsvPresenter:
   ColumnDefinitionInterpreter:
-    - '@depend - - - BadgeTypesMigration'
-  CsvMigration:
+    - '@depend - - - BadgeTypesImporter'
+  CsvImporter:
     - '@depend - - - ColumnDefinitionInterpreter'
     - 'void csv_import() {}'
     - 'void presenter() {}'
@@ -24,11 +24,11 @@ framework lightgray:
 
 variation lightblue:
   BadgeTypesPresenter extends BaseCsvPresenter:
-  BadgeTypesMigration extends CsvMigration:
+  BadgeTypesImporter extends CsvImporter:
     - '@depend - - - BadgeTypesPresenter'
     - 'void presenter() {}'
     - 'void materialize_row() {}'
 
 caller palegreen:
   BadgeTypesController:
-    - '@depend - - - BadgeTypesMigration'
+    - '@depend - - - BadgeTypesImporter'

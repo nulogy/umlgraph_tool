@@ -12,8 +12,8 @@ framework lightgray:
     - '@hidden'
   ColumnDefinitionInterpreter:
     - '@hidden'
-    - '@depend - - - SkusMigration'
-  CsvMigration:
+    - '@depend - - - SkusImporter'
+  CsvImporter:
     - '@depend - - - ColumnDefinitionInterpreter'
     - '@depend - - - FieldValidations'
     - 'void csv_import() {}'
@@ -61,9 +61,9 @@ sku lightcoral:
 
   SkusPresenter extends BaseCsvPresenter:
     - '@hidden'
-  SkusMigration extends CsvMigration:
+  SkusImporter extends CsvImporter:
     - '@depend - - - SkusPresenter'
     - '@depend - - - UpdateWithUomFields'
 
-  UomRatiosMigration extends CsvMigration:
+  UomRatiosImporter extends CsvImporter:
     - '@depend - - - UomRatiosAndContextUpserter'
