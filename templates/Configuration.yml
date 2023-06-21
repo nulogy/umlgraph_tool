@@ -1,0 +1,24 @@
+config:
+  ConfigurationRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+planning lightcoral:
+  ConfigFileLoader:
+  ConfigurationDSL:
+  ConfigurationSingleton:
+    - '@hidden'
+
+master palegreen:
+  CloudfrontConfiguration extends ConfigurationDSL:
+  ClusterConfig extends ConfigurationDSL:
+  ItemRecommendationConfig extends ConfigurationDSL:
+  PendoConfig extends ConfigurationDSL:
+  SentryConfig extends ConfigurationDSL:
+  SmarteruConfig extends ConfigurationDSL:
+  SmarteruIntegrationConfig extends ConfigurationDSL:
+

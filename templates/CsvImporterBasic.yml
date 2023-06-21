@@ -1,5 +1,5 @@
 config:
-  CsvMigrationRoot:
+  CsvImporterBasicRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -10,9 +10,9 @@ config:
 framework lightgray:
   BaseCsvPresenter:
   ColumnDefinitionInterpreter:
-    - '@depend - - - CustomerMigration'
-    - '@depend - - - SkusMigration'
-  CsvMigration:
+    - '@depend - - - CustomerImporter'
+    - '@depend - - - SkusImporter'
+  CsvImporter:
     - '@depend - - - ColumnDefinitionInterpreter'
     - 'void csv_import() {}'
     - 'void column_definition() {}'
@@ -25,7 +25,7 @@ framework lightgray:
 
 customer lightblue:
   CustomerPresenter extends BaseCsvPresenter:
-  CustomerMigration extends CsvMigration:
+  CustomerImporter extends CsvImporter:
     - '@depend - - - CustomerPresenter'
     - 'void column_definition() {}'
     - 'void materialize_row() {}'
@@ -33,7 +33,7 @@ customer lightblue:
 
 sku lightcoral:
   SkusPresenter extends BaseCsvPresenter:
-  SkusMigration extends CsvMigration:
+  SkusImporter extends CsvImporter:
     - '@depend - - - SkusPresenter'
     - 'void column_definition() {}'
     - 'void materialize_row() {}'

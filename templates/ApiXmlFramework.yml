@@ -9,13 +9,13 @@ config:
 
 
 clients lightblue:
-  CsvMigration:
+  CsvImporter:
     - '@depend - - - EventQueue'
 
   ResourcesController:
 
 inbound lightgray:
-  CsvMigration:
+  CsvImporter:
     - '@depend - - - EventQueue'
 
   ResourcesController:

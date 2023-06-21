@@ -1,5 +1,5 @@
 config:
-  CsvMigrationCarriersRoot:
+  CsvCarriersImporterRoot:
     - '@hidden'
   UMLOptions:
     - '@opt vertical'
@@ -10,8 +10,8 @@ config:
 framework lightgray:
   BaseCsvPresenter:
   ColumnDefinitionInterpreter:
-    - '@depend - - - CarriersMigration'
-  CsvMigration:
+    - '@depend - - - CarriersImporter'
+  CsvImporter:
     - '@depend - - - ColumnDefinitionInterpreter'
     - 'void csv_import() {}'
     - 'void presenter() {}'
@@ -24,11 +24,11 @@ framework lightgray:
 
 variation lightblue:
   CarriersPresenter extends BaseCsvPresenter:
-  CarriersMigration extends CsvMigration:
+  CarriersImporter extends CsvImporter:
     - '@depend - - - CarriersPresenter'
     - 'void presenter() {}'
     - 'void materialize_row() {}'
 
 caller palegreen:
   CarriersController:
-    - '@depend - - - CarriersMigration'
+    - '@depend - - - CarriersImporter'
