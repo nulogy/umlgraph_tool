@@ -1,0 +1,22 @@
+config:
+  DataPlatformRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+data_platform palegreen:
+  DataPlatformVCsvExportBase:
+  DataPlatformSqlBase:
+
+reports lightblue:
+  EstimateReportCsvExport extends DataPlatformVCsvExportBase:
+  EstimateReportDataPlatformSql extends DataPlatformSqlBase:
+
+  ReceiveOrderReportCsvExport extends DataPlatformVCsvExportBase:
+  ReceiveOrderReportDataPlatformSql extends DataPlatformSqlBase:
+
+  WorkOrderStatusReportCsvExport extends DataPlatformVCsvExportBase:
+  WorkOrderStatusReportDataPlatformSql extends DataPlatformSqlBase:
