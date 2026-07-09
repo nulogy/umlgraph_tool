@@ -1,3 +1,6 @@
+[settings]
+# The .ruby-version file is the source of truth for Ruby.
+idiomatic_version_file_enable_tools = ["ruby"]
+
 [tools]
-ruby = "3.4.7"
 java = "temurin-11.0.31+11"
