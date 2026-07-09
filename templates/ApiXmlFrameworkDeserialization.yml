@@ -1,0 +1,78 @@
+config:
+  ApiXmlFrameworkDeserializationRoot:
+    - '@hidden'
+  UMLOptions:
+    - '@opt vertical'
+    - '@opt attributes'
+    - '@opt operations'
+    - '@hidden'
+
+framework lightgray:
+  ResourcesController:
+    - '@depend - - - SerializerFactory'
+    - '@depend - - - ResourceRepositories'
+    - '@depend - - - DeserializationService'
+    - 'void create_or_update() {}'
+
+  Serializer:
+
+  SerializerFactory:
+    - '@depend - create - ShipOrderSerializer'
+    - '@depend - create - ShipOrderItemSerializer'
+    - 'void resource_deserializer_for() {}'
+
+  ResourceRepositories:
+    - '@depend - create - DefaultRepository'
+    - '@depend - create - ShipOrderItemRepository'
+    - 'void repository_for() {}'
+
+  DeserializationService:
+    - 'void deserialize() {}'
+    - '@has - - - DefaultRepository'
+    - '@has - - - DeserializationStrategy'
+    - '@has - - - ShipOrderSerializer'
+    - '@depend - - - ErrorSerializer'
+
+  DeserializationStrategy:
+  OverwriteOnly extends DeserializationStrategy:
+  OverwriteAsWellAsAppend extends OverwriteOnly:
+
+  DefaultRepository:
+    - '@depend - - - AggregateBuilder'
+    - 'void lookup_or_build() {}'
+    - 'void save_with_changes() {}'
+
+  AggregateBuilder:
+    - '@depend - - - CollectionValidatorFactory'
+    - '@depend - - - ShipOrderItemsValidator'
+    - '@depend - - - ShipOrderItemRepository'
+    - 'void apply_changes() {}'
+
+  CollectionValidatorFactory:
+    - '@depend - create - ShipOrderItemsValidator'
+
+  ErrorSerializer:
+
+extensions coral:
+  ShipOrderSerializer extends Serializer:
+    - '@depend - - - ShipOrderItemSerializer'
+    - 'void from_xml() {}'
+
+  ShipOrderItemsSerializer extends Serializer:
+    - 'void from_xml() {}'
+    - '@depend - - - ShipOrderItemSerializer'
+
+  ShipOrderItemSerializer extends Serializer:
+    - 'void from_xml() {}'
+
+  ShipOrderItemRepository extends DefaultRepository:
+    - 'void lookup_or_build() {}'
+
+  ShipOrderItemsValidator:
+    - 'void validate() {}'
+
+models pink:
+  ShipOrder:
+    - '@composed - - - ShipOrderItem'
+
+  ShipOrderItem:
