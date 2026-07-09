@@ -3,7 +3,7 @@
 
 UMLGRAPH_HOME=lib
 
-# java comes from mise (see .tool-versions). UMLGraph's doclet uses the
+# java comes from mise (see mise.toml). UMLGraph's doclet uses the
 # com.sun.javadoc API that Oracle removed in JDK 13, so it needs JDK <= 11.
 
 if [ x$2 = x ]

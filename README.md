@@ -10,11 +10,11 @@ Create UML diagrams rapidly.
     mise install
     rake
 
-`mise install` provisions the Ruby and JDK pinned in `.tool-versions` — no system Java or
+`mise install` provisions the Ruby and JDK pinned in `mise.toml` — no system Java or
 manual symlink needed.
 
 UMLGraph's doclet uses the `com.sun.javadoc` API that Oracle removed in JDK 13, so it needs
-JDK 11 (the newest release that still supports it). That is why `.tool-versions` pins JDK 11
+JDK 11 (the newest release that still supports it). That is why `mise.toml` pins JDK 11
 rather than a current release.
 
 
