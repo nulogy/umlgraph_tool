@@ -4,17 +4,18 @@ Create UML diagrams rapidly.
 
 ### Quick Start
 
-    brew install openjdk@11
     brew install graphviz
     git clone git@github.com:nulogy/umlgraph_tool.git
     cd umlgraph_tool
+    mise install
     rake
 
-Troubleshooting:
+`mise install` provisions the Ruby and JDK pinned in `.tool-versions` — no system Java or
+manual symlink needed.
 
-1. Follow the instructions to create the symlink after running: `brew install openjdk@11`;
-2. In case you've lost those instructions run: `brew info openjdk@11`;
-3. Later versions of the OpenJDK are incompatible with the UmlGraph tool.
+UMLGraph's doclet uses the `com.sun.javadoc` API that Oracle removed in JDK 13, so it needs
+JDK 11 (the newest release that still supports it). That is why `.tool-versions` pins JDK 11
+rather than a current release.
 
 
 ### Usage
