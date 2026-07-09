@@ -2,7 +2,9 @@
 #
 
 UMLGRAPH_HOME=lib
-JAVA_HOME=`/usr/libexec/java_home -v 11`
+
+# java comes from mise (see .tool-versions). UMLGraph's doclet uses the
+# com.sun.javadoc API that Oracle removed in JDK 13, so it needs JDK <= 11.
 
 if [ x$2 = x ]
 then
